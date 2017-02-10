@@ -1,0 +1,69 @@
+<div class="payment-section">
+  
+  <header class="">
+    <div class="af-heading-uppercased-1 af-mb-s">Pay-per-post</div>
+    <h5 class="jobpost-heading af-heading-2 af-normal-height job-post-duration">Job Post: 4 Weeks</h5>
+  </header>
+  
+  <div class="section">
+    <h2 class="jobpost-title af-heading-1 light-weight af-mb-s job-post-title">{{jobpost.title}}</h2>
+    <h5 class="af-heading-2 af-normal-height af-mb-xs job-post-info" *ngIf="jobpost.position">{{jobpost.position}}</h5>
+    <h5 class="af-heading-2 af-normal-height af-mb-xs job-post-info" *ngIf="jobpost.organization">{{jobpost.organization}}</h5>
+    <h5 class="af-heading-2 af-normal-height af-mb-xs  job-post-info" *ngIf="jobpost.jobLocation && jobpost.jobLocation.address">
+      <span *ngIf="hasAddress(jobpost.jobLocation)">{{jobpost.jobLocation | formataddress}}</span>
+      <span *ngIf="!hasAddress(jobpost.jobLocation)">Unspecified</span>
+      <span *ngIf="hasAddress(jobpost.jobLocation)">
+        &nbsp;&nbsp;&nbsp;
+      </span>
+    </h5>
+            <div id="reveal-map-1">
+			<div class="location-embed" id="googlemap" *ngIf="jobpost.jobLocation">
+				<iframe class="location-embed-frame" src="https://www.google.com/maps/embed/v1/place?q={{jobpost.jobLocation | formataddress}}&zoom=10&key=AIzaSyAY6on3rvjoGcgWCfoMm6xixJ8wIRHM2Es"
+					frameborder="0" style="border:0">
+				</iframe>
+			</div>
+		</div>
+  </div>
+
+  
+  <div class="section">
+    <div class="af-heading-uppercased-1 af-mb-s">Date Of Post</div>
+    <h5 class="jobpost-heading af-heading-2 af-normal-height">{{datePostedHuman}}</h5>
+  </div>
+  
+  <footer class="section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h5 class="jobpost-heading af-heading-2 af-normal-height payment-price">
+          <div class="af-heading-uppercased-1 af-mb-s">Fee</div>
+         <!-- <strike class="old-price">$60</strike> -->
+          <span class="new-price">$60</span>
+        </h5>
+      </div>
+      <div class="payment-cta">
+        <div class="af-heading-uppercased-1 af-mb-s">Coupon</div>
+        <h5 class="jobpost-heading af-heading-2 af-normal-height">
+            <input #couponCode type="text" name="couponCode" id="couponCode" style="-webkit-text-fill-color:#444" size="10">
+        </h5>
+        <div class="action-bar text-right">
+          <button class="af-btn af-heading-uppercased-1" (click)="triggerPayment($event,couponCode.value)">
+            Post this Job <!--<span class="af-icon icon-paypal af-icon-s"></span>-->
+          </button>
+         
+         <div class="row">
+      <div class="col-xs-12 no-padding-left">
+         <div class="col-xs-10 text-left">
+            <span class="cc-disc">Please note that Art Frankly does NOT store credit/debit card numbers or information. <a href="https://stripe.com/customers" target="_blank">Stripe</a> is our payment processor. </span>
+          </div>
+        <div class="col-xs-2">
+            <a class="cancel-btn" href (click)="onCancel($event)">Cancel</a>
+          </div>
+        </div>
+        </div>
+          </div>
+      
+      </div>
+    </div>
+  </footer>
+  
+</div>

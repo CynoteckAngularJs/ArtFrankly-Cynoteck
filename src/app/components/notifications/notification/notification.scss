@@ -1,0 +1,27 @@
+@import '../../../../assets/css/_variables';
+
+.alert {
+  line-height: 30px;
+  border: none;
+  border-bottom: 1px solid $color-white;
+  color: #000;
+  margin-bottom: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
+  background-color: $color-yellow-1;
+  font-family: 'NeueHaasUnicaPro-Light';
+  
+  &.alert-warning, &.alert-success {
+    background-color: $color-yellow-1;
+  }
+  &.alert-danger {
+    background-color: $color-yellow-1;
+  }
+  
+  .close {
+    top: 2px;
+  }
+}

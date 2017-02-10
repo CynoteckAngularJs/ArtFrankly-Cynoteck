@@ -1,0 +1,68 @@
+<!--<pre>{{artist | json}}</pre>-->
+<!--<div>{{artist.profile['@id']}}</div>-->
+<form class="artist-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  <input type="hidden" ngControl="mediaObject">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.mediaObject.dirty) && !form.controls.mediaObject.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.mediaObject.dirty) && form.controls.mediaObject.errors && form.controls.mediaObject.errors.required">Portfolio item media is required</div>
+    <af-uploader
+              [classvalue]="UPLOADER.class.ARTWORK"
+              [objectvalue]="profile['@id']"
+              (savesuccess)="onMediaUploaded($event)"
+              (removesuccess)="onMediaRemoved($event)"
+              [media]="item.mediaObject"
+              [opened]="opened">
+    </af-uploader>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.author.dirty) && !form.controls.author.valid}">
+    <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.author.dirty) && form.controls.author.errors && form.controls.author.errors.required">Artist is required</div>-->
+    <label class="sr-only" for="artistAuthorInput">Artist</label>
+    <input type="text" class="form-control" id="artistAuthorInput" ngControl="author" placeholder="ARTIST" autofocus [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.headline.dirty) && !form.controls.headline.valid}">
+    <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.headline.dirty) && form.controls.headline.errors && form.controls.headline.errors.required">Title is required</div>-->
+    <label class="sr-only" for="titleInput">Title</label>
+    <input type="text" class="form-control" id="titleInput" ngControl="headline" placeholder="TITLE" [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.medium.dirty) && !form.controls.medium.valid}">
+    <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.medium.dirty) && form.controls.medium.errors && form.controls.medium.errors.required">Medium is required</div>-->
+    <label class="sr-only" for="mediumInput">Medium</label>
+    <input type="text" class="form-control" id="mediumInput" ngControl="medium" placeholder="MEDIUM" [disabled]="mode !== MODES.edit">
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.datePublished.dirty) && !form.controls.datePublished.valid}">
+      <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.datePublished.dirty) && form.controls.datePublished.errors && form.controls.datePublished.errors.required">Date published is required</div>-->
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.datePublished.dirty) && form.controls.datePublished.errors && form.controls.datePublished.errors.date">Format unsupported! <small>'MM/DD/YYYY' supported</small></div>
+      <label class="sr-only" for="datePublishedInput">Date Published Date</label>
+      <input type="text" class="form-control" id="datePublishedInput" ngControl="datePublished" placeholder="PUBLISHED DATE (MM/DD/YYYY)" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.size.dirty) && !form.controls.size.valid}">
+      <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.size.dirty) && form.controls.size.errors && form.controls.size.errors.required">Size is required</div>-->
+      <label class="sr-only" for="eventsizeInput">Size</label>
+      <input type="text" class="form-control" id="eventsizeInput" ngControl="size" placeholder="SIZE" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.text.dirty) && !form.controls.text.valid}">
+    <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.text.dirty) && form.controls.text.errors && form.controls.text.errors.required">Description is required</div>-->
+    <label class="sr-only" for="textInput">Describe this portfolio item</label>
+    <textarea class="form-control" id="textInput" ngControl="text" placeholder="DESCRIBE THIS ARTWORK" [disabled]="mode !== MODES.edit"></textarea>
+  </div>
+  
+</form>

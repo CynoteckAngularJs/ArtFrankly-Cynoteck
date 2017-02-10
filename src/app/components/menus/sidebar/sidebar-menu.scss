@@ -1,0 +1,187 @@
+@import '../../../../assets/css/_variables';
+
+// padding na 3.em nivou je 25px levo desno 
+// visina na 3.em nivou je 50px 
+
+
+.menu-toggle-btn {
+    padding: 10px;
+}
+
+li {
+  // clear: both;
+  // overflow: hidden;
+  .url-sidebar-menu-icon {
+    float: right;
+  }
+  &.af-separator {
+    margin: $distance-s 0;
+    border-bottom: 1px solid #CCC; 
+  }
+}
+
+.url-sm {
+  background-color: $sidebar-menu-bgr-color;
+  list-style: none;
+  padding: 0 0 0 0;
+  * {
+    font-family: 'NeueHaasUnicaPro-Light';
+  }
+  
+  .url-sm-item-name {
+    padding: $sidebar-nav-name-padding-tb $distance-mb;
+    display: block;
+    text-decoration: none;
+    color: $sidebar-menu-color;
+  }
+  
+  .url-sm-submenu {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .url-sm-item {
+    line-height: 40px;
+    letter-spacing: 1px;
+    .url-sidebar-menu-icon {
+      // display: none;
+    }
+    &.active {
+      > sidebar-menu-item > .url-sidebar-menu-item {
+        > .url-sm-submenu {
+          display: block;
+        }
+      }
+    }
+      
+    &.first-level {
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      > sidebar-menu-item > .url-sidebar-menu-item,
+      > .sidebar-menu-item > .url-sidebar-menu-item {
+        // First Level Link
+        > .url-sm-item-name {
+          font-size: 22px;
+          // af-icon-m height is equal to line-height below
+          padding-top: 13px;
+          padding-bottom: 8px;
+          text-transform: none;
+          color: $sidebar-nav-name-first-level-active-color;
+          .sidebar-menu-item-name {
+            font-family: 'NeueHaasUnicaPro-Light' !important;
+          }
+          .url-sidebar-menu-icon {
+            float: right;
+            display: block;
+            // af-icon-m height is equal to line-height below
+            height: $distance-m;
+          }
+        }
+        
+        // Second Level Items
+        > ul > li {
+          > sidebar-menu-item > .url-sidebar-menu-item > a {
+            &:hover {
+              color: #000 !important;
+            }
+          }
+          &.active {
+            > .url-sm-item-name {
+              color: $sidebar-nav-name-first-level-active-color;
+            }
+          }
+          &:first-child {
+            margin-top: $distance-s;
+          }
+          &:last-child {
+            margin-bottom: $distance-s;
+          }
+        }
+        
+        // On third level
+        > ul > li > sidebar-menu-item > .url-sidebar-menu-item > ul {
+          li {
+            padding: 0 $distance-mb;
+            .url-sm-item-name {
+              padding: $sidebar-nav-name-padding-tb $distance-s+$distance-xxs;
+              line-height: $distance-sb;
+            }
+            &.active {
+              .url-sm-item-name {
+                background: $sidebar-nav-name-third-level-active-bgr;
+                color: $sidebar-nav-name-third-level-active-color;
+              }
+            }
+          }
+        }
+      }
+      
+      // First level active
+      &.active {
+        > sidebar-menu-item > .url-sidebar-menu-item {
+          > .url-sm-item-name {
+            border-bottom: 1px solid #CCC;
+          }
+        }
+      }
+      
+    }
+  }
+}
+
+//.af-connect {
+//  .svg-thumbnail {
+//    &:hover {
+//      margin: 20px -2px !important;
+//    }
+//  }
+// }
+
+
+
+a.svg-thumbnail, span.url-sidebar-menu-icon {
+    position: relative;
+}
+
+.svg-thumbnail:hover .state-hovered {
+    display: inline-block; 
+}
+
+span.url-sidebar-menu-icon.af-icon.af-icon-l.icon-jobpost {
+    background-size: 90%;
+}
+
+.sidebar-menu-container span.af-featured {
+    display: block;
+}
+
+
+.first-level span.af-featured {
+    text-align: right;
+    display: block;
+    opacity: .7;
+    font-family: 'NeueHaasUnicaPro-Medium';
+    font-size: 10px;
+}
+
+.url-sm-item-name img {
+    width: 24px;
+    height: auto;
+    text-align: right;
+    opacity: 0.2;
+}
+
+a.router-link-active .url-sidebar-menu-item, a.router-link-active .url-sidebar-menu-item .btn-default, a.router-link-active .url-sidebar-menu-item .af-icon {
+    background-color: #e9eaf2;
+    font-family: 'NeueHaasUnicaPro-Bold';
+    opacity: 1;
+}
+
+.sidebar-menu-item:hover {
+  background: #e9eaf2;
+}

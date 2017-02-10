@@ -1,0 +1,182 @@
+<form class="feed-filter-form" [ngFormModel]="form" (ngSubmit)="triggerFilter(form.value)">
+
+
+  <div class="row padding-bottom">
+    <div class="col-sm-12 padding-bottom">
+      <div class="col-sm-5 col-xs-11 no-padding-left">
+        <search-form [term]="term" [placeholder]="'Search all profiles'" [isShowSuggestionsList]="false" [isShowSearchButton]="false"
+          (onenter)="onSearchInputEnter($event)" (changeterm)="onSearchTermChange($event)">
+          </search-form>
+      </div>
+
+      <div class="col-sm-3 col-xs-6 no-padding-left">
+
+        <div class="city-input">
+          <label class="sr-only" for="cityInput">City</label>
+          <input type="text" id="cityInput" ngControl="cities" placeholder="Select specific cities" autocomplete="off">
+          <!--<select class="form-control"
+                      multiple="multiple"
+                      [ng2select2]="cities"
+                      [ng2select2options]="select2Options"
+                      #cities="ngForm"
+                      ngControl="cities">
+                  <option *ngFor="#city of CITIES" [value]="city.value" [selected]="isChecked(form.controls.cities.value, city.value)">{{city.label}}</option>
+              </select>-->
+        </div>
+
+
+      </div>
+
+      <div class="col-sm-3 col-xs-12 no-padding-right no-padding-left">
+        <button type="submit" class="af-button">See Results</button>
+      </div>
+
+
+      <!--
+     <div class="col-sm-6 col-sm-4 col-xs-10 hidden-xs">
+ <div class="top-submit-btn">
+      <button type="submit" class="af-btn af-button">See Results</button>
+      </div>
+       </div>
+       -->
+    </div>
+  </div>
+
+
+  <section class="body">
+
+    <div class="row">
+      <!-- <div class="col-sm-12">
+        <header class="heading filter-inst hidden-xs">
+          <h5 class="">
+            Select profile search criteria. Scroll down to see all options.
+          </h5>
+        </header>
+      </div> -->
+
+      <div class="col-sm-12">
+        <div class="">
+          <div class="col-sm-4 filter-column no-padding">
+            <header class="heading">
+              <h5 class="">
+                Institutions
+              </h5>
+              <div class="checkbox all-box">
+                <label>
+                      <input type="checkbox"
+                        [checked]="isAllIndustriesChecked()"
+                        (change)="checkAllIndustriesHandler($event)"> All
+                    </label>
+              </div>
+            </header>
+            <section class="content">
+              <ul class="no-list two-column">
+
+                <li *ngFor="#cIndustry of INSTITUTION_INDUSTRIES">
+                  <!--<input type="checkbox" [value]="cIndustry.value"> {{cIndustry.label}}-->
+                  <div class="checkbox">
+                    <label class="">
+                      <input type="checkbox"
+                        [checked]="isChecked(form.controls.industries.value, cIndustry.value)"
+                        (change)="toggleFormControlValue(form.controls.industries, cIndustry.value, $event)"> {{cIndustry.label}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-sm-4 filter-column no-padding">
+            <header class="heading">
+              <h5 class="">
+                Art Professionals
+              </h5>
+              <div class="checkbox all-box">
+                <label>
+                          <input type="checkbox"
+                            [checked]="isAllProfessionsChecked()"
+                            (change)="checkAllProfessionsHandler($event)"> All
+                        </label>
+              </div>
+            </header>
+            <section class="content last">
+              <div class="row">
+                <div class="col-sm-12 no-padding">
+                  <ul class="two-column no-list">
+
+                    <li *ngFor="#cProfession of PROFESSIONS">
+                      <!--<input type="checkbox" [value]="cProfession.value"> {{cProfession.label}}-->
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"
+                            [checked]="isChecked(form.controls.professions.value, cProfession.value)"
+                            (change)="toggleFormControlValue(form.controls.professions, cProfession.value, $event)"> {{cProfession.label}}
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="col-sm-4 filter-column no-padding">
+            <header class="heading">
+              <h5 class="truncate">
+                Service Providers
+              </h5>
+              <div class="checkbox all-box">
+                <label>
+                      <input type="checkbox"
+                        [checked]="isAllVendorIndustriesChecked()"
+                        (change)="checkAllVendorIndustriesHandler($event)"> All
+                    </label>
+              </div>
+            </header>
+            <section class="content last">
+              <ul class="two-column no-list">
+                <li *ngFor="#vcIndustry of VENDOR_INDUSTRIES">
+
+                </li>
+                <li *ngFor="#vcIndustry of VENDOR_INDUSTRIES">
+                  <div class="checkbox">
+                    <label class="">
+                      <input type="checkbox"
+                        [checked]="isChecked(form.controls.industries.value, vcIndustry.value)"
+                        (change)="toggleFormControlValue(form.controls.industries, vcIndustry.value, $event)"> {{vcIndustry.label}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <!--<div class="col-sm-4 filter-column no-padding">
+            <header class="heading">
+              <h5 class="">
+                Profile Types
+              </h5>
+            </header>
+            <section class="content">
+              <ul class="no-list">
+                <li *ngFor="#profileType of FEED_PROFILE_TYPES">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                        [checked]="isChecked(form.controls.profileTypes.value, profileType.value)"
+                        (change)="toggleFormControlValue(form.controls.profileTypes, profileType.value, $event)"> {{profileType.label}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>-->
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- <footer class="filter-footer">
+    <button type="submit" class="af-btn af-button">See All Results</button>
+  </footer> -->
+
+</form>

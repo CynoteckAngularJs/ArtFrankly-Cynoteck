@@ -1,0 +1,84 @@
+<!--{{profile | json}}-->
+<article *ngIf="profile" class="profiles-list url-profile url-profile-{{profile.type}} af-feed-item af-feed-item-{{profile.type}}">
+  <div class="row">
+    <div class="af-heading-meta af-heading-meta af-column-left no-padding-left">
+      <div class="url-profile-media col-xs-12 col-lg-3 text-center">
+
+        <div class="af-feed-featured">
+          <!--
+        <img class="featured-icon" src="./src/assets/img/semicolon-yellow.png" alt="Featured">
+        -->
+          <span *ngIf="profile.isProfessional()" class="featured-text">Art Professional</span>
+          <span *ngIf="profile.isInstitution()" class="featured-text">Institution</span>
+          <span *ngIf="profile.isVendor()" class="featured-text">Vendor</span>
+        </div>
+
+        <a href class="url-profile-media-avatar thumbnail" (click)="editProfile(profile, $event)">
+
+          <img *ngIf="!profile.image || !profile.image.contentUrl" [src]="appSrv.defaultAvatar" alt="profile.toString()">
+         
+           <div class="thumbnail-img" *ngIf="profile.image && profile.image.contentUrl" 
+          [ngStyle]="{ 'background-image': 'url(' + profile.image.contentUrl + ')'}" alt="profile.toString()">
+          </div>
+        </a>
+
+      </div>
+    </div> 
+    <div class="col-xs-12 col-lg-9 af-column-right">
+      <div class="url-profile-general">
+
+        <div class="row">
+          <div class="col-sm-12 no-padding-left">
+            <h4 class="af-feed-name">
+              <span>{{profile.toString()}}</span>
+            </h4>
+          </div>
+        </div>
+
+        <div class="af-feed-meta row">
+          <div class="col-sm-12 no-padding-left">
+
+            <div class="col-sm-12 af-value text-left" *ngIf="profile.location">
+
+              <span *ngIf="profile.hasFullAddress()">
+                <span *ngIf="profile.location.address.streetAddress">
+                  {{profile.location.address.streetAddress}},
+                </span>
+              <span *ngIf="profile.location.address.postOfficeBoxNumber">
+                  {{profile.location.address.postOfficeBoxNumber}},
+                </span>
+              </span>
+              <span *ngIf="profile.location.name">
+              {{profile.location.name}},
+            </span>
+              <span *ngIf="profile.location.address.addressCountry">
+              {{profile.location.address.addressCountry}} 
+            </span>
+              <span *ngIf="profile.location.address.city">
+               {{profile.location.address.city}}
+             </span>
+
+              <span *ngIf="!profile.location">Unspecified</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row profile-list-cta">
+    <div class="col-xs-12 profile-btn-group no-padding-left">
+      <a href (click)="editProfile(profile, $event)">
+        <button style="margin-bottom:3px;" class="btn af-button"><span class="af-icon icon-posts-white af-icon-xs"></span>
+        Edit Profile
+        </button>
+      </a>
+
+      <a href (click)="goToProfile(profile, $event)" class="">
+        <button style="margin-bottom:3px;" class="btn af-button">
+        Public Profile
+        </button>
+      </a>
+    </div>
+  </div>
+    </div>
+  </div>
+</article>

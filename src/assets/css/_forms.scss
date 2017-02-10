@@ -1,0 +1,512 @@
+@import './_variables';
+@import './_buttons';
+@import './_icons';
+
+.url-inputs {
+  height: $input-height;
+  padding: $distance-s;
+  line-height: $distance-s;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+.url-form-inputs {
+  @extend .url-inputs;
+  background-color: $input-bgr-color;
+  color: $input-color;
+  font-size: $input-font-height;
+  font-weight: $input-font-weight;
+  letter-spacing: 1px;
+}
+.url-form-inputs-focus {
+  background: #FFF;
+  border: 2px solid $color-black;
+  box-shadow: none;
+}
+.url-button {
+  @extend .url-inputs;
+  background-color: $button-bgr-color;
+  border: $button-border;
+  color: $button-color;
+  padding: 0 $distance-xl;
+  text-transform: uppercase;
+  font-size: $input-font-height - 1px;
+}
+
+form {
+  input, textarea {
+    @extend .url-form-inputs;
+    &:focus {
+      @extend .url-form-inputs-focus;
+    }
+  }
+  input {
+    &[type="checkbox"], &[type="radio"] {
+      height: auto;
+    }
+    &[type="button"] {
+      @extend .url-button;
+    }
+  }
+  
+  textarea {
+    height: 2*$input-height;
+  }
+
+  button {
+    // @extend .url-button;
+    @extend .af-button-streatched;  
+  }
+  
+  .has-error {
+    position: relative;
+    .alert {
+      position: absolute;
+      font-size: 12px;
+      top: -$distance-s;
+      border: none;
+      padding: 0;
+      &.alert-danger {
+        color: $form-error-color !important;
+        background-color: #FFF;
+      }
+    }
+    * {
+      color: $form-error-color;
+    }
+    input {
+      border: 1px solid $form-error-color;
+    }
+  } 
+}
+
+.af-form-label {
+  line-height: $input-height;
+}
+
+a, label, .link-alike {
+  color: $links-color;
+  text-transform: capitalize;
+  font-size: $input-label-font-height;
+  font-weight: bold;
+}
+a {
+  font-weight: bold;
+}
+label {
+  font-weight: $input-font-weight;
+}
+
+.url-heading {
+  margin-bottom: $distance-xl;
+  .url-heading-icon {
+    margin-bottom: $distance-s;
+  }
+  .url-heading-title {
+    font-weight: normal;
+    font-size: 22px;
+  }
+}
+
+.form-group {
+  margin-bottom: $distance-sb;
+  // &:last-child {
+  //   margin-bottom: $distance-s;
+  // }
+}
+.forgot-password-group {
+  margin-bottom: $distance-l;
+}
+.signin-link {
+  margin-bottom: $distance-m;
+}
+.actions-group {
+  margin-bottom: $distance-s;
+}
+
+.url-centered {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.select2-container--default {
+  width: 100% !important;
+  .select2-selection--single {
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    height: auto;
+    
+    &:active, &:focus {
+      outline: none;
+    }
+  
+    .select2-selection__rendered, .select2-selection__arrow {
+      @extend .url-form-inputs;
+      background-color: transparent;
+      border: 2px solid $color-gray-2;
+      outline: none;
+      &.select2-selection__rendered {
+        // border: 1px solid #000;
+      }
+      &.select2-selection__arrow {
+        background-color: transparent;
+        border: none;
+        top: 0;
+        right: 22px;
+        opacity: .4;
+        @extend .af-icon;
+        // @extend .icon-arrow-down;
+        // TODO: Here icon paths are not OK so we have to override as below
+        // background-image: url('../img/icons/arrow_down_gray.png') !important;
+        background-size: $distance-s;
+        height: 100%;
+        b {
+          display: none;
+        }
+      }
+    }
+    &:hover {
+      .select2-selection__arrow {
+        background-color: transparent;
+        border: none;
+        top: 0;
+        right: 22px;
+        opacity: 1;
+        @extend .af-icon;
+        // @extend .icon-arrow-down-over;
+        // TODO: Here icon paths are not OK so we have to override as below
+        // background-image: url('../img/icons/arrow_down.png') !important;
+        background-size: $distance-s;
+        height: 100%;
+      }
+    }
+  }
+  // Opened state
+  &.select2-container--open {
+    .select2-selection--single {
+      .select2-selection__rendered {
+        @extend .url-form-inputs-focus;
+      }
+      .select2-selection__arrow {
+        // @extend .icon-arrow-up;
+        // TODO: Here icon paths are not OK so we have to override as below
+        // background-image: url('../img/icons/arrow_up.png') !important;
+        img {
+          display: none;
+        }
+      } 
+    }
+  }
+}
+
+.select2-container--default .select2-results>.select2-results__options,
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  font-family: 'NeueHaasUnicaPro-Light' !important;
+  font-size: $input-font-height;
+  letter-spacing: 1px;
+}
+// input field
+.select2-container .select2-search--inline {
+  padding: $distance-xxs;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice,
+// .select2-container .select2-selection--multiple,
+// .select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+  border-radius: 0;
+  border: 1px solid $color-black;
+  padding: 5px 10px;
+}
+.select2-container .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--disabled .select2-selection--multiple
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  padding: 5px;
+}
+.select2-container .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+  border-radius: 0 !important;
+}
+.select2-container .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  // border: $border-style-1;
+  border: 1px solid #000;
+}
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+  border: none !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple, .select2-container--default.select2-container--disabled .select2-selection--multiple {
+  outline: none;
+  // border: $border-style-1;
+  border: 1px solid #000;
+  padding: $distance-xxs;
+}
+.select2-container--default .select2-search--inline .select2-search__field {
+  height: auto;
+}
+.select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: $color-black !important;
+  color: $color-white !important;
+}
+span.select2.select2-container.select2-container--default.select2-container--focus {
+  // border: $border-style-1;
+  border: 1px solid $color-black;
+}
+
+
+a.filter-btn.sort-feeds:visited {
+    color: #000;
+}
+
+
+form input[type="checkbox"] {
+    -webkit-appearance: none;
+}
+
+input[type="checkbox"].ng-untouched.ng-pristine, input[type="checkbox"].ng-untouched.ng-dirty, input[type="checkbox"].ng-touched.ng-dirty {
+    position: relative;
+    border: 2px solid #000;
+    padding: 8px;
+    vertical-align: bottom;
+    background: #fff;
+    margin-right: 4px;
+}
+
+.checkbox input[type="checkbox"] {
+    position: relative;
+    border: 2px solid #000;
+    padding: 6px;
+    vertical-align: sub;
+    background: #fff;
+    margin-right: 4px;
+}
+
+
+input[type="checkbox"]:checked:after
+{
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: absolute;
+  border: 1px solid #fff;
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color:rgb(241, 241, 241);
+}
+
+
+.search-form input {
+    font-size: 24px;
+    padding: 10px;
+    color: #fed100 !important;
+    -webkit-text-fill-color: transparent;
+}
+.search-form input:-webkit-input-placeholder{
+    color: #fff !important;
+    text-shadow: none;
+    -webkit-text-fill-color: #fff;
+}
+
+textarea[disabled], input[type="text"][disabled] {
+    opacity: .4;
+}
+
+.select2-container--disabled {
+    border: 1px solid #b1b1b1 !important;
+    opacity: .4;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #F1F1F1 inset !important;
+  box-shadow: 0 0 0px 1000px #F1F1F1 inset !important;
+}
+
+// Signup CSS to be moved
+
+.form-group.profile-type-drop .select2-container--default .select2-selection--single {
+    background-color: #FED100;
+}
+
+
+.form-group.profile-type-drop .select2-container--default .select2-selection--single .select2-selection__rendered {
+  border: none;
+  color: #000;
+}
+
+.form-group.profile-type-drop:before {
+    content: 'Select your profile type';
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    color: #989898;
+}
+
+input {
+    font-size: 24px;
+    padding: 10px;
+    color: #fed100 !important;
+    text-shadow: 0px 0px 0px #fff;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group input {
+  -webkit-text-fill-color: #8F8F8F !important;
+}
+
+::-webkit-input-placeholder {
+   -webkit-text-fill-color: #8F8F8F !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   -webkit-text-fill-color: #8F8F8F !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   -webkit-text-fill-color: #8F8F8F !important;
+}
+
+:-ms-input-placeholder {  
+  -webkit-text-fill-color: #8F8F8F !important;
+}
+
+.form-group.profile-type-drop .select2-container--open {
+  border: 1px solid #000;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #F1F1F1 inset !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    -webkit-text-fill-color: #8F8F8F !important;
+}
+
+
+input[type="text"][required], 
+textarea[required], select[required] + .select2 .selection .select2-selection {
+  background-image: radial-gradient(#fed100 20%, transparent 25%);
+  background-size: 1em 1em;
+  background-position: top left;
+  background-repeat: no-repeat
+}
+
+
+
+textarea {
+    background-image: linear-gradient(135deg, transparent, transparent 50%, #fed100 50%, #fed100 100%);
+    background-position: bottom right;
+    background-size: 1em 1em;
+    background-repeat: no-repeat;
+}
+
+
+select[required] + .select2 .selection .select2-selection {
+    background-image: radial-gradient(#fed100 20%, transparent 25%);
+    background-size: 1em 1em;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+[multiple] + .select2-container--default:before {
+    content: '+ ADD';
+    color: #898989;
+    position: absolute;
+    left: 7px;
+    top: 11px;
+    bottom: 7px;
+    max-height: 33px;
+    padding: 7px 11px 5px 10px;
+    border: 2px dashed #898989;
+    z-index: 0;
+    font-size: 12px;
+}
+
+
+.select2-container--default .select2-results > .select2-results__options, .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    background-color: transparent !important;
+    z-index: 9;
+    position: relative;
+}
+
+li.select2-selection__choice:first-child {
+    margin-left: 62px;
+}
+
+
+li.select2-selection__choice + li.select2-search.select2-search--inline {
+    padding-left: 0 !important;
+}
+
+li.select2-search.select2-search--inline {
+    padding-left: 62px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #fed100;
+    color: black;
+}
+
+label#indicator-label {
+    position: absolute;
+    z-index: 9;
+    background: #fff;
+    padding: 5px;
+    top: 0;
+}
+
+// adds line underneath Germany at top of selection for country list 
+
+[id$='DE'] {
+    border-bottom: 1px solid #000;
+}
+
+
+.alert-danger ~ input {
+    border: 1px solid #FF7900;
+}
+
+
+form .has-error input {
+      border: 2px solid #000;
+}
+
+
+af-uploader:after {
+    content: 'Optimal image ratio: 1:1';
+    text-align: center;
+    font-size: 10px;
+    display: block;
+    padding: 5px 0 5px 0;
+    color: #989898;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+
+.alert-danger ~ input {
+    border: 1px solid #FF7900 !important;
+}
+
+
+// TODO: all select2 should be white as :active state initially!

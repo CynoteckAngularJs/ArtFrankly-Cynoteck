@@ -1,0 +1,12 @@
+<modal [modal]="modal" (close)="onClose($event)">
+  <modal-body>
+    
+    <notification *ngIf="notifications.length" 
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+    </notification>
+
+    <change-password></change-password>
+
+  </modal-body>
+</modal>

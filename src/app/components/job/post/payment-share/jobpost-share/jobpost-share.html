@@ -1,0 +1,29 @@
+<section class="share-section">
+  
+  <header class="section no-border">
+    <h5 class="jobpost-heading af-heading-2">Your job post was submitted.</h5>
+  </header>
+  
+  <div class="section">
+    <h2 *ngIf="jobpost.title" class="jobpost-title af-heading-1 light-weight af-mb-s">{{jobpost.title}}</h2>
+    <h5 *ngIf="jobpost.organization" class="af-heading-2 af-normal-height">{{jobpost.organization}}</h5>
+  </div>
+  
+  <footer class="section">
+      <div class="row">
+          <div class="col-xs-12">
+              <button class="af-btn btn-light af-heading-uppercased-1" (click)="onCancel($event)">
+                  Close <!--<span class="af-icon icon-paypal af-icon-s"></span>-->
+              </button>
+          </div>
+      </div>
+    <!--
+    <div class="af-heading-uppercased-1 af-mb-s">Share the post to your preferred social network</div>
+    <div>
+      <a href="" class="af-mr-xs"><span class="af-icon icon-twitter-white af-icon-l"></span></a>
+      <a href=""><span class="af-icon icon-facebook-white af-icon-l"></span></a>
+    </div>  
+    -->
+  </footer>
+  
+</section>

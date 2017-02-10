@@ -1,0 +1,320 @@
+<div class="jobpost" *ngIf="spacepost">
+	<div class="row">
+		<div class="col-sm-12">
+			<header class="bottom-bordered">
+				<div class="sort-filter-wrap">
+					<feed-filter [total]="total"></feed-filter>
+				</div>
+				<div class="row feed-filter">
+					<div class="col-sm-5 no-padding text-left hidden-xs">
+						<span class="filter-btn-nolink">Space Post <span *ngIf="isPreview"> Preview</span></span>
+					</div>
+					<div class="col-sm-6 no-padding text-right space-cta-nav">
+						<div class="col-sm-12 no-padding" *ngIf="spacepost.createdBy !== profile.user && spacepost.state !== SPACE_POST_STATES.ARCHIVED">
+							<!--<a *ngIf="spacepost.id" href class="spacepost-apply btn af-button" (click)="onReply($event)">
+								<span class="af-icon af-icon-s icon-replies-white"></span> Apply
+							</a>-->
+							<!-- (replysuccess)="onReplySuccess($event)" -->
+							<spacepost-reply-modal *ngIf="replyModal && replyModal.opened" class="text-left" [modal]="replyModal" (onhide)="onReplyModalHide($event)"
+											[spacepost]="spacepost">
+								</spacepost-reply-modal>
+								<span class="" *ngIf="(spacepost.state !== SPACE_POST_STATES.ARCHIVED && spacepost.state !== SPACE_POST_STATES.PUBLISHED) && (spacepost.createdBy === profile.user || spacepost['@id'] === preview)">
+							<a *ngIf="spacepost.id" href [routerLink]="['EditSpacePost', { id: spacepost.id }]" class="">
+								<button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Edit
+								Post
+								</button>
+								</a>
+								<a *ngIf="!spacepost.id" href [routerLink]="['AddSpacePost']" class="">
+									<button type="button" class="btn af-button"><!-- <span class="af-icon icon-posts-add-white af-icon-s"></span>--> Add Post
+								</button>
+								</a>
+								</span>
+								<span *ngIf="spacepost.id && spacepost.state === SPACE_POST_STATES.ARCHIVED && spacepost.createdBy === profile.user">
+							<a class="">
+								<button type="button" class="btn af-button"><span class="af-icon icon-arrow-left-white af-icon-s"></span>Repost
+								</button>
+								<div><small>Coming Soon</small></div>
+								</a>
+								</span>
+								<span *ngIf="spacepost.createdBy !== profile.user">
+							<a *ngIf="spacepost.id" href [routerLink]="['Feeds']" class="">
+								<button type="button" class="af-button-plain no-border light-btn"><span class="af-icon icon-arrow-left af-icon-xs"></span>Return
+								</button>
+								</a>
+								</span>
+						</div>
+					</div>
+				</div>
+			</header>
+		</div>
+		<div class="row ">
+			<div class="col-sm-12">
+				<h2 class="af-title-1">{{spacepost.title}}</h2>
+			</div>
+		</div>
+		<div class="row jobpost-top-info af-heading-meta profile-img">
+			<div class="af-column-left">
+				<!-- Preview -->
+				<a href class="af-media-avatar thumbnail" *ngIf="isPreview" [routerLink]="routerLink">
+					<img *ngIf="!spacepost.image || !spacepost.image.contentUrl" [src]="DEFAULT_PROFILE_IMAGE" alt="" fallbackimg>
+					<div class="thumbnail-img" *ngIf="spacepost.image && spacepost.image.contentUrl" [ngStyle]="{ 'background-image': 'url(' + spacepost.image.contentUrl + ')' }">
+					</div>
+				</a>
+				<!-- Non Preview -->
+				<a href class="af-media-avatar thumbnail" *ngIf="!isPreview" [routerLink]="routerLink">
+					<img *ngIf="!spacepost.image || !spacepost.image.contentUrl" [src]="appSrv.defaultAvatar" alt="" fallbackimg>
+					<div class="thumbnail-img" *ngIf="spacepost.image && spacepost.image.contentUrl" [ngStyle]="{ 'background-image': 'url(' + spacepost.image.contentUrl + ')' }">
+					</div>
+				</a>
+			</div>
+			<div class="af-column-right">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-12 col-xs-12 af-label af-tags-wrapper no-padding-left" *ngIf="spacepost.createdBy === profile.user">
+							<span class="label label-warning">{{spacepost.state}}</span>
+						</div>
+						<div class="col-sm-12 col-xs-12 af-label af-tags-wrapper no-padding-left">
+							<h6 class="af-sub-title-1 af-feed-type">
+								<span class="af-feed-type">{{spacepost.position}}</span>
+							</h6>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+				</div>
+				<!-- Space Size -->
+				<div class="row af-label-value">
+					<div class="col-sm-12 col-lg-3 af-label">Space Size</div>
+					<div class="col-sm-7 col-lg-9 af-value">
+						<span *ngIf="spacepost.size">{{spacepost.size}}</span>
+						<span *ngIf="!spacepost.size">Unspecified</span>
+					</div>
+				</div>
+				<!-- Space Pricing -->
+				<div class="row af-label-value">
+					<div class="col-sm-12 col-lg-3 af-label">Pricing</div>
+					<div class="col-sm-7 col-lg-9 af-value">
+						<span *ngIf="spacepost.pricing">{{spacepost.pricing}}</span>
+						<span *ngIf="!spacepost.pricing">Unspecified</span>
+					</div>
+				</div>
+				<div class="row af-label-value" *ngIf="spacepost.spaceLocation && spacepost.spaceLocation.address">
+					<div class="col-sm-12 col-lg-3 af-label">Location</div>
+					<div class="col-sm-7 col-lg-9 af-value">
+						<span *ngIf="hasAddress(spacepost.spaceLocation)">{{spacepost.spaceLocation | formataddress}}</span>
+						<span *ngIf="!hasAddress(spacepost.spaceLocation)">Unspecified</span>
+						<span *ngIf="hasAddress(spacepost.spaceLocation)">
+              &nbsp;&nbsp;&nbsp;
+            </span>
+						<div class="location-map">
+							<button data-toggle="collapse" data-target="#reveal-map-1" class="af-button-plain no-border collapsed" value="Show map" *ngIf="spacepost.spaceLocation"> <span class="af-icon icon-arrow-down af-icon-xs"></span> Show map</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div id="reveal-map-1" class="collapse">
+					<div class="location-embed" id="googlemap" *ngIf="spacepost.spaceLocation">
+						<iframe class="location-embed-frame" src="https://www.google.com/maps/embed/v1/place?q={{spacepost.spaceLocation | formataddress}}&zoom=10&key=AIzaSyAcMta2szaRvyJGWiU3keRw8-Ct_MW44bw"
+										frameborder="0" style="border:0">
+							</iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="body">
+		<ng2owlcarousel *ngIf="mediaFiles.length && isAdditionalImages" class="bottom-bordered" [options]="carouselOptions" [items]="mediaFiles">
+        <carouselitems>
+          <div *ngFor="#mediaWrapper of mediaFiles" class="item">
+            <!--<div class="thumbnail" *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)" style="height: 100%; max-height: 100%;">
+            <img
+                [src]="mediaWrapper.mediaObject.contentUrl"
+                [alt]="mediaWrapper.mediaObject.name">
+          </div>-->
+            <img src="{{GetImage(mediaWrapper)}}">
+            <!--<video *ngIf="isVideo(mediaWrapper.mediaObject.fileFormat)" class="video-js vjs-default-skin" controls preload="auto" width="auto"
+              height="auto" data-setup='{"example_option":true}'>
+              <source [src]="mediaWrapper.mediaObject.contentUrl" [type]="mediaWrapper.mediaObject.fileFormat" />
+              <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/"
+                  target="_blank">supports HTML5 video</a></p>
+            </video>-->
+          </div>
+        </carouselitems>
+				<carouselthumbs>
+          <div *ngFor="#thumbMediaWrapper of mediaFiles" class="item">
+            <img src="{{GetImage(thumbMediaWrapper)}}">
+            <!--<img *ngIf="isVideo(thumbMediaWrapper.mediaObject.fileFormat)" src="http://grooveline.org/wp-content/themes/LiveTheme_201/images/video-placeholder.jpg"
+              onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';" [alt]="thumbMediaWrapper.mediaObject.name">-->
+          </div>
+        </carouselthumbs>
+      </ng2owlcarousel>
+
+
+
+		 <ng2owlcarousel *ngIf="mediaFiles.length && !isAdditionalImages" class="bottom-bordered" [options]="carouselOptions" [items]="mediaFiles">
+        <carouselitems>
+          <div *ngFor="#mediaWrapper of mediaFiles" class="item">
+            <!--<div class="thumbnail" *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)" style="height: 100%; max-height: 100%;">
+            <img
+                [src]="mediaWrapper.mediaObject.contentUrl"
+                [alt]="mediaWrapper.mediaObject.name">
+          </div>-->
+            <img *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)" [src]="mediaWrapper.mediaObject.contentUrl" [alt]="mediaWrapper.mediaObject.name">
+            <video *ngIf="isVideo(mediaWrapper.mediaObject.fileFormat)" class="video-js vjs-default-skin" controls preload="auto" width="auto"
+              height="auto" data-setup='{"example_option":true}'>
+              <source [src]="mediaWrapper.mediaObject.contentUrl" [type]="mediaWrapper.mediaObject.fileFormat" />
+              <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/"
+                  target="_blank">supports HTML5 video</a></p>
+            </video>
+          </div>
+        </carouselitems>
+        <carouselthumbs>
+          <div *ngFor="#thumbMediaWrapper of mediaFiles" class="item">
+            <img *ngIf="!isVideo(thumbMediaWrapper.mediaObject.fileFormat)" [src]="thumbMediaWrapper.mediaObject.contentUrl" [alt]="thumbMediaWrapper.mediaObject.name">
+            <img *ngIf="isVideo(thumbMediaWrapper.mediaObject.fileFormat)" src="http://grooveline.org/wp-content/themes/LiveTheme_201/images/video-placeholder.jpg"
+              onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';" [alt]="thumbMediaWrapper.mediaObject.name">
+          </div>
+        </carouselthumbs>
+        <carouseldetails>
+          <div *ngFor="#mediaWrapper of mediaFiles" class="item">
+            <div *ngIf="mediaWrapper['@id'].indexOf('/artworks/') === 0" class="text-center">
+              <div>
+                <span class="bold" *ngIf="mediaWrapper.headline">{{mediaWrapper.headline}}</span>
+              </div>
+              <div>
+                <span class="bold" *ngIf="mediaWrapper.medium">{{mediaWrapper.medium}}</span>
+              </div>
+              <div>
+                <small *ngIf="mediaWrapper.size">(size: {{mediaWrapper.size}})</small>
+                <small *ngIf="mediaWrapper.author">by {{mediaWrapper.author}}</small>
+                <small *ngIf="mediaWrapper.datePublished">on {{mediaWrapper.datePublished | formatdate:'MMM YYYY'}}</small>
+              </div>
+              <div *ngIf="mediaWrapper.text" [innerHTML]="mediaWrapper.text"></div>
+            </div>
+          </div>
+        </carouseldetails>
+      </ng2owlcarousel>
+
+	  
+		<div class="spacepost-description">
+			<div class="row">
+				<div class="col-sm-12">
+					<h5 class="jobpost-heading" *ngIf="spacepost.description">
+						Description
+					</h5>
+					<div class="spacepost-title" *ngIf="spacepost.description" [innerHTML]="spacepost.description | smarttext"></div>
+					<div class="spacepost-title" *ngIf="!spacepost.description"></div>
+				</div>
+			</div>
+		</div>
+		<!-- additional details section -->
+		<div class="jobpost-additional">
+			<div class="row">
+				<div class="col-sm-12">
+					<h5 class="jobpost-heading" *ngIf="spacepost.additional">
+						How To Apply
+					</h5>
+					<div class="spacepost-title" *ngIf="spacepost.additional" [innerHTML]="spacepost.additional | smarttext"></div>
+					<div class="spacepost-title" *ngIf="!spacepost.additional"></div>
+				</div>
+			</div>
+		</div>
+		<div class="jobpost-contact">
+			<div class="row">
+				<div class="col-sm-12">
+					<h5 class="jobpost-heading">Contact</h5>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<!-- Addition Contact name -->
+					<div class="row af-label-value" *ngIf="spacepost.contactname">
+						<div class="col-sm-4 af-label">Name</div>
+						<div class="col-sm-8 af-value">{{spacepost.contactname}}</div>
+					</div>
+					<!-- Addition Contact phone -->
+					<div class="row af-label-value" *ngIf="spacepost.contactphone">
+						<div class="col-sm-4 af-label">Phone</div>
+						<div class="col-sm-8 af-value">{{spacepost.contactphone}}</div>
+					</div>
+					<div class="row af-label-value">
+						<div class="col-sm-4 af-label">Website</div>
+						<div class="col-sm-8 af-value">
+							<a *ngIf="spacepost.url" href="{{spacepost.url | urlcorrect}}" target="blank">{{spacepost.url}}</a>
+							<span *ngIf="!spacepost.url">Unspecified</span>
+						</div>
+					</div>
+					<!-- Addition Contact email -->
+					<div class="row af-label-value">
+						<div class="col-sm-4 af-label">Email</div>
+						<div class="col-sm-8 af-value">
+							<a *ngIf="spacepost.contactemail" href="{{spacepost.contactemail}}" target="blank">{{spacepost.contactemail}}</a>
+							<span *ngIf="!spacepost.contactemail">Unspecified</span>
+						</div>
+					</div>
+					<!--
+          <div class="row af-label-value">
+            <div class="col-sm-4 af-label">Address</div>
+            <div class="col-sm-8 af-value" *ngIf="spacepost.contactLocation && spacepost.contactLocation.address">
+                <span *ngIf="hasAddress(spacepost.contactLocation)">{{spacepost.contactLocation | formataddress}}</span>
+                <span *ngIf="!hasAddress(spacepost.contactLocation)">Unspecified</span>
+                <span *ngIf="hasAddress(spacepost.contactLocation)">
+                  &nbsp;&nbsp;&nbsp;
+                  <a target="_blank"
+                    href="https://www.google.com/maps/place/{{spacepost.contactLocation | formataddress}}?hl=en"
+                    class="bold underline" *ngIf="spacepost.contactLocation">
+                      Map
+                  </a>
+                </span>
+            </div>
+          </div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="spacepost-actionbar">
+			<div class="text-center" *ngIf="spacepost.createdBy === profile.user && (spacepost.state === SPACE_POST_STATES.DRAFT || spacepost.state === SPACE_POST_STATES.PENDING)">
+				<a *ngIf="spacepost.id" href class="spacepost-pay btn af-button" (click)="showPaymentShareModal($event)">
+          Checkout 
+        </a>
+				<spacepost-payment-share-modal *ngIf="paymentModal && paymentModal.opened" class="text-left" [modal]="paymentModal" [spacepost]="spacepost"
+								(paymentsuccess)="onPaymentShareModalSuccess($event)" (close)="onPaymentShareModalHide($event)" (onhide)="onPaymentShareModalHide($event)">
+					</spacepost-payment-share-modal>
+			</div>
+			<div *ngIf="spacepost.createdBy === profile.user || spacepost['@id'] === preview">
+				<div class="text-center mb-20">
+					<a *ngIf="spacepost.id && spacepost['@id'] === preview" href [routerLink]="['EditSpacePost', { id: spacepost.id, mode: 'submit' }]"
+									class="btn af-button"><span class="af-icon af-icon-xl icon-commissions-white"></span> Post Space
+						</a>
+						<a *ngIf="!spacepost.id && spacepost['@id'] === preview" href [routerLink]="['AddSpacePost', { mode: 'submit' }]" class="btn af-button"><span class="af-icon af-icon-l icon-commissions-white"></span> Post Space
+					</a>
+				</div>
+				<div class="text-center mb-20" *ngIf="(spacepost.state !== SPACE_POST_STATES.ARCHIVED && spacepost.state !== SPACE_POST_STATES.PUBLISHED) && (spacepost.createdBy === profile.user || spacepost['@id'] === preview)">
+					<a *ngIf="spacepost.id" href [routerLink]="['EditSpacePost', { id: spacepost.id }]" class="return-to-edit btn af-btn">
+            Back
+          </a>
+					<a *ngIf="!spacepost.id" href [routerLink]="['AddSpacePost']" class="return-to-edit btn af-btn">
+            Back
+          </a>
+				</div>
+				<div class="text-center mb-20" *ngIf="spacepost.id && spacepost.state === SPACE_POST_STATES.ARCHIVED && spacepost.createdBy === profile.user">
+					<a class="btn af-button edit-post-btn">
+						<span class="af-icon af-icon-m icon-posts-white"></span> Repost
+						<div><small>Coming Soon</small></div>
+					</a>
+				</div>
+			</div>
+			<div class="text-center" *ngIf="spacepost.createdBy !== profile.user && spacepost.state !== SPACE_POST_STATES.ARCHIVED">
+				<!--<a *ngIf="spacepost.id" href class="spacepost-apply btn af-button" (click)="onReply($event)">
+					<span class="af-icon af-icon-m icon-replies-white"></span> Apply
+				</a>-->
+				<!-- (replysuccess)="onReplySuccess($event)" -->
+				<spacepost-reply-modal *ngIf="replyModal && replyModal.opened" class="text-left" [modal]="replyModal" (onhide)="onReplyModalHide($event)"
+								[spacepost]="spacepost">
+					</spacepost-reply-modal>
+			</div>
+		</div>
+	</footer>
+</div>

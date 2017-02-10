@@ -1,0 +1,10 @@
+app {
+  display: block;
+  clear: both;
+  overflow: hidden;
+}
+
+html {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+}

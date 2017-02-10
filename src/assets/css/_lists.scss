@@ -1,0 +1,35 @@
+@import './_variables';
+@import './_icons';
+@import './_buttons';
+
+.af-list {
+
+}
+
+.af-empty-list {
+  
+  .af-icon-cnt {
+    @extend .reset-mp;
+    margin-bottom: $distance-m;
+  }
+  
+  .af-heading {
+    @extend .reset-mp;
+    font-size: $h1-font-size;
+    color: $color-gray-1;
+    margin-bottom: $distance-sb;
+  }
+  
+  .af-description {
+    font-size: $size-16;
+    margin-bottom: $distance-l;
+  }
+    
+  .af-action-bar {}
+}
+
+.af-truncated-description {
+  max-height: 140px;
+  overflow: hidden;
+  clear: both;
+}

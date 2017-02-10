@@ -1,0 +1,8 @@
+<select class="form-control {{config.class}}"
+    [id]="config.id">
+        <option *ngFor="#opt of options"
+            value="opt.value"
+            [selected]="opt.value === control.value">
+                {{opt.label}}
+        </option>
+</select>

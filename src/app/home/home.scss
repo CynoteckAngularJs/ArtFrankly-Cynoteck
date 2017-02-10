@@ -1,0 +1,741 @@
+  @import '../../assets/css/_variables';
+@import '../../assets/css/_buttons';
+$url-bilboard-height: 650px;
+$gray-font-color: $color-gray-4;
+$home-fonts-color: $color-gray-6;
+$home-fonts-size: 22px;
+$home-heading-fonts-size: 48px;
+.af-section {
+  color: $home-fonts-color;
+  font-size: $home-fonts-size;
+  font-family: 'NeueHaasUnicaPro-Light';
+  // .container {
+  // padding: 200px 10%;
+  // }
+  &.even {
+    background-color: #F9F9F9;
+  }
+  .af-title-1 {
+    margin-top: 0;
+    font-size: $home-heading-fonts-size;
+  }
+}
+
+.spacer {
+  display: block;
+  width: 100%;
+  padding-top: 80px;
+}
+
+.af-title-1 {
+  font-size: 52px;
+  font-weight: normal;
+  margin-bottom: $distance-m;
+  font-family: NeueHaasUnicaPro-Light;
+}
+
+.af-button {
+  display: inline-block;
+  padding: $distance-s $distance-m;
+  background: #1A1718;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.start-looking-btn {
+  font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.featured-post {}
+
+.featured-post-details {
+  font-size: 16px;
+}
+
+.featured-post-name {
+  a {
+    text-transform: none;
+    font-size: $home-fonts-size;
+    font-family: 'NeueHaasUnicaPro-Bold';
+    text-decoration: none;
+    &:hover {
+      color: $color-black;
+    }
+  }
+}
+
+.artist-name {
+  text-transform: none;
+  text-decoration: none;
+  font-size: $home-fonts-size;
+  font-family: 'NeueHaasUnicaPro-Light';
+  color: $gray-font-color;
+  &:hover {
+    color: $color-black;
+  }
+}
+
+.url-bilboard {
+  .url-bilboard-panel {
+    position: relative;
+    min-height: $url-bilboard-height;
+    .url-bilboard-cover {}
+    .url-bilboard-panel-splitter {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      >div {
+        height: 100%;
+        position: relative;
+        display: table;
+        >* {
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
+    }
+    .url-bilboard-post {
+      padding: $distance-l;
+      padding-left: 0;
+      .url-bilboard-post-ctx {
+        padding-right: $distance-l;
+        border-right: 2px solid black;
+      }
+      .url-bilboard-post-title {
+        @extend .af-title-1;
+      }
+      .url-bilboard-post-body {
+        // font-size: 16px;
+        margin-bottom: $distance-s;
+      }
+    }
+  }
+  .url-bilboard-footer {
+    font-size: 10px;
+    font-family: 'NeueHaasUnicaPro-Medium';
+    color: rgba(0, 0, 0, 0.3);
+    padding: $distance-s;
+  }
+}
+
+.thumbnail {
+  border: none;
+  padding: 0;
+}
+
+.bs3-table {
+  display: table;
+  height: 100%;
+  min-height: 300px;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.bs3-cell {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+
+.promo-strap {
+  display: none;
+}
+
+.featured-item-wrap a.thumbnail {
+  display: inline-block;
+}
+
+.featured-item-wrap {
+  display: inline-block;
+  width: 32%;
+  text-align: center;
+  vertical-align: top;
+}
+
+.explore-profiles.af-section.narrower.padding-l .container {
+  padding-top: 20px !important;
+}
+
+.top-promo-area-cta {
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 9vw;
+  a {
+    font-size: 2vw;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 300;
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+.top-promo-area .col-sm-4 {
+  padding: 3% 6%;
+}
+
+.promo-container {
+  padding: 0px !important;
+}
+
+.featured-post-name {
+  text-align: center;
+}
+
+span.position {
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  color: rgba(0, 0, 0, 0.28);
+  border-radius: 19px;
+  display: inline-block;
+  padding: 6px 10px 4px 10px;
+  margin-bottom: 10px;
+  font-family: 'NeueHaasUnicaPro-Medium';
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+span.company,
+span.location {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.af-feed-featured a {
+  text-align: right;
+  float: right;
+  text-transform: capitalize;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.af-feed-featured a:after {
+  content: '';
+  background: url(assets/img/svg/fill/art_frankly_navigate_right_icon_filled.svg);
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+// to be moved to main //
+h4 {
+  font-family: 'NeueHaasUnicaPro-Medium';
+  color: #1A1718;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+// new home page CSS
+.home-splash {
+  position: relative;
+  margin-top: -120px;
+  margin-left: 0;
+  margin-right: 0;
+  height: 600px;
+  min-height: 500px;
+  width: -moz-available;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  font-family: 'NeueHaasUnicaPro-Light';
+}
+
+.home-splash h3 {
+  font-size: 7vw;
+}
+
+.af-intro {
+  margin: auto;
+  position: absolute;
+  padding: 100px 5% 0 5%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.fixed-header,
+af-header {
+  background-color: transparent !important;
+}
+
+.home-splash h3.af-title-1 {
+  text-align: left;
+  font-size: 7vw;
+}
+
+.home-splash p {
+  text-align: left;
+}
+
+span.top-cta-button-wrap {
+  text-align: left;
+  display: block;
+}
+
+a.af-button.af-mt-s.home-top-cta-button:hover {
+  color: #000;
+  background: #fed100;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.splash-caption {
+  text-align: right;
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 10%;
+  font-size: 12px;
+  line-height: 30px;
+  text-transform: uppercase;
+}
+
+.top-promo-area-cta span {
+  text-align: left;
+  font-size: 22px;
+  border-bottom: 1px solid #1A1718;
+}
+
+.find-jobs-top span,
+.post-jobs-top span,
+.create-top span {
+  display: inline-block;
+}
+
+.find-jobs-top img,
+.post-jobs-top img,
+.create-top img {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-top: 0;
+  margin-right: 3%;
+}
+
+.top-promo-area-cta div:first-child {
+  border-right: 1px solid #1A1718;
+}
+
+.top-promo-area-cta div:last-child {
+  border-left: 1px solid #1A1718;
+}
+
+.top-promo-area p,
+.top-promo-area h3 {
+  font-size: 20px;
+  text-transform: none;
+}
+
+.top-promo-area h3.af-title-1 {
+  margin-bottom: 20px;
+}
+
+.thumbnail img {
+  max-width: 120px;
+  height: auto;
+  min-height: initial;
+  min-width: initial;
+}
+
+.post-jobs-top,
+.create-top {
+  padding-left: 30px;
+}
+
+.promo-container .bs3-table {
+  min-height: 50px;
+  padding: 20px 0 20px 0;
+}
+
+#mobile-press {
+  position: absolute;
+    bottom: 0;
+  max-width: 344px;
+  .carousel-inner {
+    overflow: visible;
+    position: relative;
+    height: 100px;
+    &:before {
+      font-family: 'NeueHaasUnicaPro-Medium';
+      content: 'Press';
+      display: inline-block;
+      position: absolute;
+      top: 36px;
+    }
+    .item {
+      height: 100px;
+      width: 100% !important;
+      overflow: visible;
+      text-align: center;
+      padding-top: 20px;
+    }
+    .carousel-inner>.item>img {
+      display: inline-block;
+      text-align: center;
+    }
+    img {
+      display: inline-block;
+      text-align: center;
+    }
+  }
+}
+
+//.item img {
+//    position: absolute;
+//   height: auto !important;
+//   width: auto !important;
+//   min-width: 100%;
+//   overflow: hidden;
+//   max-width: none;
+//   left: 50%;
+//   top: 46%;
+//   -webkit-transform: translate(-50%, -50%);
+//  -ms-transform: translate(-50%, -50%);
+//  transform: translate(-50%, -50%);
+//   min-height: 500px;
+//}
+.carousel-indicators li {
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
+  background-color: #fff;
+  opacity: .8;
+  margin: 1%;
+}
+
+.carousel-indicators .active {
+  background-color: #000;
+  border: 1px solid #000;
+}
+
+.carousel-caption {
+  right: 8%;
+  top: 56vh;
+  left: 20%;
+  padding-bottom: 30px;
+  text-shadow: none;
+  padding-top: 0;
+}
+
+.promo-container .col-xs-12.bs3-cell {
+  padding-top: 30px;
+}
+
+.sample-preview .container {
+  padding-bottom: 0px !important;
+}
+
+section.af-section.narrower.padding-l.odd.sample-preview {
+  padding-bottom: 100px;
+}
+
+.carousel {
+  overflow: visible;
+  width: 100%;
+}
+
+.container-fluid .wrapper main {
+  margin-top: -20px;
+}
+
+.af-section:first-child {
+  overflow: -moz-hidden-unscrollable;
+}
+
+.home-hero {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 70%;
+  position: relative;
+}
+ 
+.press-banner {
+  position: absolute;
+  bottom: 35px;
+  max-width: 620px;
+  text-align: left;
+  padding-top: 58px;
+  span {
+    font-size: 18px;
+    font-family: 'NeueHaasUnicaPro-Medium';
+  }
+  img {
+    height: 28px;
+    display: inline-block;
+    margin-left: 20px;
+    vertical-align: bottom;
+  }
+}
+
+.splash-padding {
+  padding: 0 10%;
+}
+
+// end new home page CSS
+@media only screen and (min-width: 1165px) {
+  .home-splash h3.af-title-1 {
+    text-align: left;
+    font-size: 5vw;
+  }
+  .top-promo-area p {
+    font-size: 22px;
+    padding: 0 5% 0 0;
+  }
+  .top-promo-area-cta span {
+    text-align: left;
+    font-size: 27px;
+    border-bottom: 1px solid #1A1718;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .af-title-1 {
+    font-size: 36px !important;
+  }
+  .carousel-indicators {
+    display: none;
+  }
+  .top-promo-area {
+    .af-button {
+      padding: 20px 16px;
+    }
+  }
+  .splash-padding {
+    padding: 0 2%;
+  }
+  span.top-cta-button-wrap {
+    text-align: center;
+  }
+  .home-splash {
+    height: 400px;
+    margin-top: -100px;
+  }
+  .home-splash h3.af-title-1 {
+    text-align: center;
+    font-size: 9vw;
+  }
+  .top-promo-area p {
+    font-size: 16px;
+    text-align: center;
+  }
+  p {
+    font-size: 18px;
+  }
+  .af-section.narrower.padding-l.first-block .container {
+    padding: 53px 0 0 0;
+  }
+  .af-section {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .thumb-right img {
+    width: 50px;
+    height: 50px;
+  }
+  .thumb-right {
+    width: 50px;
+    height: 50px !important;
+    display: inline-block;
+  }
+  .thumb-container {
+    position: absolute;
+  }
+  .container {
+    position: relative;
+  }
+  .thumb-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+  }
+  .thumb-icon {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .af-section.narrower.padding-l .container {
+    padding: 45px 0;
+  }
+  .home-top-cta {
+    display: none;
+  }
+  .promo-strap {
+    background: #fed100;
+    display: block;
+    font-size: 34px;
+    padding: 14px 30px 0 30px;
+  }
+  .promo-strap span {
+    display: block;
+  }
+  .promo-strap-link-1,
+  .promo-strap-link-2 {
+    background: transparent !important;
+    display: inline-block;
+    font-size: 34px;
+    border-bottom: 2px solid #1A1718;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+  .promo-strap-link-1:before {
+    content: url("./src/assets/img/svg/regular/art_frankly_search_icon.svg");
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+  }
+  .promo-strap-link-2:before {
+    content: url("./src/assets/img/svg/regular/art_frankly_available_space_icon.svg");
+    display: inline-block;
+    width: 28px;
+    height: 32px;
+  }
+  .promo-cta-btn {
+    background: #1A1718 !important;
+    color: #fff !important;
+  }
+  .home-featured-feed .thumbnail {
+    max-width: 70px !important;
+    max-height: 70px !important;
+    z-index: 999;
+  }
+  .featured-post-details {
+    display: block;
+    text-align: center;
+  }
+  .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+  }
+  .featured-item-wrap {
+    padding-bottom: 30px;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+    padding-top: 20px;
+  }
+  .featured-post-name a {
+    font-size: 19px;
+    line-height: 23px;
+  }
+  .featured-post-name {
+    text-align: center;
+  }
+  .featured-post-details span {
+    line-height: 14px;
+  }
+  .position {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+  .company,
+  .location {
+    font-size: 14px;
+  }
+  .featured-post-details h4 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  .first-block a.thumbnail.thumb-right {
+    margin-top: 37px;
+  }
+  span.position.bold,
+  span.occupation.bold {
+    display: block;
+    margin-top: 3px;
+  }
+  .af-feed-featured {
+    display: block;
+  }
+  span.company.bold,
+  .featured-posting-view-btn {
+    display: inline-block;
+    text-align: center;
+  }
+  .top-promo-area-cta,
+  .home-top-cta-button {
+    margin-bottom: 20px;
+  }
+  .home-featured-feed .thumbnail {}
+  .top-promo-area-cta div:first-child {
+    border-right: none;
+  }
+  .top-promo-area-cta div:last-child {
+    border-left: none;
+  }
+  .col-sm-4.find-jobs-top,
+  .post-jobs-top {
+    margin-bottom: 35px;
+  }
+  .post-jobs-top,
+  .create-top {
+    padding-left: 10px;
+  }
+  .top-promo-area-cta span {
+    font-size: 30px;
+  }
+  .splash-caption {
+    text-align: center;
+    margin-right: 0;
+  }
+  section.af-section.narrower.even.padding-l.first-block.home-splash {
+    padding: 0;
+  }
+  .carousel-caption {
+    left: 0;
+    right: 0;
+    top: 471px;
+  }
+  .carousel-inner {
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .home .container-fluid .wrapper main {
+    overflow: visible;
+  }
+}
+
+
+/* Home iPad Styles */
+
+@media (min-width: 768px) and (max-width: 769px) {
+  .home-splash {
+    margin-top: -150px !important;
+    h3.af-title-1 {
+      text-align: left !important;
+    }
+
+    .af-intro {
+        padding: 0px 8% 0 5%;
+    }
+
+    span.top-cta-button-wrap {
+      text-align: left;
+    }
+    .top-promo-area {
+      margin-top: 0px !important;
+      p {
+        text-align: left;
+        padding: 0 5% 0 0;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,196 @@
+<div class="menu-toggle-btn-cnt" [ngClass]="{ opened: opened, closed: !opened }">
+  <a class="btn menu-toggle-btn" href (click)="toggleMenu($event)">
+    <span *ngIf="!opened" class="glyphicon glyphicon-menu-hamburger"></span>
+    <span *ngIf="opened" class="icon-x-out"></span>
+  </a>
+</div>
+<ul class="url-sm" *ngIf="opened">
+  <li class=" first-level top-row">
+    <div class="">
+      <div class="url-sidebar-menu-item">
+        <div class="url-sm-item-name clearfix">
+          <div class="row">
+            <span class="af-featured">MENU </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-feed">
+      <a href (click)="resetFilter()" [routerLink]="['/Feeds']"><span class="sr-only">(current)</span> 
+        <div class="url-sidebar-menu-item">      
+          <div class="url-sm-item-name clearfix">
+            <div class="row">        
+            <div class="col-sm-10">          
+            <span class="btn-default">Feed </span>         
+            </div>
+            <div class="col-sm-2">
+              <span class="af-icon icon-feed af-icon-m"></span>
+            </div>        
+            </div>
+          </div>         
+        </div>
+        </a>
+    </div>
+  </li>
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-posts">
+      <a href [routerLink]="['/MyLanding']"><span class="sr-only">(current)</span>
+        <div class="url-sidebar-menu-item">
+          <div class="url-sm-item-name clearfix">
+            <div class="row">
+              <div class="col-sm-10">
+                <span class="btn-default">Posts </span>
+              </div>
+              <div class="col-sm-2">
+                <span class="af-icon icon-posts af-icon-m"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-preview">
+      <a href [routerLink]="['MyProfiles']">
+        <div class="url-sidebar-menu-item">
+          <div class="url-sm-item-name clearfix">
+            <div class="row">
+              <div class="col-sm-10">
+                <span class="btn-default">Profile </span>
+              </div>
+              <div class="col-sm-2">
+                <span class="af-icon icon-profile-fill af-icon-m"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-replies">
+      <a [routerLink]="['/MyJobPosts']">
+        <div class="url-sidebar-menu-item">
+          <div class="url-sm-item-name clearfix">
+            <div class="row">
+              <div class="col-sm-10">
+                <span class="btn-default">Replies </span>
+                <!-- <span class="alert-number jobpost-responses">{{(jobpost.jobResponses).length}}</span> -->
+              </div>
+              <div class="col-sm-2">
+                <span class="af-icon icon-replies af-icon-m"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </li>
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-news">
+      <a href (click)="comingSoon($event)">
+        <div class="url-sidebar-menu-item">
+          <div class="url-sm-item-name clearfix">
+            <div class="row">
+              <div class="col-sm-10">
+                <span class="btn-default">News </span>
+              </div>
+              <div class="col-sm-2">
+                <span class="af-icon icon-news af-icon-m"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </li>
+  <!--
+  <li class="url-sm-item">
+    <div class="sidebar-menu-item" id="sidebar-social">
+      <a href (click)="comingSoon($event)">
+        <div class="url-sidebar-menu-item">
+          <div class="url-sm-item-name clearfix">
+            <div class="row">
+              <div class="col-sm-10">
+                <span class="btn-default">Social </span>
+              </div>
+              <div class="col-sm-2">
+                <span class="af-icon icon-social af-icon-m"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </li>
+  -->
+  <!-- <li *ngFor="#child of menu.children"
+       class="url-sm-item first-level"
+       [class.active]="child.expanded">
+
+        <sidebar-menu-item [menu]="child" id="{{child.id}}">
+        </sidebar-menu-item>
+
+    </li> -->
+</ul>
+<!--<ul class="url-sm">
+  <li class="url-sm-item">
+    <div class="url-sm-horizontal-icon-set">
+      <a href class="">Edit <span class=""></span></a>
+      <a href class="">Envelope <span class=""></span></a>
+      <a href class="">Hart <span class=""></span></a>
+    </div>
+  </li>
+  <li class="url-sm-item"
+    [class.active]="router.isRouteActive(router.generate(['/MyProfiles']))">
+    <a href
+        class="url-sm-item-name"
+        (click)="">
+      Profile <span class=""></span>
+    </a>
+    <ul class="url-sm-submenu"
+        [class.expanded]="">
+      <li class="url-sm-item">
+        <a href class="url-sm-item-name">Profile Name <span class=""></span></a>
+        <ul class="url-sm-submenu expanded">
+          <li class="url-sm-item">
+            <a href class="url-sm-item-name">Edit Profile <span class=""></span></a>
+          </li>
+          <li class="url-sm-item"
+              [class.active]="router.isRouteActive(router.generate(['/MyProfiles']))">
+            <a href
+                class="url-sm-item-name"
+                [routerLink]="['MyProfiles']">
+              My Profiles <span class=""></span>
+            </a>
+          </li>
+          <li class="url-sm-item"
+              [class.active]="router.isRouteActive(router.generate(['/Profiles']))">
+            <a href
+                class="url-sm-item-name"
+                [routerLink]="['/Profiles']">
+              Public Profiles <span class=""></span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="url-sm-item"
+          [class.active]="router.isRouteActive(router.generate(['/AddProfile']))">
+        <a href (click)="goToAddProfile($event)" class="url-sm-item-name">Add Profile <span class=""></span></a>
+      </li>
+    </ul>
+  </li>
+  <li class="url-sm-item"
+      [class.active]="router.isRouteActive(router.generate(['/Profiles']))">
+    <a href
+       class="url-sm-item-name"
+       [routerLink]="['Profiles']"
+       >Posts <span class=""></span></a>
+  </li>
+  <li class="url-sm-item">
+    <a href class="url-sm-item-name">Settings <span class=""></span></a>
+  </li>
+</ul>-->

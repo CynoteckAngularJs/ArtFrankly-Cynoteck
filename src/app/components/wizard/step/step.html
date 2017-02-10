@@ -1,0 +1,14 @@
+<div class="wizard-step text-center">
+  <h2 *ngIf="step.iconClass" class="step-icon-cnt">
+    <i class="{{step.iconClass}}"></i>
+  </h2>
+
+  <h2 class="step-title">{{step.title}}</h2>
+  
+  <div class="step-body" [innerHTML]="step.body"></div>
+  
+  <a (click)="goToSlide($event, step)"
+      class="step-button af-button" href>
+    {{step.nextText}}
+  </a>
+</div>

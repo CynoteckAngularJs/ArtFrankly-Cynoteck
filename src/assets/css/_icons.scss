@@ -1,0 +1,533 @@
+@import './_variables';
+
+.af-icon {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.af-icon-xs {
+  width: 11px;
+  height: 11px;
+}
+
+.af-icon-s {
+  width: $distance-s;
+  height: $distance-s;
+}
+
+.af-icon-m {
+  width: 25px;
+  height: 25px;
+}
+
+.af-icon-l {
+  width: 30px;
+  height: 30px;
+}
+.af-icon-xl {
+  width: $distance-m;
+  height: $distance-m;
+}
+.af-icon-xl-xxl {
+  width: $distance-l;
+  height: $distance-l;
+}
+.af-icon-xxl {
+  width: $distance-xxl;
+  height: $distance-xxl;
+}
+
+.af-icon-xxxl {
+  width: $distance-xxxl;
+  height: $distance-xxxl;
+}
+
+.account-menu {
+  background-image: url('./assets/img/icons/accont_menu.png');
+}
+.icon-arrow-right {
+ background-image: url('./assets/img/svg/next-icon.svg');
+ background-size: contain;
+}
+.icon-arrow-left {
+  background-image: url('./assets/img/svg/prev-icon.svg');
+  background-size: contain;
+}
+
+.icon-arrow-left-white {
+  background-image: url('./assets/img/svg/prev-icon-white.svg');
+  background-size: contain;
+}
+
+.icon-arrow-right-white {
+  background-image: url('./assets/img/svg/next-icon-white.svg');
+  background-size: contain;
+}
+
+
+.icon-arrow-down {
+  background-image: url('./assets/img/svg/down-arrow.svg');
+}
+.icon-arrow-down-over {
+  background-image: url('./assets/img/svg/down-arrow.svg');
+   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.icon-arrow-up {
+  background-image: url('./assets/img/svg/down-arrow.svg');
+   -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.icon-arrow-up-over {
+  background-image: url('./assets/img/svg/fill/art_frankly_dropdown_icon_filled.svg');
+}
+.icon-close {
+  background-image: url('./assets/img/icons/close.png');
+}
+.icon-close-over {
+  background-image: url('./assets/img/icons/close_filled.png');
+}
+.icon-close-white {
+  background-image: url('./assets/img/icons/close_white.png');
+}
+.icon-close-white-over {
+  background-image: url('./assets/img/icons/close_white_filled.png');
+}
+.icon-checkmark {
+  background-image: url('./assets/img/svg/fill/art_frankly_check_icon_filled.svg');
+}
+.icon-checkmark-white {
+  background-image: url('./assets/img/svg/fill/art_frankly_check_icon_filled-white.svg');
+}
+.icon-search {
+  background-image: url("./assets/img/svg/af-search-icon.svg");
+}
+.icon-search-over {
+   background-image: url("./assets/img/svg/fill/art_frankly_search_icon_filled.svg");
+}
+.icon-flag {
+  background-image: url('./assets/img/icons/small/info_active.png');
+}
+.icon-equal-checkmark {
+  background-image: url('./assets/img/icons/job_post_icon.png');
+}
+.icon-endorse {
+  background-image: url("./assets/img/svg/regular/art_frankly_endorse_icon.svg");
+  background-size: contain;
+}
+.icon-endorse-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_endorse_icon_filled.svg");
+  background-size: contain;
+}
+.icon-endorse-filled {
+   background-image: url("./assets/img/svg/fill/art_frankly_endorse_icon_filled.svg");
+   background-size: contain;
+}
+.icon-endorse-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_endorse_icon_filled.svg");
+}
+.icon-endorse-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_endorse_icon_filled.svg");
+}
+.icon-connect {
+  background-image: url("./assets/img/svg/regular/art_frankly_connect_icon.svg");
+}
+.icon-connect-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled.svg");
+}
+
+.actions-bar .icon-connect-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled-white.svg");
+}
+
+.icon-connect-filled {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled.svg");
+}
+
+.icon-connect-filled {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled-white.svg");
+}
+
+.icon-connect-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled.svg");
+}
+.icon-connect-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_connect_icon_filled.svg");
+}
+.icon-reply {
+  background-image: url("./assets/img/svg/regular/art_frankly_reply_icon.svg");
+}
+.icon-reply-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_reply_icon_filled.svg");
+}
+
+.icon-reply-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_reply_icon_filled-white.svg");
+}
+
+.icon-reply-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_reply_icon_filled.svg");
+}
+.icon-response_default {
+  background-image: url('./assets/img/icons/response_default.png');
+}
+.icon-request_default {
+  background-image: url('./assets/img/icons/request_default.png');
+}
+.icon-endorsment_default {
+  background-image: url('./assets/img/icons/endorsment_default.png');
+}
+.icon-available-space {
+  background-image: url('./assets/img/icons/small/available_space.png');
+}
+.icon-available-space-over {
+  background-image: url('./assets/img/icons/small/available_space_over.png');
+}
+.icon-available-space-active {
+  background-image: url('./assets/img/icons/small/available_space_filled.png');
+}
+.icon-jobpost {
+  background-image: url('./assets/img/icons/small/job_post.png');
+}
+.icon-jobpost-over {
+  background-image: url('./assets/img/icons/small/job_post_over.png');
+}
+.icon-jobpost-active {
+  background-image: url('./assets/img/icons/small/job_post_filled.png');
+}
+.icon-notification {
+  background-image: url('./assets/img/icons/small/notifications.png');
+}
+.icon-notification-over {
+  background-image: url('./assets/img/icons/small/notifications_over.png');
+}
+.icon-notification-active {
+  background-image: url('./assets/img/icons/small/notifications_filled.png');
+}
+.icon-settings {
+  background-image: url('./assets/img/icons/small/settings.png');
+}
+.icon-settings-over {
+  background-image: url('./assets/img/icons/small/settings_over.png');
+}
+.icon-settings-active {
+  background-image: url('./assets/img/icons/small/settings_filled.png');
+}
+.icon-add {
+  background-image: url("./assets/img/svg/fill/art_frankly_add_icon_filled.svg");
+}
+.icon-add-over {
+  background-image: url("./assets/img/svg/fill/art_frankly_add_icon_filled.svg");
+}
+.icon-add-active {
+  background-image: url("./assets/img/svg/fill/art_frankly_add_icon_filled.svg");
+}
+.icon-facebook-white {
+  background-image: url('./assets/img/icons/facebook_white.png');
+}
+.icon-twitter-white {
+  background-image: url('./assets/img/icons/twitter_white.png');
+}
+.icon-paypal {
+  background-image: url('./assets/img/svg/fill/art_frankly_paypal_icon.svg');
+}
+.icon-paypal-white {
+  background-image: url('./assets/img/svg/fill/art_frankly_paypal_icon-white.svg');
+}
+.icon-stapler {
+  background-image: url('./assets/img/ai-icons/attach-icon.ai');
+}
+.icon-x-out {
+  background-image: url('./assets/img/svg/x-out-icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.icon-feed {
+    background-image: url("./assets/img/svg/feed-icon.svg");
+    opacity: .4;
+}
+
+.icon-feed-over {
+    background-image: url("./assets/img/svg/feed-icon.svg");
+    opacity: 1;
+}
+
+.icon-posts {
+    background-image: url("./assets/img/svg/posts-icon.svg");
+}
+
+.icon-posts-white, .af-button:active .icon-posts-white {
+    background-image: url("./assets/img/svg/posts-icon-white.svg");
+}
+
+.icon-profile {
+    background-image: url("./assets/img/svg/profile-icon.svg");
+}
+
+.icon-profile-fill {
+  background-image: url("./assets/img/svg/profile-icon-fill.svg");
+}
+
+.icon-replies {
+    background-image: url("./assets/img/svg/replies-icon.svg");
+}
+
+.icon-replies-white {
+    background-image: url("./assets/img/svg/replies-icon-white.svg");
+}
+
+.icon-news {
+    background-image: url("./assets/img/svg/news-icon.svg");
+}
+
+.icon-social {
+    background-image: url("./assets/img/svg/social-icon.svg");
+}
+
+.icon-jobs {
+    background-image: url("./assets/img/svg/jobs-icon.svg");
+}
+
+.icon-spaces {
+    background-image: url("./assets/img/svg/spaces-icon.svg");
+}
+
+.icon-commissions {
+    background-image: url("./assets/img/svg/commissions-icon.svg");
+}
+
+.icon-commissions-white {
+    background-image: url("./assets/img/svg/commissions-icon-white.svg");
+}
+
+a, button {
+  .icon-search {
+    @extend .icon-search;
+  }
+  .icon-close {
+    @extend .icon-close;
+  }
+  .icon-endorse {
+    @extend .icon-endorse;
+  }
+  .icon-connect {
+    @extend .icon-connect;
+  }
+  .icon-reply {
+    @extend .icon-reply;
+  }
+  .icon-arrow-down {
+    @extend .icon-arrow-down;
+  }
+  .icon-arrow-up {
+    @extend .icon-arrow-up;
+  }
+  .icon-available-space {
+    background-image: url("./assets/img/svg/regular/art_frankly_available_space_icon.svg");
+  }
+  .icon-jobpost {
+    background-image: url("./assets/img/svg/regular/art_frankly_job_post_icon.svg");
+  }
+  .icon-add {
+    @extend .icon-add;
+  }
+  .icon-stapler {
+    @extend .icon-stapler;
+  }
+
+  &:hover {
+    .icon-search {
+      @extend .icon-search-over;
+    }    
+    .icon-close {
+      @extend .icon-close-over;
+    }
+    .icon-close-white {
+      @extend .icon-close-white-over;
+    }
+    .icon-endorse {
+      @extend .icon-endorse-filled;
+    }
+    .icon-connect {
+      @extend .icon-connect-filled;
+    }
+    .icon-reply {
+      @extend .icon-reply-over;
+    }
+    .icon-arrow-down {
+      @extend .icon-arrow-down-over;
+    }
+    .icon-arrow-up {
+      @extend .icon-arrow-up-over;
+    }
+    .icon-available-space {
+      background-image: url("./assets/img/svg/fill/art_frankly_available_space_icon_filled.svg");
+    }
+    .icon-jobpost {
+      background-image: url("./assets/img/svg/fill/art_frankly_job_post_icon_filled.svg");
+    }
+    .icon-add {
+      @extend .icon-add-over;
+    }
+  }
+  &.active, &:active {
+    .icon-endorse {
+      @extend .icon-endorse-active;
+    }
+    .icon-connect {
+      @extend .icon-connect-active;
+    }
+    .icon-reply {
+      @extend .icon-reply-active;
+    }
+    .icon-available-space {
+      @extend .icon-available-space-active;
+    }
+    .icon-jobpost {
+      @extend .icon-jobpost-active;
+    }
+    .icon-notification {
+      @extend .icon-notification-active;
+    }
+    .icon-settings {
+      @extend .icon-settings-active;
+    }
+    .icon-add {
+      @extend .icon-add-active;
+    }
+  }
+  &.af-btn:hover {
+    .icon-arrow-left {
+      @extend .icon-arrow-left-white;
+    }
+  }
+}
+
+.af-button:hover .icon-arrow-left-white {
+      @extend .icon-arrow-left;
+    }
+
+.af-button:hover .icon-replies-white {
+      @extend .icon-replies;
+    }
+
+.af-button:hover .icon-posts-white {
+      @extend .icon-posts;
+    }
+
+.af-button:hover .icon-commissions-white {
+      @extend .icon-commissions;
+    }
+
+.af-btn:hover .icon-checkmark-white {
+      @extend .icon-checkmark;
+    }
+
+
+// li {
+//   .url-sidebar-menu-icon {
+//     width: $distance-s;
+//     height: $distance-s;
+//     float: right;
+//   }
+//   &.active {
+//     .icon-arrow-left {
+//       background: url('./assets/img/icons/arrow_right.png') center center no-repeat;
+//     }
+//   }
+//   &:hover {}   
+// }
+
+.af-icon-cnt {
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-block;
+  &.circle {
+    border-radius: 50%;
+  }
+  &.white {
+    background-color: $color-white;
+  }
+  &.black {
+    background-color: $color-black;
+  }
+  &.transparent {
+    background-color: transparent;
+  }
+}
+
+.af-feed-actions ul li {
+    padding: 10px;
+    position: relative;
+}
+
+.svg-thumbnail-wrapper .af-icon.af-icon-xl.icon-connect {
+    background-size: 50%;
+}
+
+.af-uploader-button .af-icon:after {
+    left: -7px !important;
+    top: -7px !important;
+}
+
+.post-job img {
+    margin-left: 4px;
+}
+
+.icon-add, a .icon-add, button .icon-add {
+  background-size: 90%;
+}
+
+span.af-icon.af-icon-xl.icon-reply {
+  background-size: 50%;
+  display: inline-block;
+}
+
+.sidebar-menu-item .af-icon {
+    opacity: 0.25;
+}
+
+.sidebar-menu-item:hover .af-icon {
+    opacity: 1;
+}
+
+.af-button .icon-arrow-left-white {
+    background-size: 44%;
+}
+
+.padding-top-bottom-sm {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.padding-top-bottom-xs {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.margin-top-bottom-sm {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.padding-top-bottom-xs {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}

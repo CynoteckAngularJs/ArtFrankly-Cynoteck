@@ -1,0 +1,29 @@
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_icons';
+
+.icon-paypal {
+  margin-left: 10px;
+}
+
+.cancel-btn {
+  display: inline-block;
+  padding-top: 18px;
+}
+
+.share-section {
+  margin-top: $distance-xxl;
+}
+
+.payment-section {
+    .af-heading-1, .af-heading-2 {
+        font-family: NeueHaasUnicaPro-Medium;
+    }
+}
+
+
+.cc-disc {
+  text-align: left;
+    display: inline-block;
+    padding-top: 18px;
+    color: #505050 !important;
+}

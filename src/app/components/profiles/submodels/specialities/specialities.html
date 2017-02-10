@@ -1,0 +1,28 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Areas of Speciality</h5>
+    </header>
+    
+    <form class="specialities-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+      
+      <header class="form-group">
+        <div class="text-right action-bar">
+          <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+          <a href (click)="onDelete(item, $event)">Delete</a>
+          <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+          <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+        </div>
+      </header>
+      
+      <div class="form-group">
+        <select class="form-control" multiple="multiple" [ng2select2]="specialities" [ng2select2options]="select2Options" #specialities="ngForm" ngControl="specialities" [disabled]="mode !== MODES.edit">
+            <option *ngFor="#pSpeciality of SPECIALITIES" [value]="pSpeciality.value" [selected]="profile.specialities && profile.specialities.indexOf(pSpeciality.value) >= 0">{{pSpeciality.label}}</option>
+        </select>
+      </div>
+      
+    </form>
+    
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<!--<div class="overlay">
+    <div class="overlay-content">-->
+
+      <div class="md-modal md-effect-3 md-show"
+        *ngIf="modal && modal.opened">
+
+        <div class="md-content">
+          
+          <header class="md-modal-header">
+            <ul class="md-modal-action-bar">
+              <li>
+                <a href
+                  class="md-modal-close"
+                  *ngIf="modal.closeable"
+                  (click)="onClose($event)">
+                  <span>Close</span>
+                  <span class="af-icon icon-x-out af-icon-s"></span>
+                </a>
+              </li>
+            </ul>
+            <!--<h3 class="modal-title" *ngIf="modal.title" [innerHTML]="modal.title"></h3>-->
+            <ng-content select="modal-title"></ng-content>
+          </header>
+          
+          <ng-content select="modal-body"></ng-content>
+          
+        </div>
+        
+      </div>
+      
+    <!--</div>
+</div>-->

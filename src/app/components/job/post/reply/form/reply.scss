@@ -1,0 +1,52 @@
+@import '../../../../../../assets/css/_variables';
+@import '../../../../../../assets/css/_forms';
+@import '../../../../../../assets/css/_utils';
+
+.reply-files {
+  padding: 0 20px 20px;
+  // .reply-file {
+  //   display: block;
+  // }
+  .reply-file-meta {
+    background: #FFF;
+    .file-name, .file-size {
+      color: $color-black;
+    }
+    .file-size-wrapper {
+      font-size: 10px;
+      line-height: 20px;
+      vertical-align: middle;
+    }
+  }
+}
+
+form {
+  textarea {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    height: 140px;
+    resize: none;
+    &:focus {
+      border: none;
+      background-color: transparent;
+    }
+  }
+  
+  .reply-form-body {
+    border: 1px solid $color-black;
+    &.focused {
+      background: #FFF;
+      * {
+        color: #000;
+      }
+      
+      .reply-files {
+        .reply-file-meta {
+          background: $color-gray-2;
+        }
+      }
+
+    }
+  } 
+}

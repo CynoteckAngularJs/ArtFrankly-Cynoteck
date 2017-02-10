@@ -1,0 +1,19 @@
+<form class="af-uploader">
+  <a class="thumbnail">
+    <label class="btn af-uploader-button">
+        <!--<span class="url-sidebar-menu-icon af-icon icon-add"></span>-->
+        <i class="glyphicon glyphicon-paperclip"></i> 
+        <span class="af-heading-uppercased-1 af-mb-s">Attach a File</span>
+        <input type="file"
+              [disabled]="isDisabled"
+              (change)="onFileChange($event)"
+              [ng-file-select]="uploaderOptions" 
+              (onUpload)="handleUpload($event)"
+              multiple>
+    </label>
+  </a>
+  <div class="progress" *ngIf="isShowProgress">
+    <div class="progress-bar" [style.width]="progress + '%'"></div>
+    <div class="percent text-center">{{ progress }}%</div>
+  </div>
+</form>

@@ -1,0 +1,49 @@
+<!--<form class="af-uploader" *ngIf="!src && uploadFile && !uploadFile.contentUrl">-->
+<form class="af-uploader" [ngStyle]="{ display: !src && uploadFile && !uploadFile.contentUrl ? 'inline-block' : 'none' }">
+  <a class="thumbnail">
+    <label class="btn af-uploader-button">
+        <span class="url-sidebar-menu-icon af-icon af-icon-xl icon-add"></span>
+        <span class="af-uploader-button-text">ADD PHOTO</span>
+        <input type="file"
+              [disabled]="isDisabled"
+              (change)="onFileChange($event)"
+              [ng-file-select]="uploaderOptions" 
+              (onUpload)="handleUpload($event)">
+    </label>
+  </a>
+  <div class="progress">
+    <div class="progress-bar" [style.width]="progress + '%'"></div>
+    <div class="percent text-center">{{ progress }}%</div>
+  </div>
+</form>
+
+<div class="af-uploader af-uploader-wrapper" *ngIf="src || (uploadFile && uploadFile.contentUrl)">
+  <a class="thumbnail">
+    <img [src]="src"
+          [alt]="alt"
+          *ngIf="!isVideo"
+          onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';">
+    <!--<img *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)"
+          [src]="mediaWrapper.mediaObject.contentUrl"
+          [alt]="mediaWrapper.mediaObject.name">-->
+    <video  *ngIf="isVideo" 
+      class="video-js vjs-default-skin"
+      controls preload="auto" width="auto" height="auto"
+      data-setup='{"example_option":true}'>
+      <source [src]="src" [type]="uploadFile && uploadFile.fileFormat" />
+      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+  </a>
+  <a *ngIf="deleteable && (media && media['@id'] || uploadFile && uploadFile['@id'])"
+      class="af-uploader-remove-media"
+      href
+      (click)="removeMedia($event)">
+    <span class="af-icon icon-x-out af-icon-xs"></span>
+  </a>
+  <a *ngIf="deleteable && !(media && media['@id'] || uploadFile && uploadFile['@id'])"
+      class="af-uploader-remove-media"
+      href
+      (click)="unqueueMedia($event)">
+    <span class="af-icon icon-x-out af-icon-xs"></span>
+  </a>
+</div>

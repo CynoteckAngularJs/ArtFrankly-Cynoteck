@@ -1,0 +1,30 @@
+<div class="btn-group-container filter-btn-wrapper">
+  <div class="btn-group" role="group">
+    <button (click)="onFilterChange($event, FILTER_TYPES.JOBS)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.JOBS }">Jobs</button>
+    <span class="btn-group-separator"></span>
+    <button (click)="comingSoon($event)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.SPACES }">Spaces</button>
+    <span class="btn-group-separator"></span>
+    <button (click)="comingSoon($event)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.OPPORTUNITIES }">Opportunities</button>
+    <span class="btn-group-separator"></span>
+    <button (click)="onFilterChange($event, FILTER_TYPES.PROFILES)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.PROFILES }">Profiles</button>
+  </div>
+  <div class="general-filter-box dropdown-menu" *ngIf="selectedType && (selectedType === FILTER_TYPES.JOBS || selectedType === FILTER_TYPES.PROFILES)">
+    <jobs-filter *ngIf="selectedType === FILTER_TYPES.JOBS"
+        [term]="jobFilter.term"
+        [jobPositionTypes]="jobFilter.subType"
+        [jobServices]="jobFilter.description"
+        [cities]="jobFilter.location"
+        (filterchange)="onChange($event)">
+    </jobs-filter>
+    <profiles-filter *ngIf="selectedType === FILTER_TYPES.PROFILES"
+        [term]="profileFilter.term"
+        [industries]="profileFilter.subtitle"
+        [professions]="profileFilter.description"
+        [profileTypes]="profileFilter.subType"
+        (filterchange)="onChange($event)">
+    </profiles-filter>
+    <a href class="filter-close-btn" (click)="close($event)">
+      <span class="af-icon icon-x-out af-icon-s"></span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+@import '../../../../assets/css/_variables';
+@import '../../../../assets/css/_icons';
+@import '../../../../assets/css/_forms';
+
+@media only screen and (min-width: 768px) {
+  .af-feeds .feed-filter {
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    background: #fff !important;
+    padding: 12px 20px 3px 90px;
+    z-index: 3;
+    left: 0;
+    top: 120px;
+    border-bottom: 2px solid #e6e6e6;
+  }
+
+   .feed.menu-expanded .feed-filter {
+     width: calc(100% - 280px) !important;
+    left: 280px !important;
+    padding: 18px 4% 12px 1% !important;
+   }
+}
+
+
+$dropdown-height: 34px;
+$dropdown-toggle-btn-padding: 6px 12px;
+
+.refine-feeds {
+  text-decoration: none;
+  line-height: $dropdown-height;
+  span {
+    margin-left: 5px;
+  }
+}
+
+.btn-group {
+  .dropdown-toggle {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    @extend .link-alike;
+    padding: $dropdown-toggle-btn-padding;
+    color: $input-color;
+    &:hover {
+      @extend .link-alike;
+    }
+  }
+}

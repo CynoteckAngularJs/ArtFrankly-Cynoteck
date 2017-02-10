@@ -1,0 +1,69 @@
+<form class="feed-filter-from" [ngFormModel]="form" (ngSubmit)="triggerFilter(form.value)">
+  
+  <!--<div class="row">
+    <div class="col-sm-4">
+      
+      <a href class="refine-feeds">
+        Refine your feeds <span class="af-icon icon-close af-icon-xs"></span>
+      </a>
+    </div>
+    <div class="col-sm-8">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Posts <span class="af-icon icon-arrow-down af-icon-xs"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li class="text-center">
+            <a>Show Me</a>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <a>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" [checked]="form.controls.type.value === ''" (change)="toggleType('', $event)"> All
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" [checked]="form.controls.type.value === FEED_TYPES.job_posting" (change)="toggleType(FEED_TYPES.job_posting, $event)"> Job Listings
+                </label>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" [checked]="form.controls.type.value === FEED_TYPES.profile" (change)="toggleType(FEED_TYPES.profile, $event)"> Profiles
+                </label>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="pull-right">
+        <a href class="sort-feeds" (click)="toggleSort($event)">
+          Sort
+          <span class="af-icon af-icon-xs"
+               [class.icon-arrow-up]="form.controls.sort.value === FEED_SORT_PARAM_VALUES.ASC"
+               [class.icon-arrow-down]="form.controls.sort.value === FEED_SORT_PARAM_VALUES.DESC">
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>-->
+  
+  <!-- <a href class="filter-btn sort-feeds btn" (click)="toggleSort($event)">
+    Sort <span *ngIf="total !== undefined">({{total}})</span>
+    <span class="af-icon af-icon-xs"
+          [class.icon-arrow-up]="form.controls.sort.value === FEED_SORT_PARAM_VALUES.ASC"
+          [class.icon-arrow-down]="form.controls.sort.value === FEED_SORT_PARAM_VALUES.DESC">
+    </span>
+  </a> -->
+</form>

@@ -1,0 +1,76 @@
+@import '../../../assets/css/_variables';
+@import '../../../assets/css/_buttons';
+
+.af-circle {
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: $slider-pagination-color;
+}
+
+.wizard {
+  .wizard-steps {
+    position: relative;
+    padding: 0 0 $distance-s 0;
+    margin: 0;
+    
+    .step {
+      background-color: #FFF;
+      width: 100%;
+      list-style-type: none;
+      height: 0;
+      display: none;
+      
+      .step-icon-cnt {
+        padding-bottom: $distance-m;
+      }
+      .step-title {
+        padding-bottom: $distance-s;
+        font-weight: normal;
+      }
+      .step-body {
+        padding-bottom: $distance-m;
+      }
+      .step-button {
+        @extend .af-button-streatched;
+      }
+      
+      &.active {
+        height: auto;
+        display: block;
+      }
+    }
+
+  }
+  
+  /* Pagination */
+  .wizard-pagination {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+    
+    li {
+      display: inline;
+      margin-right: 10px;
+      :last-child {
+        margin-right: 0;
+      }
+      &.active {
+        a {
+          .af-circle {
+            background-color: $slider-pagination-color-active;
+          }
+        }
+      }
+      
+      a {
+        text-decoration: none;
+        .af-circle {
+          background-color: $slider-pagination-color;
+        }
+      }
+    }
+  }
+}

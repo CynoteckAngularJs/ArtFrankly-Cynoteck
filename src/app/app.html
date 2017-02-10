@@ -1,0 +1,61 @@
+<af-header></af-header>
+
+<div class="main-container">
+  <div class="container-fluid">
+    <div class="wrapper">
+      <header class="notifications-cnt">
+        <notification *ngIf="notifications.length"
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+        </notification>
+      </header>
+
+      <div class="clearfix" style="overflow: visible;">
+        
+        <!-- TODO: part of root subpage of root Router -->
+        <aside class="main-aside sidebar-menu-container" *ngIf="isShowAside">
+          <div class="main-aside-cnt">
+            <sidebar-menu *ngIf="menu" [menu]="menu" (toggled)="onToggled($event)">
+            </sidebar-menu>
+          </div>
+        </aside>
+        
+        <div class="main-content-container">
+          <section class="row">
+            
+            <!--<main [ngClass]="{ 'col-lg-12 col-md-12 col-sm-12 col-xs-12': !state.isAuthenticated, 'col-lg-12 col-md-12 col-sm-12 col-xs-12': state.isAuthenticated }">-->
+            <main class="col-sm-12">
+              <router-outlet></router-outlet>
+            </main>
+            
+          </section>
+        </div>
+        
+      </div>
+      
+    </div>
+
+<!-- TODO: move this to new directory -->
+ <div *ngIf="state.isAuthenticated" class="btn-group-container visible-xs" id="mobile-nav-bottom">
+  <div class="btn-group" role="group">
+    <a href [routerLink]="['/Feeds']">
+    <button class="btn btn-default no-border" >Feed</button>
+    </a>
+   
+    <a href [routerLink]="['/MyLanding']">
+    <button class="btn btn-default no-border">Posts</button>
+    </a>
+    
+    <a href [routerLink]="['MyProfiles']">
+    <button class="btn btn-default no-border">Profile</button>
+    </a>
+    
+    <a href [routerLink]="['/MyJobPosts']">
+    <button class="btn btn-default no-border">Replies</button>
+    </a>
+  </div>
+
+</div>
+
+  </div>
+<af-footer></af-footer>

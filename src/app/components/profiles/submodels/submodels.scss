@@ -1,0 +1,16 @@
+@import '../../../../assets/css/_variables';
+
+profile-submodel-form {
+  margin-top: $distance-s;
+}
+
+.additional-fileds-actionbar {
+  margin: $distance-m auto 0;
+  text-align: center;
+  width: 80%;
+  
+  a {
+    margin-right: $distance-xs;
+    margin-bottom: $distance-xs;
+  }
+}

@@ -1,0 +1,34 @@
+<!--<pre>{{item | json}}</pre>-->
+<form class="photos-and-videos-form" novalidate>
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <!--<a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>-->
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <!--<a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>-->
+      <!--<a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>-->
+    </div>
+  </header>
+
+  <div class="form-group upload-form">
+    <af-uploader
+              [classvalue]="UPLOADER.class.PROFILE"
+              [objectvalue]="profile['@id']"
+              (savesuccess)="onProfilePhotoUploaded($event)"
+              (removesuccess)="onProfilePhotoRemoved($event)"
+              [media]="item.mediaObject"
+              [opened]="opened">
+    </af-uploader>
+  </div>
+  
+</form>
+
+<!--<artwork-forms class="form-group" [profile]="profile">
+</artwork-forms>-->
+<!--<footer *ngIf="!artwork">
+  <a href (click)="onAddArtwork($event)"
+    class="btn btn-block af-btn-dashed">
+    <span class="af-icon icon-add"></span>
+    <span>Add Artwork</span>
+  </a>
+</footer>-->

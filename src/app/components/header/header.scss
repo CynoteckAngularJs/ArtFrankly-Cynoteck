@@ -1,0 +1,267 @@
+@import '../../../assets/css/_variables';
+@import '../../../assets/css/_icons';
+@import '../../../assets/css/_forms';
+@import '../../../assets/css/_buttons';
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.centered-nav, .centered-nav li, .centered-nav li a  {
+  display: inline-block;
+  float: none;
+}
+
+.account-profile {
+  a {
+    text-decoration: none;
+  }
+  &.active {
+    a {
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+}
+
+a.edit-link {
+    font-size: 13px !important;
+}
+
+.primary-menu-cnt {
+  .dropdown {
+    .dropdown-toggle {
+      border: none;
+      background: transparent;
+      outline: none;
+      box-shadow: none;
+      .icon-arrow-down {
+        margin-left: $distance-s/4;
+      }
+    }
+    .dropdown-menu {
+      padding: 0;
+      .divider {
+        background-color: $color-gray-2;
+        margin: 0;
+      }
+      a {
+        padding: $distance-s/4 $distance-sb;
+        @extend .link-alike;
+        &.normal-weight {
+          font-weight: normal;
+        }
+        &.pb {
+          padding: $distance-ss $distance-sb;
+        }
+        &.pb-trl {
+           padding: $distance-ss $distance-sb $distance-s/4 $distance-sb;
+        }
+        &.pb-brl {
+           padding: $distance-s/4 $distance-sb $distance-ss $distance-sb;
+        }
+      }
+    }
+    &.open {
+      .icon-arrow-down {
+        @extend .icon-arrow-up-over;
+      }
+    }
+  }
+}
+
+.active-profile-icon {
+  margin: 0;
+}
+
+.centered-menu-container {
+  .nav {
+    li {
+      a {
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+  }
+  .url-authenticated-menu {
+    margin-top: 15px;
+    li {
+      a {
+        line-height: 28px;
+      }
+    }
+  }
+}
+
+.thumbnail {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.beta-sign {
+    color: $color-yellow-1;
+    font-size: 25px;
+    padding-left: 33px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+.mobile-search-btn, .mobile-account-btn {
+  display: none;
+}
+
+.mobile-nav-item {
+    display: none;
+}
+
+.dropdown.open ul.dropdown-menu {
+    border-radius: 0;
+    border: none;
+}
+
+li.login-links a {
+    display: inline-block;
+    padding: 30px 10px 30px 10px;
+    letter-spacing: 1px;
+    color: #161616;
+}
+
+.nav-links-center {
+  padding-left: 50px;
+}
+
+.nav-links-center li a {
+    color: #161616;
+}
+
+.navbar-default .navbar-toggle {
+  border: none;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background: none;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+
+@media only screen and (max-width: 767px) {
+   
+  .logo-mobile {
+    display: inline-block;
+  }
+
+  .logo-desktop {
+    display: none;
+  }
+
+   .beta-sign {
+     display: none;
+   }
+
+   .mobile-account-dropdown {
+      display: inline-block;
+    }
+
+   .logo-mobile img {
+     width: 40px;
+     height: auto !important;
+     margin: 5px 0 !important;
+   }
+   .fixed-header, af-header {
+     height: 87px !important;
+   }
+  button#account-dropdown-menu {
+    border: none;
+  }
+
+  div#bs-example-navbar-collapse-1 {
+    background: #fff;
+    border: none;
+    box-shadow: none;
+  }
+
+
+  .mobile-nav-item {
+    display: inline-block;
+    padding: 20px 0;
+  }
+  .mobile-search-btn, .mobile-account-btn {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .mobile-search-btn {
+   
+  }
+
+  .mobile-nav-item .af-button {
+    font-size: 10px;
+  }
+  
+  .navbar-default .navbar-toggle {
+    margin-top: 30px;
+  }
+
+  .centered-nav.mobile-center {
+    text-align: right;
+    float: right;
+    width: 80%;
+    padding-right: 15px;
+  }
+
+  button#account-dropdown-menu {
+    padding: 0;
+    background: transparent;
+  }
+
+  #bs-example-navbar-collapse-1 ul a {
+    padding: 10px;
+    line-height: 30px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: #000;
+    text-transform: capitalize;
+  }
+
+  .navbar-collapse .navbar-right {
+    display: none;
+  }
+
+  ul {
+      padding: 0 30px 0 20px;
+  }
+  
+  ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .centered-menu-container li a {
+    font-size: 19px;
+    line-height: 23px;
+  }
+
+  .mobile-nav-item a {
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .mobile-signin {
+    padding: 30px 20px 20px 0 !important;
+  }
+
+   .mobile-nav-item .thumbnail {
+     height: 42px;
+    width: 42px;
+    margin-right: 5px;
+   }
+}
+
+ 

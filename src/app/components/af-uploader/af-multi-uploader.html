@@ -1,0 +1,19 @@
+<form class="af-uploader">
+  <a class="btn btn-block af-btn-dashed" style="padding: 0">
+    <label style="display: block; padding: 13px 25px 10px 25px; cursor: pointer; margin: 0">
+        <!--<span class="url-sidebar-menu-icon af-icon icon-add"></span>-->
+        <span class="af-icon icon-add"></span>
+        <span>Add Photo or Video</span>
+        <input style="display: none" type="file"
+              [disabled]="isDisabled"
+              (change)="onFileChange($event)"
+              [ng-file-select]="uploaderOptions" 
+              (onUpload)="handleUpload($event)"
+              multiple>
+    </label>
+  </a>
+  <div class="progress" *ngIf="isShowProgress">
+    <div class="progress-bar" [style.width]="progress + '%'"></div>
+    <div class="percent text-center">{{ progress }}%</div>
+  </div>
+</form>

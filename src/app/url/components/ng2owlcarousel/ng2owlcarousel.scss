@@ -1,0 +1,158 @@
+@import '../../../../assets/js/owl.carousel.2.0.0-beta.2.4.css';
+$carousel-inner-margin: 50px;
+$carouselitems-height: 450px;
+
+img {
+    vertical-align: middle;
+}
+
+.owl-carousel {
+    // height: 100%;
+}
+
+carouselitems {
+  position: relative;
+
+  .item {
+    margin: 0 $carousel-inner-margin;
+  }
+}
+
+carouselthumbs, carouseldetails {
+  .owl-stage-outer {
+    margin: 20px 50px 0;
+  }
+}
+
+.owl-stage-outer {
+  // margin: 0 $carousel-inner-margin;
+  position: relative;
+  z-index: 2;
+}
+
+$owl-controls-position: -40px;
+.owl-controls {
+  position: absolute;
+  top: $carouselitems-height/2 - 5px;
+  left: $owl-controls-position;
+  right: $owl-controls-position;
+  
+  .owl-prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+  .owl-next {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+  }
+}
+
+.owl-carousel .owl-item, .owl-carousel .item {
+    // height: 100vh;
+}
+
+.owl-carousel .owl-item img {
+    // transform-style: initial;
+    // height: 100%;
+    // object-fit: cover;
+}
+
+.owl-carousel .owl-item {
+  .video-js {
+    //   width: 100% !important;
+    //   height: auto !important;
+    width: auto !important;
+    height: 100% !important;
+    margin: 0 auto;
+  }
+  .video-js:after {
+      content: '.';
+      display: block;
+      position: relative;
+      padding: 40.1% 0 0 0; /* (height/width)*100%, eg. 56.25% for 16:9 75% for 4:3 */
+      margin: 0 0 0 -100%;
+      visibility: hidden;
+      height: 0; 
+  }
+}
+
+.owl-thumb-item img {
+    width: 150px;
+    height: auto;
+}
+
+.owl-thumbs {
+    // display: table;
+    // width: 100%;
+    text-align: center;
+    padding: 2% 0;
+    margin: 0 $carousel-inner-margin;
+}
+
+.owl-thumb-item {
+    display: table-cell;
+    border: none;
+    background: none;
+    padding: 0;
+    opacity: .4;
+}
+
+.owl-thumb-item.active {
+    opacity: 1;
+}
+
+// .label {
+//     position: absolute;
+//     top: 20px;
+//     right: 20px;
+//     background-color: #0a6cff;
+//     color: white;
+//     padding: 10px 20px;
+//     z-index: 5;
+//     text-align: center;
+// }
+
+// $carouselthumbs-height: 100px;
+// carouselthumbs,
+carouselitems {
+    .owl-stage-outer {
+        height: $carouselitems-height;
+    }
+    .owl-item {
+        overflow: hidden;
+        display: table;
+        table-layout: fixed;
+        .item {
+            height: $carouselitems-height;
+            vertical-align: middle;
+            text-align: center;
+            overflow: hidden;
+
+            display: table-cell;
+            vertical-align: middle;
+
+            img {
+                width: auto !important;
+                // height: 100%;
+                max-height: 100%;
+                max-width: 100%;
+                display: inline-block !important;
+            }
+            
+            .video-js {
+                width: 100% !important;
+            }
+        }
+    }
+    // &:carouselthumbs {
+    //     .owl-item {
+    //         .item {
+    //             height: $carouselthumbs-height;
+    //         }
+    //     }
+    // }
+}

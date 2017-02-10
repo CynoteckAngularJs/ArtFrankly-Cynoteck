@@ -1,0 +1,25 @@
+<profile-submodel-form *ngIf="profile.isInstitution()"
+                        *ngFor="#submodelType of submodelsConfig.institution.selected"
+                        [submodeltype]="submodelType"
+                        [profile]="profile">
+</profile-submodel-form>
+
+<profile-submodel-form  *ngIf="profile.isVendor()"
+                        *ngFor="#submodelType of submodelsConfig.vendor.selected"
+                        [submodeltype]="submodelType"
+                        [profile]="profile">
+</profile-submodel-form>
+
+<profile-submodel-form  *ngIf="profile.isProfessional()"
+                        *ngFor="#submodelType of submodelsConfig.professional.selected"
+                        [submodeltype]="submodelType"
+                        [profile]="profile">
+</profile-submodel-form>
+
+<div class="additional-fileds-actionbar text-center">
+  <a href class="af-btn"
+      *ngFor="#submodel of submodelsConfig[profile.type].unselected"
+      (click)="addSubmodel($event, submodel)">
+    {{submodel}}
+  </a>
+</div>

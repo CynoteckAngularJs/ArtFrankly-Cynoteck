@@ -1,0 +1,25 @@
+<div class="row">
+  
+</div>
+
+<aside class="col-sm-3 footer-pages-sidebar">
+  <nav>
+    <ul class="no-list">
+      <li *ngFor="#navPage of pages"
+        [ngClass]="{ active: navPage.slug === selectedPageSlug }">
+        <a href [routerLink]="['/FooterPages', { slug: navPage.slug }]">{{navPage.label}}</a>
+      </li>
+    </ul>
+  </nav>
+</aside>
+
+<div class="col-sm-3"></div>
+<section class="col-sm-9">
+  <div *ngFor="#page of pages">
+    <article class="footer-page"
+            *ngIf="page.slug === selectedPageSlug">
+      <h2 class="footer-page-title" [innerHTML]="page.title"></h2>
+      <div class="footer-page-body" [innerHTML]="page.html"></div>
+    </article>
+  </div>
+</section>

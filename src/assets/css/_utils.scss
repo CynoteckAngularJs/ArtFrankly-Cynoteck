@@ -1,0 +1,271 @@
+@import './_variables';
+@import './_forms';
+@import './_buttons';
+
+$small-distance: $distance-s;
+$big-distance: $distance-m;
+
+.af-heading-base {
+  margin: 0;
+  padding: 0;
+  color: $color-black-1;
+  font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.af-heading-1 {
+  @extend .af-heading-base;
+  font-size: $h1-font-size;
+  margin-top: $distance-s;
+  margin-bottom: $distance-mb;
+  &.light-weight {
+    font-weight: $font-200;
+  }
+}
+
+.af-heading-2 {
+  @extend .af-heading-base;
+  font-size: $af-form-heading-1;
+  letter-spacing: .5px;
+  font-family: 'NeueHaasUnicaPro-Bold';
+  // font-weight: $font-200;
+  // line-height: $distance-l;
+  // &.af-normal-height {
+  //   line-height: $af-form-heading-1;
+  // }
+  &.af-light {
+    font-family: 'NeueHaasUnicaPro-Light';
+  }
+}
+
+.af-heading-3 {
+  font-size: 22px;
+  font-family: 'NeueHaasUnicaPro-Medium';
+  color: $color-black-1;
+}
+
+.af-uppercased-heading {
+  text-transform: uppercase;
+  font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.af-heading-uppercased-1 {
+  color: $links-color;
+  text-transform: uppercase;
+  font-size: $input-font-height;
+  font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.af-featured {
+  font-family: 'NeueHaasUnicaPro-Medium';
+  text-transform: uppercase;
+  vertical-align: middle;
+  padding-left: 0;
+  color: $color-gray-4;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  line-height: 30px;
+  img.featured-icon {
+    margin-right: $distance-xs;
+  }
+}
+
+.af-mb-xs {
+  margin-bottom: $distance-xs;
+}
+.af-mb-s {
+  margin-bottom: $distance-s;
+}
+.af-mb-m {
+  margin-bottom: $distance-m;
+}
+.af-mb-ml {
+  margin-bottom: $distance-m + $distance-xs;
+}
+.af-mt-s {
+  margin-top: $distance-s;
+}
+.af-mt-xs {
+  margin-top: $distance-xs;
+}
+.af-mb-sb {
+  margin-bottom: $distance-sb;
+}
+.af-mr-xs {
+  margin-right: $distance-xs;
+}
+.af-mr-s {
+  margin-right: $distance-s;
+}
+.af-mt-m {
+  margin-top: $distance-m;
+}
+.af-p-s {
+  padding: $distance-s;
+}
+.af-ptb-s {
+  padding: $distance-s 0;
+}
+.af-pb-s {
+  padding-bottom: $distance-s;
+}
+.af-p-xs {
+  padding: $distance-xs;
+}
+.af-ptb-xs {
+  padding: $distance-xs 0;
+}
+
+.af-label-value {
+  margin-bottom: $small-distance/2;
+  letter-spacing: .5px;
+  font-size: 11px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .af-label {
+    @extend .link-alike;
+    font-family: 'NeueHaasUnicaPro-Medium';
+    word-wrap: break-word;
+    text-transform: uppercase;
+  }
+  .af-value {
+    text-transform: none;
+    @extend .link-alike;
+    font-family: 'NeueHaasUnicaPro-Light';
+    color: #161616;
+    font-weight: normal;
+    word-wrap: break-word;
+    a {
+      font-weight: normal;
+      text-decoration: none;
+      color: inherit;
+      text-transform: none;
+    }
+  }
+}
+
+.mb-20 {
+  margin-bottom: $distance-s;
+}
+
+.reset-mp {
+  margin: 0;
+  padding: 0;
+}
+
+.truncate {
+  width: 250px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uppercased {
+  text-transform: uppercase;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.af-bootstrap-label {
+  display: inline-block;
+  color: $color-black;
+  font-family: 'NeueHaasUnicaPro-Medium';
+  padding: $distance-xs;
+  font-size: 10px;
+}
+
+h1, h2, h3 {
+  .label {
+    font-size: 50%;
+  }
+}
+
+@mixin no-padding($side) {
+    @if $side == 'all' {
+        .no-padding {
+            padding: 0 !important;
+        }
+    } @else {
+        .no-padding-#{$side} {
+            padding-#{$side}: 0 !important;
+        }
+    }
+}
+@include no-padding("left");
+@include no-padding("right");
+@include no-padding("top");
+@include no-padding("bottom");
+@include no-padding("all");
+
+a, button, af-btn, input, textarea {
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+.bold {
+  font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.clearfix {
+  clear: both;
+  overflow: hidden;
+}
+
+* > p:last-child {
+  margin: 0 !important;
+}
+
+.svg-thumbnail {
+  display: inline-block;
+  margin: 20px;
+  .state-regular {
+    display: block;
+  }
+  .state-hovered {
+    display: none;
+  }
+  &:hover {
+    .state-regular {
+      display: none;
+    }
+    .state-hovered {
+      display: block;
+    }
+  }
+}
+
+.table-layout {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-layout .table-layout-cell {
+  display: table-cell;
+  vertical-align: middle;
+  float: none;
+}
+
+.af-tags-wrapper {
+  margin-bottom: 5px;
+  .label {
+    @extend .af-bootstrap-label;
+    border-radius: 0;
+  }
+}
+
+.af-title-1 {
+  font-family: 'NeueHaasUnicaPro-Bold';
+}
+
+.no-border {
+  border: none;
+}
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+}

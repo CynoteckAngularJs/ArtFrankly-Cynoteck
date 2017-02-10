@@ -1,0 +1,18 @@
+@import '../../../../assets/css/_forms';
+@import '../../../../assets/css/_buttons';
+
+
+@media only screen and (max-width : 768px) {
+    .url-heading .url-heading-title {
+        font-size: 18px;
+    }
+
+    .url-heading {
+        margin-bottom: 20px;
+    }
+    
+    .signin {
+       width: 90% !important;
+        display: block;
+    }
+}

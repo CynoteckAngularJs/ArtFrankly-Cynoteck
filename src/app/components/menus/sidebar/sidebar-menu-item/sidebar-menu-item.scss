@@ -1,0 +1,60 @@
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_icons';
+
+.url-sidebar-menu-item {
+  a {
+    text-decoration: none;
+  }
+}
+
+.sidebar-menu-item-html {
+  float: right;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  
+  .badge {
+    background-color: $sidebar-nav-name-third-level-active-bgr;
+    color: $color-black-1;
+    border: none;
+    border-radius: 0;
+    font-size: 12px;
+    padding: 4px;
+    width: 100%;
+  }
+}
+
+
+  .url-sidebar-menu-icon.menu-icon-arrow-down {
+    background-image: url('./assets/img/svg/regular/art_frankly_dropdown_icon.svg');
+        -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 30px;
+    height: 40px;
+    vertical-align: middle;
+  }
+
+  .url-sidebar-menu-icon.menu-icon-arrow-up {
+    background-image: url('./assets/img/svg/regular/art_frankly_dropdown_icon.svg');
+     -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+  }

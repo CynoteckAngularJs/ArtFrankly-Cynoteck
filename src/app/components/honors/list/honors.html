@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Honors and Awards</h5>
+    </header>
+    
+    <honor-form *ngFor="#honor of items"
+        [item]="honor"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </honor-form>
+    <honor-form *ngFor="#unsavedHonor of unsavedItems"
+        [item]="unsavedHonor"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </honor-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Honors and Awards</span>
+      </a>
+    </footer>
+  </div>
+</div>

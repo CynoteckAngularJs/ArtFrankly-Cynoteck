@@ -1,0 +1,42 @@
+<form class="signin url-centered" [ngFormModel]="form" (ngSubmit)="signin({ email: email.value, password: password.value })">
+  
+  <div class="text-center url-heading">
+    <!--<span class="glyphicon glyphicon-pencil url-heading-icon"></span>-->
+    <img width="50" src="./assets/img/semicolon-black.png" alt="">
+    <h2 class="url-heading-title">Connecting the professional art world.</h2>
+  </div>
+
+  <div class="form-group email-group" [ngClass]="{'has-error': email.dirty && !email.valid}">
+    <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.required">Email is required</div>
+    <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.email">Email is not valid</div>
+    <label class="sr-only" for="emailInput">Email address</label>
+    <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" autofocus>
+  </div>
+  
+  <div class="form-group password-group" [ngClass]="{'has-error': password.dirty && !password.valid}">
+    <div class="alert alert-danger" *ngIf="password.dirty && password.errors && password.errors.required">Password is required</div>
+    <div class="alert alert-danger" *ngIf="password.dirty && password.errors && password.errors.minlength">Password too short</div>
+    <label class="sr-only" for="passwordInput">Password</label>
+    <input type="password" id="passwordInput" ngControl="password" required minlength="6" class="form-control" placeholder="PASSWORD">
+  </div>
+    
+  <div class="row forgot-password-group">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+       <a [routerLink] = "['LostPassword']">Forgot your password?</a>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+      <!--<div class="checkbox">-->
+        <label><input type="checkbox" ngControl="rememberMe"> Remember me</label>
+      <!--</div>-->
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <div class="actions-group">
+      <button type="submit" [disabled]="!form.valid">Log in</button>
+    </div>
+    
+    <a class="dont-have-an-account-btn" [routerLink]="['Signup']">Don't have an account?</a>
+  </div>
+  
+</form>

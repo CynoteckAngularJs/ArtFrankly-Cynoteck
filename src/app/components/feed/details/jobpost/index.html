@@ -1,0 +1,121 @@
+<article [class.active]="select === feed.id" class="af-feed-item af-feed-item-{{feed.type}}">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 url-profile-media">
+      <div class="af-feed-featured text-center">
+        <!--
+        <img class="featured-icon" src="./src/assets/img/semicolon-yellow.png" alt="Featured"> 
+        -->
+        <span class="featured-text" *ngIf="feed.subType">{{feed.subType}}</span>
+        <span class="featured-text" *ngIf="!feed.subType">Job Post</span>
+      </div>
+
+      <a href class="url-profile-media-avatar thumbnail" [routerLink]="routerLink">
+
+        <img *ngIf="!feed.image" [src]="appSrv.defaultAvatar" alt="">
+
+        <div class="thumbnail-img" *ngIf="feed.image"
+          [ngStyle]="{ 'background-image': 'url(' + feed.image + ')'}">
+          </div>
+      </a>
+
+      <a href [routerLink]="routerLink" class="af-feed-details feed-cta hidden-sm hidden-xs">
+        <span>View Details</span>
+        <!--<span *ngIf="feed.isProfile">Go to Profile</span>-->
+      </a>
+
+      <div class="af-feed-featured text-center" *ngIf="feed.featured">
+        <img class="featured-icon" src="../assets/img/semicolon-yellow.png" alt="Featured"> <span class="featured-text">Featured</span>
+      </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 url-profile-general no-padding-right">
+
+      <div class="row">
+        <div class="col-sm-12 no-padding">
+          <h4 class="af-feed-name">
+            <a href [routerLink]="routerLink">{{feed.name}}</a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="feed.subtitle">
+        <div class="col-sm-12 af-feed-type no-padding-right">
+          {{feed.subtitle}}
+        </div>
+      </div>
+
+      <div class="row" *ngIf="feed.description">
+        <div class="col-sm-12 af-feed-type no-padding-right">
+          <span>
+          {{feed.description}}
+          </span>
+        </div>
+      </div>
+
+      <!--<div class="row">
+        <div class="col-sm-12">
+          <h4 class="af-feed-name">
+            <a href [routerLink]="routerLink">{{feed.description}}</a>
+            </h4>
+        </div>
+      </div>-->
+
+      <div class="af-label-value row" *ngIf="feed.location">
+        <!-- <div class="col-sm-5 af-label">Location</div> -->
+        <div class="col-sm-12 af-value no-padding-left">
+          <span *ngIf="feed.location">{{feed.location}}</span>
+          <span *ngIf="!feed.location">Unspecified</span>
+        </div>
+      </div>
+      <a href [routerLink]="routerLink" class="af-feed-details feed-cta hidden-lg hidden-md">
+        <button class="btn af-button-no-fill" type="button">Apply </button>
+      </a>
+      <div class="af-label-value row date-posted">
+        <div class="col-sm-3 af-label">Date Posted</div>
+        <div class="col-sm-9 af-value">
+          <span *ngIf="feed.dateModified">{{feed.dateModified | formatdate:'MMMM D, YYYY'}}</span>
+          <span *ngIf="!feed.dateModified">Unspecified</span>
+        </div>
+      </div>
+
+      <!--
+      <div class="af-label-value row">
+        <div class="col-sm-5 af-label">Valid until</div>
+        <div class="col-sm-7 af-value">
+          <span *ngIf="feed.location">{{feed.validUntil | formatdate:'MMMM D, YYYY'}}</span>
+        </div>
+      </div>
+      -->
+
+
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 af-feed-actions">
+      <ul>
+        <li *ngIf="feed.isProfile">
+          <a (click)="comingSoon($event)" href>
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill"><span class="af-icon icon-connect af-icon-s"></span>Connect</button>
+            </div>
+          </a>
+          <div class="">122</div>
+        </li>
+        <!--
+        <li *ngIf="feed.isProfile">
+          <a (click)="comingSoon($event)" href class="">
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill"><span class="af-icon icon-checkmark af-icon-s"></span>Recommend</button>
+            </div>
+          </a>
+        </li>
+        -->
+        <li *ngIf="feed.isJobPost && (feed.createdById != auth.user)">
+          <a href (click)="onReply($event, feed)">
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill">Apply</button>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</article>

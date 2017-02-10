@@ -1,0 +1,330 @@
+@import '../../../assets/css/_variables';
+@import '../../../assets/css/_icons';
+
+$modal-z-index: 2000;
+// .overlay{
+//     position: fixed;
+//     top: 0px;
+//     left: 0px;
+//     right: 0px;
+//     bottom: 0px;
+//     background-color: #FFF;
+//     z-index: 1000;
+
+//     .overlay-content {
+//         height: 100%;
+//         overflow: scroll;
+//     }
+// }
+
+.background-content{
+    height: 100%;
+    overflow: auto;
+}
+
+modal-body, modal-title {
+  display: block;
+}
+
+modal-body {
+  padding-top: $distance-m;
+}
+
+.md-modal {
+	position: fixed;
+	// top: 50%;
+	// left: 50%;
+  top: 0;
+	left: 0;
+	width: 100%;
+	/* max-width: 630px; */
+	min-width: 320px;
+	height: 100%;
+  // height: auto;
+  // min-height: 100%;
+  overflow: auto;
+  background-color: #FFF;
+	z-index: $modal-z-index;
+	visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	// -webkit-transform: translateX(-50%) translateY(-50%);
+	// -moz-transform: translateX(-50%) translateY(-50%);
+	// -ms-transform: translateX(-50%) translateY(-50%);
+	// transform: translateX(-50%) translateY(-50%);
+  // -webkit-font-smoothing: antialiased;
+}
+
+.md-modal-size-xxl {
+  width: 100%;
+  height: 100%;
+}
+
+.md-modal-size-xl {
+  width: 80%;
+  height: 80%;
+}
+
+.md-modal-size-l {
+  width: 50%;
+  height: 50%;
+}
+
+.md-show {
+	visibility: visible;
+}
+
+.md-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(143,27,15,0.8);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.md-show ~ .md-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Content styles */
+.md-content {
+	color: $modal-color;
+	background: $modal-bgr;
+	position: relative;
+	border-radius: 3px;
+	margin: 0 auto;
+}
+
+.md-content .modal-title {
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	font-size: 2.4em;
+	font-weight: 300;
+	opacity: 0.8;
+	background: rgba(0,0,0,0.1);
+	border-radius: 3px 3px 0 0;
+}
+
+.md-content > div {
+	padding: 15px 40px 30px;
+	margin: 0;
+	font-weight: 300;
+	font-size: 1.15em;
+}
+
+.md-content > div p {
+	margin: 0;
+	padding: 10px 0;
+}
+
+.md-content > div ul {
+	margin: 0;
+	padding: 0 0 30px 20px;
+}
+
+.md-content > div ul li {
+	padding: 5px 0;
+}
+
+/* Effect 3: Slide from the bottom */
+.md-effect-3 .md-content {
+	-webkit-transform: translateY(20%);
+	-moz-transform: translateY(20%);
+	-ms-transform: translateY(20%);
+	transform: translateY(20%);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.md-show.md-effect-3 .md-content {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1;
+	height: 100%;
+}
+
+
+.md-modal-header {
+  height: 60px;
+  overflow: hidden;
+  clear: both;
+  .md-modal-action-bar {
+    padding: 0;
+    margin: 0;
+    float: right;
+    margin-right: 20px;
+    line-height: 60px;
+    position: relative;
+    z-index: 1;
+    li {
+      list-style: none;
+      display: inline;
+      margin-left: 10px;
+      a {
+        text-decoration: none;
+        display: inline-block;
+        line-height: $distance-s;
+        color: inherit;
+        span {
+          line-height: $distance-s;
+          vertical-align: middle;
+        }
+        .af-icon {
+          line-height: $distance-s;
+          margin-left: $distance-s/2;
+        }
+      }
+    }
+    .md-modal-close {
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.transparent-black-modal {
+  * {
+    color: $color-gray-3;
+  }
+  .af-btn {
+    background: transparent;
+    color: $color-white;
+    border: 1px solid $color-white;
+    &:hover, &.btn-light {
+      background: $color-white;
+      color: $color-black;
+      border: 1px solid $color-white;
+    }
+  }
+  .icon-close {
+    @extend .icon-close-white;
+    &:hover {
+      @extend .icon-close-white-over;
+    }
+  }
+  .af-heading-uppercased-1 {
+    color: $color-gray-3;
+  }
+  .af-btn {
+    &.af-heading-uppercased-1 {
+      color: $color-black;
+    }
+    &:hover {
+      background: $color-white;
+    }
+  }
+  .md-modal-header {
+    height: $distance-l * 2;
+  }
+  .jobpost-title {
+    color: $color-white;
+  }
+  .section {
+    border-bottom: $border-2;
+    margin-bottom: $distance-sb;
+    padding-bottom: $distance-sb;
+    &:last-child, &.no-border {
+      border-bottom: none;
+    }
+  }
+  .md-modal {
+    background-color: rgba(0, 0, 0, 0.9);
+    .md-content {
+      background: transparent;
+    }
+  }
+}
+
+.select2-dropdown {
+  z-index: $modal-z-index;  
+}
+
+.job-post-duration {
+    color: #ffffff;
+    background: rgba(254, 209, 0, 0.11);
+    padding: 15px 12px 11px 12px;
+    display: inline-block;
+    font-size: 15px;
+}
+
+button.reveal-map {
+    background: none;
+    border: none;
+    padding: 10px 10px 10px 0px;
+    margin-bottom: 0px;
+    display: block;
+    font-family: 'NeueHaasUnicaPro-Medium';
+    text-transform: uppercase;
+}
+
+.location-embed {
+    display: block;
+    text-align: left;
+}
+
+.location-embed iframe {
+    border: 0;
+    height: 205px;
+    width: 283px;
+    border:0;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    filter: gray;
+	  -webkit-filter: grayscale(99%);
+	  -webkit-backface-visibility: hidden;
+  }
+
+.payment-cta .af-btn {
+    background: #FED100;
+    border: 1px solid #FED100;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.payment-price div {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    margin-top: 6px;
+}
+
+.payment-price span {
+    color: #fff;
+}
+
+strike.old-price {
+    display: inline;
+    vertical-align: middle;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+
+@media only screen and (max-width : 768px) {
+  .job-post-title {
+    font-size: 35px;
+  }
+
+  .job-post-info {
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: .5px;
+  }
+  
+  .payment-cta {
+    width: 100%;
+  }
+}

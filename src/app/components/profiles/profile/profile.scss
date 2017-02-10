@@ -1,0 +1,153 @@
+@import '../../../../assets/css/_variables';
+@import '../../feed/list/feeds.scss';
+@import '../../../../../assets/css/_icons';
+
+$url-profile-left-side-width: 150px;
+
+.reset {
+  margin: 0;
+  padding: 0;
+}
+
+.url-profile {
+  padding: $distance-m 0;
+  border-bottom: 1px solid $profile-list-item-border;
+  
+  .url-profile-media-avatar {
+    width: $url-profile-left-side-width;
+  }
+  
+  .url-profile-featured {
+    width: $url-profile-left-side-width;
+    text-align: center;
+    
+    .featured-text {
+      text-transform: uppercase;
+    }
+    .featured-text {}
+  }
+}
+
+.af-feed-item {
+  padding: 40px 0;
+  border-bottom: 1px solid #F1F1F1;
+  font-size: 0.9em; 
+}
+
+.af-feed-featured {
+  text-transform: uppercase;
+  .featured-text {
+    margin-left: 5px;
+  }
+}
+
+.af-feed-name span {
+  text-transform: none;
+}
+
+.af-feed-meta {
+  // margin-bottom: $distance-s;
+  margin-bottom: $distance-xs;
+  
+  .af-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $links-color;
+  }
+  .af-value {
+    text-transform: none;
+    color: #161616;
+  }
+}
+
+.af-feed-details {
+  text-transform: none;
+  font-weight: normal;
+  font-size: 1em !important;
+  color: inherit;
+}
+
+.af-feed-actions {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    
+    li {
+      text-align: center;
+      margin-bottom: $distance-s/2;
+      a {
+        display: block;
+      }
+      a + div {
+        margin-top: 5px; 
+      }
+    }
+  }
+}
+
+.member-location span {
+    vertical-align: sub;
+}
+
+
+
+h4.af-feed-name, .profile-btn-group {
+    text-align: left;
+  }
+
+.profile-list-cta {
+    margin-top: 20px;
+}
+
+.af-btn {
+    margin: 3px 0px;
+}
+
+ .profiles-list .af-column-right {
+    width: calc(100% - 245px);
+  }
+
+
+@media only screen and (max-width : 768px) {
+
+  .profiles-list .af-column-right {
+    width: calc(100% - 160px);
+  }
+
+  .media-sm {
+    height: 100px !important;
+    width: 100px !important;
+  }
+
+  .af-feed-item {
+    text-align: center;
+  }
+
+  .profile-btn-group {
+    text-align: left;
+  }
+
+  .url-profile-media {
+    overflow: hidden;
+  }
+
+  .af-feed-item .url-profile-media .af-feed-featured {
+    width: 100%;
+  }
+
+  .af-column-left {
+    margin-right: 0;
+    width: 160px;
+  }
+}
+
+
+@media only screen and (max-width: 1020px) {
+   .af-feed-item {
+    text-align: left;
+  }
+
+
+}

@@ -1,0 +1,430 @@
+<!--<section class="af-section">
+  
+  <div class="container">
+    <div class="url-bilboard">
+
+      <div class="row url-bilboard-panel">
+        
+        <div class="url-bilboard-panel-splitter row">
+          
+          <div class="col-xs-12 col-sm-8">
+            <article class="url-bilboard-post">
+              <div class="url-bilboard-post-ctx">
+                <h2 class="url-bilboard-post-title">The art world, connected</h2>
+                <div class="url-bilboard-post-body">
+                  <p>A platform for the global arts community to seek and post jobs, find spaces and discover other opportunities while building your professional presence.</p>
+                </div>
+                <a href 
+                    *ngIf="!state.isAuthenticated"
+                    class="af-button af-mt-s"
+                    [routerLink]="['Signup']">
+                  Get Started
+                </a>
+              </div>
+            </article>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <article class="featured-post">
+              <div class="af-feed-featured featured-post-meta af-featured af-mb-s">
+                <img class="featured-icon" src="./assets/img/semicolon-yellow.png" alt="Featured"> <span class="featured-text">Featured Post</span>
+              </div>
+              <div class="featured-post-details">
+                <h4 class="af-feed-name featured-post-name">
+                  <a [routerLink]="['JobPost', { id: 20 }]" href>Ambassador</a>
+                </h4>
+                <div class="featured-post-description af-mb-s">
+                  Art Frankly is looking for a number of art world professionals to act as ambassadors for the online platform. The position will entail visiting any and all galleries, museums and institutions in a given area and signing up these clients to artfrankly.com Ideal Candidate: Organized, presentable and well spoken. At least 4 years experience working in visual arts. A robust network to utilize. MS Office proficient. Bi-lingual preferred
+                </div>
+                <a class="featured-posting-view-btn" [routerLink]="['JobPost', { id: 20 }]" href>View posting</a>
+              </div>
+            </article>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</section>-->
+<section class="narrower even padding-l first-block home-splash">
+  <!--<h3 class="af-title-1">The art world, connected</h3>
+    <div class="">
+      <p>A platform for the global arts community to seek and post jobs, find spaces and discover other opportunities while building your professional presence.</p>
+    </div>
+    <a href 
+        *ngIf="!state.isAuthenticated"
+        class="af-button af-mt-s"
+        [routerLink]="['Signup']">
+      Get Started
+    </a>-->
+  <div class="home-hero" style="background-image: url('./assets/img/images/splash-3.jpg')">
+    
+    <div class="row af-intro">
+      <div class="bs3-table">
+        <div class="col-xs-12 bs3-cell splash-padding">
+          <div class="top-promo-area">
+            <a href [routerLink]="['Signup']">
+              <h3 class="af-title-1">The art world, connected</h3>
+              <p>Art Frankly is a professional networking platform for the art world to seek and post jobs, find spaces, service providers, and discover other opportunities while building your professional presence.</p>
+            </a>
+            <span class="top-cta-button-wrap">
+              <a href 
+                  *ngIf="!state.isAuthenticated"
+                  class="af-button af-mt-s"
+                  [routerLink]="['Signup']">
+                Create your free profile today
+              </a>
+            </span>
+      
+          </div>
+
+<div class="press-banner hidden-xs">
+      <span>Press</span>
+      <a href="http://www.forbes.com/sites/kurtmcvey/2017/01/17/karline-moeller-and-josie-hines-solve-the-art-worlds-recruiting-problem-with-art-frankly/#682aa0af25f7"
+        target="_blank"><img src="./assets/img/images/forbes-logo.png"></a>
+        <a href="http://artreport.com/the-new-jobs-platform-for-the-arts-professional-network" target="_blank"><img src="./assets/img/images/art-report.png"></a>
+        <a href="http://www.artsper.com/en/experts-selections/2080/art-frankly" target="_blank"><img src="./assets/img/images/artsper.png"></a>
+        <a href="https://www.ibm.com/blogs/think-leaders/pacesetters/digital-founders-panel-october-2016/" target="_blank"><img src="./assets/img/images/ibm.png"></a>
+    </div>
+
+
+        </div>
+
+<div id="mobile-press" class="carousel slide hidden-md hidden-lg hidden-sm" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <a href="http://www.forbes.com/sites/kurtmcvey/2017/01/17/karline-moeller-and-josie-hines-solve-the-art-worlds-recruiting-problem-with-art-frankly/#682aa0af25f7"
+                target="_blank">
+          <img src="./assets/img/images/forbes-logo.png" alt="">
+         </a>
+       
+        </div>
+        <div class="item">
+          <a href="http://artreport.com/the-new-jobs-platform-for-the-arts-professional-network" target="_blank">
+          <img src="./assets/img/images/art-report.png" alt="">
+          </a>
+       
+        </div>
+        <div class="item">
+          <a href="http://www.artsper.com/en/experts-selections/2080/art-frankly" target="_blank">
+          <img src="./assets/img/images/artsper.png" alt=""></a>
+       
+        </div>
+        <div class="item">
+          <a href="https://www.ibm.com/blogs/think-leaders/pacesetters/digital-founders-panel-october-2016/" target="_blank">
+          <img src="./assets/img/images/ibm.png" alt=""></a>
+        
+        </div>
+  
+      </div> 
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="af-section narrower even padding-l">
+  <div class="container text-left promo-container">
+    <!--<h3 class="af-title-1">The art world, connected</h3>
+    <div class="">
+      <p>A platform for the global arts community to seek and post jobs, find spaces and discover other opportunities while building your professional presence.</p>
+    </div>
+    <a href 
+        *ngIf="!state.isAuthenticated"
+        class="af-button af-mt-s"
+        [routerLink]="['Signup']">
+      Get Started
+    </a>-->
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 bs3-cell">
+          <div class="">
+            <div>
+              <div class="top-promo-area-cta">
+                <div class="col-sm-4 find-jobs-top">
+                  <a href class="af-mt-s" [routerLink]="['Feeds']">
+                    <h4><img src="./assets/img/svg/jobs-icon.svg">Find Jobs</h4>
+                    <span>Search Job Posts</span>
+                  </a>
+                </div>
+                <div class="col-sm-4 post-jobs-top">
+                  <a href class="af-mt-s" [routerLink]="['Feeds']">
+                    <h4><img src="./assets/img/svg/posts-icon.svg">Post Jobs</h4>
+                    <span>Find Talent</span>
+                  </a>
+                </div>
+                <div class="col-sm-4 create-top">
+                  <a href class="af-mt-s" [routerLink]="['Feeds']">
+                    <h4> <img src="./assets/img/svg/profile-icon.svg">Create Profile</h4>
+                    <span>Highlight Your Career</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="af-section explore-jobs narrower odd padding-l background-pattern-2">
+  <div class="container text-center">
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 col-sm-12 bs3-cell">
+          <div class="text-left">
+            <article class="featured-post home-featured-feed">
+              <div class="af-feed-featured featured-post-meta af-featured af-mb-s">
+                <img class="featured-icon" src="./assets/img/semicolon-yellow.png" alt="Featured"> <span class="featured-text">Browse Jobs</span>
+                <a href [routerLink]="['Signup']">All Jobs</a>
+              </div>
+              <div class="featured-item-wrap">
+                <a href="/jobposts/Summer-Art-Teaching-Oxford-Cambridge-St-Andrews?uId=391" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/job-1.jpg" alt="Oxbridge">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/jobposts/Summer-Art-Teaching-Oxford-Cambridge-St-Andrews?uId=391">Summer Art Teaching: Oxford, Cambridge, St Andrews</a>
+                  </h4>
+                  <div>
+                    <span class="position">Full-Time</span>
+                    <span class="company">Oxbridge</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/jobposts/Summer-Art-Teaching-Oxford-Cambridge-St-Andrews?uId=391">View posting</a>
+                </div>
+              </div>
+              <div class="featured-item-wrap">
+                <a href="/jobposts/Art-Production-Fund-Spring-Internship?uId=351" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/job-2.jpg" alt="Handlers needed">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/jobposts/Art-Production-Fund-Spring-Internship?uId=351">Art Production Fund Spring Internship</a>
+                  </h4>
+                  <div>
+                    <span class="position">Internship</span>
+                    <span class="company">Art Production Fund</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/jobposts/Art-Production-Fund-Spring-Internship?uId=351">View posting</a>
+                </div>
+              </div>
+              <div class="featured-item-wrap">
+                <a href="/jobposts/Editorial-Events-Intern?uId=254" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/job-3.jpg" alt="Assistant accountant">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/jobposts/Editorial-Events-Intern?uId=254">Editorial & Events Intern</a>
+                  </h4>
+                  <div>
+                    <span class="position">Internship</span>
+                    <span class="company">Art Zealous</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/jobposts/Editorial-Events-Intern?uId=254">View posting</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="af-section narrower even padding-l background-pattern-2">
+  <div class="container text-center">
+    <!--<h3 class="af-title-1">Discover Opportunities</h3>
+    <div>Art Frankly is an integrated platform that provides unbiased information about the art world and the opportunities available within it. With listings that cater to the greater visual arts community, Art Frankly enables you to find a position directly matched to your skillset and experience.</div>-->
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 col-sm-4 bs3-cell  thumb-container">
+          <div class="thumb-icon">
+            <div>
+              <a href [routerLink]="['Home']" class="thumbnail thumb-right" style="height: 200px;">
+                <img src="./assets/img/svg/commissions-icon.svg">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 bs3-cell">
+          <div class="text-left">
+            <h3 class="af-title-1" style="padding-right: 40px;">Discover Opportunities</h3>
+            <div>
+              <p>Art Frankly is an integrated platform that provides unbiased information about the art world and the opportunities
+                available within it. With listings that cater to the greater visual arts community, Art Frankly enables you
+                to find a position directly matched to your skillset and experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="af-section narrower padding-l odd sample-preview">
+  <div class="container">
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 col-sm-12 bs3-cell">
+          <div class="text-left">
+            <h3 class="af-title-1">Build Your Profile</h3>
+            <div>
+              <p>Create a professional profile to discover unlimited opportunities. Create and manage several profiles based
+                upon your needs. For personal professional development, begin with your arts professional profile. Create
+                an institutional profile for your gallery, museum, or nonprofit. Service provider profiles are tailored for
+                promotion and advertising.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="af-section explore-profiles narrower odd padding-l background-pattern-2">
+    <div class="container text-center">
+      <div class="row">
+        <div class="bs3-table">
+          <div class="text-left">
+            <article class="featured-post home-featured-feed">
+              <div class="af-feed-featured featured-post-meta af-featured af-mb-s">
+                <img class="featured-icon" src="./assets/img/semicolon-yellow.png" alt="Featured"> <span class="featured-text">Browse Profiles</span>
+                <a href [routerLink]="['Signup']">All Profiles</a>
+              </div>
+              <div class="featured-item-wrap">
+                <a href="/preview/profiles/professional/Jake-Weigel?uId=3299" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/user-thumb-1.jpg" alt="Allison Raddock">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/preview/profiles/professional/Jake-Weigel?uId=3299">Jake Weigel</a>
+                  </h4>
+                  <div>
+                    <span class="position">Artist</span>
+                    <span class="location">Odessa. TX</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/preview/profiles/professional/Jake-Weigel?uId=3299">View Profile</a>
+                </div>
+              </div>
+              <div class="featured-item-wrap">
+                <a href="/preview/profiles/professional/Doss-Hill?uId=3288" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/user-thumb-2.jpg" alt="Handlers needed">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/preview/profiles/professional/Doss-Hill?uId=3288">Doss Hill</a>
+                  </h4>
+                  <div>
+                    <span class="position">Curatorial</span>
+                    <span class="location">Charlotte, NC</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/preview/profiles/professional/Doss-Hill?uId=3288">View Profile</a>
+                </div>
+              </div>
+              <div class="featured-item-wrap">
+                <a href href="/preview/profiles/professional/Tatiana-Nenilina?uId=913" class="thumbnail" style="width: 200px; margin: 0 auto; height: 200px; max-height: 200px;">
+                  <img src="./assets/img/images/user-thumb-3.jpg" alt="Assistant accountant">
+                </a>
+                <div class="featured-post-details">
+                  <h4 class="af-feed-name featured-post-name">
+                    <a href="/preview/profiles/professional/Tatiana-Nenilina?uId=913">Tatiana Nenilina</a>
+                  </h4>
+                  <div>
+                    <span class="position">Art Advisor</span>
+                    <span class="location">London, GB</span>
+                  </div>
+                  <a class="featured-posting-view-btn" href="/preview/profiles/professional/Tatiana-Nenilina?uId=913">View Profile</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<!--<section class="af-section narrower odd padding-xl background-pattern-1">-->
+<section class="af-section narrower even padding-l background-pattern-1">
+  <div class="container text-center">
+    <!--<h3 class="af-title-1">Filter Your Search</h3>
+    <div style="margin: 0 30%;">
+      Use our robust search function to find and filter jobs, spaces, opportunities, and people. A radius function allows you to narrow in on the location you’re seeking.
+    </div>-->
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 col-sm-4 bs3-cell thumb-container">
+          <div class="">
+            <div class="thumb-icon">
+              <a href [routerLink]="['Home']" class="thumbnail thumb-right" style="height: 200px;">
+                <img src="./assets/img/svg/regular/art_frankly_refine_icon.svg">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 bs3-cell">
+          <div class="text-left">
+            <h3 class="af-title-1">Filter Your Search</h3>
+            <div>
+              <p>
+                Use our robust search function to find and filter jobs, spaces, opportunities, and people. A radius function allows you to
+                narrow in on the location you’re seeking.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="af-section narrower padding-l odd">
+  <div class="container text-center">
+    <div class="row">
+      <div class="bs3-table">
+        <div class="col-xs-12 col-sm-12 bs3-cell">
+          <div class="text-left">
+            <div>
+              <h3 class="af-title-1">Space Issues?</h3>
+              <div class="af-pb-s">
+                <p>
+                  From commercial rentals to studio spaces to pop-up venues, Art Frankly can help you find it. Whether you are an artist looking
+                  for a studio, an atelier seeking a one-day rental, or a creative needing alternative space, Art Frankly
+                  has got you covered. Define your search using specific criteria such as dates of availability, location,
+                  size, and facility amenities.</p>
+              </div>
+              <div class="af-mt-s">
+                <a href class="af-btn transparent start-looking-btn" *ngIf="!state.isAuthenticated" [routerLink]="['Signup']">
+                    Start Looking
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 bs3-cell thumb-container">
+          <div class="thumb-icon">
+            <a href [routerLink]="['Home']" class="thumbnail thumb-right" style="height: 200px;">
+              <img src="./assets/img/svg/spaces-icon.svg">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<section class="af-section narrower"
+    *ngFor="#section of sections; #i = index"
+    [ngClass]="{ even: i % 2 === 1, odd: i % 2 === 0 }">
+  <div class="container text-center">
+    <h3 class="af-title-1">{{section.title}}</h3>
+    <div [innerHTML]="section.body"></div>    
+  </div>
+</section>-->
+<!--<div class="container">-->
+<!--<div>
+    <wizard [steps]="steps"></wizard>
+  </div>-->
+<!--<section  *ngFor="#section of sections; #i = index">
+    <h3>{{section.title}}</h3>
+    <div [innerHTML]="section.body"></div>
+  </section>-->
+<!--<modal [modal]="modal">
+      <signin></signin>
+  </modal>-->
+<!--</div>-->

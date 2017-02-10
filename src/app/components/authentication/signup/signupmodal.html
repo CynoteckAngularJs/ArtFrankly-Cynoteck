@@ -1,0 +1,13 @@
+<modal [modal]="modal" (close)="onClose($event)" (onhide)="onClose($event)"
+    *ngIf="modal && modal.opened">
+  <modal-body>
+    
+    <notification *ngIf="notifications.length" 
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+    </notification>
+    
+    <signup></signup>
+    
+  </modal-body>
+</modal>

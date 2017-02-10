@@ -1,0 +1,38 @@
+<modal [modal]="modal"
+  (close)="onClose($event)"
+  (onhide)="onHide($event)"
+  class="transparent-black-modal">
+
+  <modal-title>
+    <a class="navbar-brand" [routerLink]="['/Feeds']">
+      <img src="./assets/img/art_frankly_logo_white.png" alt="">
+    </a>
+  </modal-title>
+
+  <modal-body>
+    
+    <div class="container jobpost">
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <header>
+            <h2 class="af-icon-cnt af-icon-xxl white">
+              <i class="af-icon icon-jobpost af-icon-xxl"></i>
+            </h2>
+            
+            <!--<h5 class="af-heading-2 af-normal-height">
+              <span>Job post reply sent to</span> 
+              <a href>{{jobpost.title}}</a>
+            </h5>-->
+            <h2 class="jobpost-title">
+              <span>Job post reply sent to</span> 
+              <a *ngIf="jobpost.title" href [routerLink]="['JobPost', { id: jobpost.id }]">{{jobpost.title}}</a>
+            </h2>
+          </header>
+          
+        </div>
+      </div>
+    </div>
+    
+  </modal-body>
+</modal>

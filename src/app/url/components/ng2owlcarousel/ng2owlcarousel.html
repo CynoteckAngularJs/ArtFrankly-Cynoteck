@@ -1,0 +1,8 @@
+<div>
+
+  <ng-content class="owl-carousel" select="carouselitems"></ng-content>
+  
+  <ng-content class="owl-carousel owl-carousel-thumbs" select="carouselthumbs" *ngIf="items.length > 1"></ng-content>
+  
+  <ng-content class="owl-carousel owl-carousel-details" select="carouseldetails"></ng-content>
+</div>

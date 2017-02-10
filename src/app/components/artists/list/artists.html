@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Artists Represented</h5>
+    </header>
+    
+    <artist-form *ngFor="#artist of items"
+        [item]="artist"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </artist-form>
+    <artist-form *ngFor="#unsavedArtist of unsavedItems"
+        [item]="unsavedArtist"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </artist-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Artist</span>
+      </a>
+    </footer>
+  </div>
+</div>

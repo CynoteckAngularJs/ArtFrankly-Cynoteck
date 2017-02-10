@@ -1,0 +1,108 @@
+<!--{{spacepost | json}}-->
+<div class="row">
+  
+  
+  <div class="col-sm-3">
+    <a class="thumbnail" href [routerLink]="['/ProfilePreview', { id: profileId, type: profileType }]">
+      <img *ngIf="spaceresponse && !spaceresponse.responseImageSrc" src="./assets/img/feed-icons/Fine_Art_Picture.jpg" alt="">
+      <img *ngIf="spaceresponse && spaceresponse.responseImageSrc" [src]="spaceresponse.responseImageSrc" alt="" onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';">
+    </a>
+    <div class="row">
+      <div class="col-sm-12 no-padding" [ngClass]="{ 'col-md-6': !noReply, 'col-md-12': noReply }">
+        <div class="af-feed-featured text-center af-mt-xs">
+          <a href class="svg-thumbnail-wrapper">
+                          <button class="af-btn af-btn-sm">       
+            <span class="af-icon icon-connect af-icon-xs"></span> Connect     
+      </button>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 no-padding" *ngIf="!noReply">
+        <div class="af-feed-featured text-center af-mt-xs">
+          <a href (click)="onShowForm($event)" class="svg-thumbnail-wrapper">
+                              <button class="af-btn af-btn-sm">       
+            <span class="af-icon icon-reply"></span> Reply     
+      </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-9">
+    
+    <div class="row">
+      <div *ngIf="spaceresponse && spaceresponse.responseSubtitle" class="col-sm-12 af-feed-type"><span>{{spaceresponse.responseSubtitle}}</span></div>
+      <!--<div *ngIf="spacepost && spacepost.position" class="col-sm-12 af-feed-type">{{spacepost.position}}</div>-->
+      <div *ngIf="spaceresponse && spaceresponse.replyDate" class="col-sm-4 af-reply-date">{{spaceresponse.replyDate | formatdate:'MMM YYYY'}}</div>
+      <!--<div *ngIf="spacepost && spacepost.datePosted" class="col-sm-4 af-reply-date">{{spacepost.datePosted | formatdate:'MMM YYYY'}}</div>-->
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 *ngIf="spaceresponse && spaceresponse.responseProfileName" class="af-feed-name">{{spaceresponse.responseProfileName}}</h3>
+        <!--<h4 *ngIf="spacepost && spacepost.title" class="af-feed-name">{{spacepost.title}}</h4>-->
+      </div>
+    </div>
+    
+    <message-form *ngIf="spaceresponse && showForm"
+      [spaceResponse]="spaceresponse" 
+      [spacepost]="spacepost"
+      [message]="message"
+      [profile]="profile && profile['@id']"
+      (uploadsuccess)="onUploadSuccess($event)"
+      (saved)="onMessageSaved($event)">
+    </message-form>
+    
+    <af-message
+      *ngFor="#message of messages | sortByDate:'-created'"
+      class="af-message af-feed-item"
+      [message]="message"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <af-message *ngIf="spaceresponse"
+      class="af-message af-feed-item"
+      [message]="spaceresponse.asMessage"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <!--<div *ngIf="!noReply">
+      <a href *ngIf="spacepost && reply"
+        [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id }]"
+        class="">
+          <span class="af-icon icon-reply"></span> Reply
+      </a>
+    </div>-->
+    
+  </div>
+</div>
+
+<!--<reply-details [reply]="spaceresponse" [spacepost]="spacepost" [noReply]="true">
+  
+  <reply-header>
+        
+    <message-form *ngIf="spaceresponse"
+      [spaceResponse]="spaceresponse" 
+      [spacepost]="spacepost"
+      [profile]="profile && profile['@id']"
+      (saved)="onReplySaved($event)">
+    </message-form>
+    
+   <af-message
+      *ngIf="messages && messages.length > 0"
+      *ngFor="#message of messages"
+      class="af-message af-feed-item"
+      [message]="message"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <af-message *ngIf="spaceresponse"
+      class="af-message af-feed-item"
+      [message]="spaceresponse.asMessage"
+      [profile]="profile && profile.user">
+    </af-message>
+        
+  </reply-header>
+  
+</reply-details>-->

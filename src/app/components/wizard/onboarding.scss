@@ -1,0 +1,14 @@
+@import '../../../assets/css/_variables';
+@import '../../../assets/css/_icons';
+
+.af-onboarding {
+  .md-modal-header {
+    height: auto;
+  }
+  modal-body {
+    wizard {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<!--<pre>{{artist | json}}</pre>-->
+<!--<div>{{artist.profile['@id']}}</div>-->
+<form class="artist-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.name.dirty) && !form.controls.name.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.name.dirty) && form.controls.name.errors && form.controls.name.errors.required">Name is required</div>
+    <label class="sr-only" for="artistnameInput">Name</label>
+    <input type="text" class="form-control" id="artistnameInput" ngControl="name" placeholder="NAME" autofocus required [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.description.dirty) && !form.controls.description.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.description.dirty) && form.controls.description.errors && form.controls.description.errors.required">Description is required</div>
+    <label class="sr-only" for="descriptionInput">Description</label>
+    <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION*" [disabled]="mode !== MODES.edit"></textarea>
+  </div>
+  
+</form>

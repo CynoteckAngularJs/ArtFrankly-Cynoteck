@@ -1,0 +1,86 @@
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_icons';
+@import '../../../../../assets/css/_forms';
+@import '../../../../../assets/css/_utils';
+
+form.jobpost {
+  width: 80%;
+}
+
+form {
+  header {
+    @extend .reset-mp;
+    border-bottom: $border-1;
+    padding-bottom: $distance-m;
+    margin-bottom: $distance-m;
+  }
+  footer {
+    @extend .reset-mp;
+    border-top: $border-1;
+    padding-top: $distance-m;
+    margin-top: $distance-m;
+  }
+}
+.af-form-heading-1 {
+  color: $color-black-1;
+  font-size: $af-form-heading-1;
+  margin-bottom: $distance-m;
+  .af-heading-title {
+    @extend .reset-mp;
+    font-weight: $font-200;
+  }
+}
+
+.formset-description {
+  font-size: $size-14;
+  color: $color-black;
+  line-height: 22px;
+  
+  &.fsd-2, &.fsd-3 {
+    padding-top: $distance-sb;
+    margin-bottom: $distance-sb;  
+  }
+  &.fsd-4 {
+    margin-bottom: $distance-sb;
+  }
+}
+
+input[type="checkbox"] {
+    position: relative;
+    border: 2px solid #000 !important;
+    padding: 8px !important;
+    vertical-align: bottom;
+    background: #fff !important;
+    margin-right: 4px;
+}
+
+.jobpost-checkbox label {
+    text-transform: none;
+}
+
+.jobpost-checkbox {
+  padding-bottom: 20px;
+}
+
+.jobpost-checkbox span {
+    display: inline-block;
+    width: 90%;
+    padding-left: 10px;
+}
+
+.jobpost-checkbox input[type="checkbox"] {
+    float: left;
+}
+
+.formset-description p {
+    font-family: 'NeueHaasUnicaPro-Medium';
+    padding-top: 10px;
+}
+
+.form-inst {
+  color: #adadad;
+}
+
+form.jobpost {
+  letter-spacing: .5px;
+}

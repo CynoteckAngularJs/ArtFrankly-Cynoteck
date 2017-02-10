@@ -1,0 +1,49 @@
+<form class="send-email url-centered" [ngFormModel]="resetForm" (ngSubmit)="resetPassword({ password: password.value })">
+
+    <div class="text-center url-heading">
+        <!--<span class="glyphicon glyphicon-pencil url-heading-icon"></span>-->
+        <img width="50" src="./assets/img/semicolon-black.png" alt="">
+        <h3 class="url-heading-title">Connecting the professional art world.</h3>
+    </div>
+
+    <div *ngIf="showResetForm">
+        <div class="form-group password-group" *ngIf="confirmPassword.touched && resetForm.hasError('isTooSimple')">
+            <div class='alert alert-danger'>
+                <div>Password is too simple.</div>
+            </div>
+        </div>
+
+        <div class="form-group password-group" [ngClass]="{'has-error': password.touched && !password.valid}">
+            <div class="alert alert-danger" *ngIf="password.touched && password.hasError('required')">Password is required</div>
+            <div class="alert alert-danger" *ngIf="password.touched && password.hasError('minlength')">Password too short</div>
+            <input type="password" id="passwordInput" class="form-control" placeholder="PASSWORD" minlength='6' [ngFormControl]="resetForm.controls['password']">
+        </div>
+
+        <div class="form-group password-group" [ngClass]="{'has-error': confirmPassword.touched && !confirmPassword.valid}">
+            <input type="password" id="confirmPassword" class="form-control" placeholder="CONFIRM PASSWORD" minlength='6' [ngFormControl]="resetForm.controls['confirmPassword']">
+        </div>
+
+        <div class="form-group password-group" *ngIf="confirmPassword.touched && resetForm.hasError('mismatchedPasswords')">
+            <div class='alert alert-danger'>
+                <div>Passwords do not match.</div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="actions-group">
+                <button type="submit" [disabled]="!resetForm.valid">Reset password</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showUrlIncorrect">
+        Error: Url for resetting password is not correct. <br />
+        {{urlError}}
+    </div>
+
+    <div *ngIf="showPasswordChanged">
+        Password has been changed. 
+    </div>
+
+</form>
+

@@ -1,0 +1,18 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <ng-content select="formlist-header"></ng-content>
+    </header>
+    
+    <ng-content select="formlist-body"></ng-content>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+          <span class="af-icon icon-add"></span>
+          <ng-content select="formlist-footer"></ng-content>
+      </a>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row af-spacepost-reply">
+  <div class="row">
+    <div class="col-sm-1 col-xs-2 reply-thumbnail-wrap">
+      <a class="thumbnail" href *ngIf="spacepost && reply" [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id, showForm: 'false', noReply: noReply }]">
+        <img *ngIf="reply && !reply.responseImageSrc" src="./assets/img/feed-icons/Fine_Art_Picture.jpg" alt="">
+        <img *ngIf="reply && reply.responseImageSrc" [src]="reply.responseImageSrc" alt="" onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';">
+      </a>
+      <!-- <div class="af-feed-featured text-center">
+      <a href class="svg-thumbnail-wrapper">
+        <div><span class="af-icon icon-connect"></span></div> 
+        <div class="featured-text">Connect</div>
+      </a>
+    </div> -->
+    </div>
+    <div class="col-sm-3 col-xs-10">
+      <ng-content select="reply-header"></ng-content>
+      <!-- <div *ngIf="reply && reply.responseSubtitle" class="col-sm-12 af-feed-type">{{reply.responseSubtitle}}</div> -->
+      <!-- <div *ngIf="reply && reply.replyDate" class="col-sm-4 af-reply-date">{{reply.replyDate | formatdate:'MMM YYYY'}}</div> -->
+
+      <!--  <span class="message-created-on">
+      on {{message.created | formatdate:'dddd, MMM D, YYYY'}}
+    </span> -->
+    
+      <div class="">
+        <a href *ngIf="spacepost && reply" [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id, showForm: 'false', noReply: noReply }]">
+        <h3 *ngIf="reply && reply.responseProfileName" class="af-feed-name">{{reply.responseProfileName}}</h3>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="af-feed-meta message-preview">
+        <a href *ngIf="spacepost && reply" [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id, showForm: 'false', noReply: noReply }]"> 
+        <div *ngIf="reply && reply.text" class="col-sm-12" [innerHTML]="reply.text | smarttext"></div>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-3 no-padding">
+      <div class="actions-bar message-preview-actions no-padding">
+        <a href *ngIf="spacepost && reply" [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id }]" class="svg-thumbnail-wrapper">
+          <button *ngIf="!noReply" class="af-btn af-btn-sm">  
+            <span class="af-icon icon-reply"></span> Reply   
+      </button>
+        </a>
+        <a href *ngIf="spacepost && reply" [routerLink]="['SpacePostReplyMessages', { id: spacepost.id, spaceresponseId: reply.id, showForm: 'false', noReply: noReply }]">
+          <button class="af-btn af-btn-sm">  
+          <!--<span class="af-icon icon-reply"></span>-->
+           View  
+      </button>
+        </a>
+        <ng-content select="reply-footer"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

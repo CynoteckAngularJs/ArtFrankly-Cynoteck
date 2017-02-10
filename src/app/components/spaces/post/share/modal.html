@@ -1,0 +1,44 @@
+<modal [modal]="modal" (close)="onClose($event)" class="transparent-black-modal">
+  <modal-body>
+    
+    <notification *ngIf="notifications.length" 
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+    </notification>
+    
+    <div class="container spacepost">
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <header>
+            <h5 class="spacepost-heading">Your space post was submitted.</h5>
+          </header>
+          
+          <div class="section">
+            <h2 *ngIf="spacepost.title" class="spacepost-title">{{spacepost.title}}</h2>
+            <h5 *ngIf="spacepost.organization" class="spacepost-heading">{{spacepost.organization}}</h5>
+          </div>
+          
+          <footer class="section">
+            <div class="row">
+              <div class="col-xs-12">
+                  <button class="af-btn btn-light af-heading-uppercased-1" (click)="onCancel($event)">
+                    Close <span class="af-icon x-out af-icon-s"></span>
+                  </button>
+              </div>
+            </div>
+            <!--
+            <div class="btn-alike">Share the post to your preferred social network</div>
+            <div>
+              <a href="">Facebook</a>
+              <a href="">Twitter</a>
+            </div>  
+            -->
+          </footer>
+          
+        </div>
+      </div>
+    </div>
+    
+  </modal-body>
+</modal>

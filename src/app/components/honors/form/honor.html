@@ -1,0 +1,56 @@
+<!--<pre>{{honor | json}}</pre>-->
+<!--<div *ngIf="honor && honor.profile">{{honor.profile['@id']}}</div>-->
+<form class="honor-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.title.dirty) && !form.controls.title.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.title.dirty) && form.controls.title.errors && form.controls.title.errors.required">Title is required</div>
+    <label class="sr-only" for="honorTitleInput">Title</label>
+    <input type="text" class="form-control" id="honorTitleInput" ngControl="title" placeholder="TITLE*" autofocus required [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-sm-8" [ngClass]="{'has-error': (isShowErrors || form.controls.organization.dirty) && !form.controls.organization.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.organization.dirty) && form.controls.organization.errors && form.controls.organization.errors.required">Organization is required</div>
+      <label class="sr-only" for="honorOrganizationInput">Organization</label>
+      <input type="text" class="form-control" id="honorOrganizationInput" ngControl="organization" placeholder="ORGANIZATION*" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-4" [ngClass]="{'has-error': (isShowErrors || form.controls.receiveDate.dirty) && !form.controls.receiveDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.receiveDate.dirty) && form.controls.receiveDate.errors && form.controls.receiveDate.errors.required">Date is required</div>
+      <div class="alert alert-danger" *ngIf="(isShowErrors) && form.controls.receiveDate.errors && form.controls.receiveDate.errors.date"><small>'MM/DD/YYYY' supported</small></div>
+      <label class="sr-only" for="honorReceiveDateInput">Date</label>
+      <input type="text" class="form-control" id="honorReceiveDateInput" ngControl="receiveDate" placeholder="DATE RECEIVED (MM/DD/YYYY)" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.url.dirty) && !form.controls.url.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.url.dirty) && form.controls.url.errors && form.controls.url.errors.required">Url is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.url.dirty) && form.controls.url.errors && form.controls.url.errors.url">Not a valid url.</div>
+    <label class="sr-only" for="urlInput">URL</label>
+    <input type="text" class="form-control" id="urlInput" ngControl="url" placeholder="URL*" [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.description.dirty) && !form.controls.description.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.description.dirty) && form.controls.description.errors && form.controls.description.errors.required">Description is required</div>
+    <label class="sr-only" for="descriptionInput">Description</label>
+    <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION*" [disabled]="mode !== MODES.edit"></textarea>
+  </div>
+  
+  <!--<div class="form-group">
+    <select multiple="multiple" [ng2select2]="type" [ng2select2options]="{ tags: true }" #type="ngForm" ngControl="type" class="form-control">
+        <option *ngFor="#option of JOB_POSITION_TYPES" [value]="option.value">{{option.label}}</option>
+    </select>
+  </div>-->
+  
+</form>

@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Experience</h5>
+    </header>
+    
+    <experience-form *ngFor="#experience of items | sortByDate:'-startDate'"
+        [item]="experience"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </experience-form>
+    <experience-form *ngFor="#unsavedExperience of unsavedItems"
+        [item]="unsavedExperience"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </experience-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Experience</span>
+      </a>
+    </footer>
+  </div>
+</div>

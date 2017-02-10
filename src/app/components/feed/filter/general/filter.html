@@ -1,0 +1,22 @@
+<div class="btn-group-container filter-btn-wrapper">
+    <div class="btn-group btn-default-filter-header" role="group">
+        <button (click)="onFilterChange($event, FILTER_TYPES.JOBS)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.JOBS || isSelected === FILTER_TYPES.JOBS}">Jobs <span class="af-icon icon-jobs af-icon-xs"></span></button>
+        <span class="btn-group-separator"></span>
+        <button (click)="onFilterChange($event, FILTER_TYPES.SPACES)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.SPACES || isSelected === FILTER_TYPES.SPACES}">Spaces<span class="af-icon icon-spaces af-icon-xs"></span></button>
+        <span class="btn-group-separator"></span>
+        <button (click)="comingSoon($event)" type="button" class="btn btn-default" [ngClass]="{ active: selectedType === FILTER_TYPES.OPPORTUNITIES || isSelected === FILTER_TYPES.OPPORTUNITIES}">Opportunities<span class="af-icon icon-commissions af-icon-xs"></span></button>
+        <span class="btn-group-separator"></span>
+        <button (click)="onFilterChange($event, FILTER_TYPES.PROFILES)" type="button" class="btn btn-default " [ngClass]="{ active: selectedType === FILTER_TYPES.PROFILES || isSelected === FILTER_TYPES.PROFILES}">Profiles<span class="af-icon icon-profile af-icon-xxs"></span></button>
+    </div>
+    <div class="general-filter-box dropdown-menu" *ngIf="selectedType && (selectedType === FILTER_TYPES.JOBS || selectedType === FILTER_TYPES.PROFILES || selectedType === FILTER_TYPES.SPACES)">
+        <jobs-filter *ngIf="selectedType === FILTER_TYPES.JOBS" [term]="jobFilter.term" [jobPositionTypes]="jobFilter.subType" [jobServices]="jobFilter.description" [cities]="jobFilter.location" (filterchange)="onChange($event)">
+        </jobs-filter>
+        <profiles-filter *ngIf="selectedType === FILTER_TYPES.PROFILES" [term]="profileFilter.term" [industries]="profileFilter.subtitle" [professions]="profileFilter.description" [profileTypes]="profileFilter.subType" (filterchange)="onChange($event)">
+        </profiles-filter>
+        <spaces-filter *ngIf="selectedType === FILTER_TYPES.SPACES" [term]="spacesFilter.term" [spacePositionTypes]="spacesFilter.spacePositionTypes" [cities]="spacesFilter.location" [radius]="spacesFilter.radius" (filterchange)="onChange($event)"></spaces-filter>
+        <a href class="filter-close-btn" (click)="close($event)">
+            <span class="af-icon icon-x-out af-icon-s"></span>
+        </a>
+   
+  </div>
+</div>

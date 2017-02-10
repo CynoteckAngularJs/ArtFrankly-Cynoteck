@@ -1,0 +1,88 @@
+@import '../../../../../../assets/css/_variables';
+@import '../../../../../../assets/css/_forms';
+@import '../../../../../../assets/css/_utils';
+@import '../../../../../../assets/css/_icons';
+@import '../../../../../../assets/css/_lists';
+@import '../../../../feed/list/feeds.scss';
+
+.af-message {
+  color: inherit;
+  text-align: left;
+}
+
+.af-jobpost-reply .thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+.row.af-jobpost-reply {
+    padding: 1% 0 1% 1%;
+    border-bottom: 1px solid #e9eaf2;
+    border-left: 1px solid #e9eaf2;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.af-jobpost-reply .row {
+    margin: 0;
+}
+
+.message-preview a .col-sm-12 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-preview {
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+.message-preview-actions .icon-reply {
+  margin-right: 5px;
+  height: 15px;
+}
+
+.af-jobpost-reply h3.af-feed-name, .message-preview a {
+    margin-top: 15px;
+    font-weight: 300;
+    display: block;
+    text-align: left;
+}
+
+h3.af-feed-name {
+    font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.reply-thumbnail-wrap {
+  padding: 0;
+}
+
+.message-preview-actions {
+    text-align: right;
+    margin-top: 7px;
+}
+
+.af-message {
+   border-bottom: 1px solid #e9eaf2;
+}
+
+
+@media only screen and (max-width: 1020px) {
+    .message-preview-actions {
+        text-align: right;
+        margin: 10px 0;
+    }
+
+    h3.af-feed-name {
+        text-align: left;
+    }
+
+    .message-preview {
+        margin-top: 20px;
+    }
+
+    .af-jobpost-reply h3.af-feed-name, .message-preview a {
+        margin-top: 10px;
+    }
+}

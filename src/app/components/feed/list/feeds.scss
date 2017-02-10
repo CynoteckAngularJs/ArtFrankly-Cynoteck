@@ -1,0 +1,416 @@
+@import '../../../../assets/css/_variables';
+@import '../../../../assets/css/_icons';
+@import '../../../../assets/css/_buttons';
+@import '../../../../assets/css/_utils';
+
+
+.reset {
+  margin: 0;
+  padding: 0;
+}
+
+.feed .container-fluid .wrapper main {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+header {
+  .search-header {
+    border-bottom: $border-1;
+    padding-bottom: $distance-s;
+    padding-top: $distance-s;
+    // margin-bottom: $distance-s;
+    padding-left: 40px;
+    line-height: 1em;
+    .clear-search {
+      vertical-align: middle;
+      margin-left: $distance-xxs;
+    }
+  }
+}
+
+.af-feeds {
+  .app-loading {
+    margin-top: 80px;
+  }
+
+  .btn-default {
+    letter-spacing: 1px;
+  }
+}
+
+.af-feeds-list {
+  .featured-text {
+    letter-spacing: 1px;
+  }
+}
+
+.af-feed-item {
+  color: $input-color;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 40px 30px 40px 30px;
+  border-bottom: none;
+  // &:last-child {
+  //   border-bottom: none;
+  // }
+  
+  $avatar-width: 160px;
+  // Left hand side
+  .url-profile-media {
+    .thumbnail {
+        height: $avatar-width;
+        width: $avatar-width;
+    }
+    .af-feed-featured {
+      @extend .af-mt-s;
+      width: $avatar-width;
+      font-size: 12px;
+      color: $color-gray-3;
+      img {
+        width: 20px;
+      }
+    }
+  }
+  // Right hand side
+  .url-profile-general {
+    text-align: left;
+    padding-left: 40px;
+    .af-feed-name {
+      font-family: 'NeueHaasUnicaPro-Medium';
+      margin-bottom: 10px;
+      padding-right: 20px;
+    }
+  }
+  .af-label {
+    
+  }
+}
+
+.af-feed-featured {
+  text-transform: uppercase;
+  .featured-text {
+    // margin-left: 5px;
+  }
+}
+
+.af-feed-type {
+  text-transform: initial;
+  margin-bottom: $distance-xs;
+  padding-left: 0;
+  color: #000;
+  font-family: 'NeueHaasUnicaPro-Medium';
+  letter-spacing: .5px;
+}
+
+.af-feed-name {
+  color: $links-color;
+  @extend .reset;
+  margin-bottom: $distance-xs;
+  a {
+    font-size: 26px;
+    color: $links-color;
+    @extend .reset;
+    margin-bottom: $distance-s;
+    text-decoration: none;
+    text-transform: none;
+  }
+}
+
+.af-feed-details {
+  text-transform: none;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: 'NeueHaasUnicaPro-Light';
+  color: $color-black-1;
+}
+
+.af-feed-actions {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+    
+    li {
+      text-align: center;
+      margin-bottom: $distance-s/2;
+      a {
+        display: block;
+      }
+      a + div {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.af-feed-loadmore {
+    margin-top: 25px;
+}
+
+.filter-btn {
+  padding: $distance-xs;
+  display: inline-block;
+}
+
+.feed .main-content-container {
+    float: right; 
+}
+
+.feed main.col-sm-9 {
+    width: 91%;
+}
+
+.af-feeds {
+    position: relative;
+    top:22px;
+}
+
+.sort-filter-wrap {
+    position: absolute;
+    bottom: -45px;
+    left: 20px;
+}
+
+a.filter-btn.sort-feeds.btn {
+    text-transform: capitalize;
+}
+
+// .feed-container:first-child {
+//   margin-top: 36px;
+// }
+
+.feed-container:nth-child(even) {
+    background: #f9fafc;
+}
+
+.af-feed-item-profile span:nth-child(4n) {
+    border: none;
+    border-radius: 0;
+}
+
+.url-profile-media .af-feed-featured {
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+
+.url-profile-media .af-feed-details {
+    text-align: center;
+    width: 160px;
+    margin-top: 15px;
+    display: block;
+}
+
+.col-sm-12.af-feed-type span {
+    margin-right: 5px;
+}
+
+.af-feeds .af-value span, .af-feeds .col-sm-12.af-feed-type.af-black {
+    color: #161616;
+}
+
+.af-feeds .row .col-sm-12, .af-label, .af-value {
+    padding: 0;
+}
+
+.feed-container:hover, .af-jobpost-reply:hover {
+  background-color: rgba(254, 209, 0, 0.1) !important;
+}
+
+.two-column {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+
+@media only screen and (max-width: 992px) {
+  a.url-profile-media-avatar.thumbnail, h4.af-feed-name,  .af-feed-name a {
+      display: inline-block;
+      text-align: center;
+      line-height: 30px;
+      font-size: 24px;
+      letter-spacing: 0 !important;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-right: 0 !important;
+  }
+
+  .url-profile-media {
+    width: 100%;
+  }
+  
+  a.url-profile-media-avatar.thumbnail {
+    float: none;
+  }
+
+
+  .af-feed-actions {
+    display: none;
+  }
+
+  .af-feed-item .url-profile-general {
+    width: 100%;
+    text-align: center;
+    padding-left: 0;
+  }
+
+   .feed .url-profile-media, .feed .af-label, .feed .af-value {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .feed-cta {
+    text-decoration: none;
+    display: inline-block;
+    background: transparent;
+    color: #161616;
+    padding: 0px 12px 13px 12px;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-family: 'NeueHaasUnicaPro-Medium';
+  }
+  
+
+  .filter-container .btn-group-separator {
+    background-color: #fff;
+  }
+
+  .btn-group-container .btn-group .btn:active {
+    text-decoration: underline;
+  }
+
+  .feed-account-nav span {
+    width: 32.3%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .af-feed-item .url-profile-media .thumbnail {
+    height: 75px;
+    width: 75px;
+  }
+
+  .feed-container {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .af-feed-ite .url-profile-media .af-feed-featured {
+    width: 100%;
+    display: block;
+  }
+
+  .date-posted {
+    display: none; 
+  }
+
+  /* temporarily removing hamburger from feed section */
+
+  .feed button.navbar-toggle.collapsed {
+    display: none;
+  }
+
+  .af-feed-featured.text-center {
+    width: 100% !important;
+    text-align: center;
+    display: block;
+  }
+
+  .feed .af-feed-type, .feed  .af-feed-name, .feed .af-feed-item .url-profile-media .af-feed-featured {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+
+
+  header.heading.filter-inst h5 {
+    font-size: 10px;
+    color: #9c9c9c;
+    letter-spacing: 0;
+  }
+
+     .feed-account-nav span a {
+    text-decoration: none;
+    font-weight: 300;
+    text-transform: capitalize;
+    font-size: 17px;
+  }
+
+   .feed-account-nav {
+    display: block;
+    background: #fed100;
+    padding: 70px 20px 20px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 30px;
+    margin-top: -80px;
+  }
+
+  .feed-account-nav span a {
+    position: relative;
+  }
+
+  .wrapper {
+    margin-top: 35px;
+  }
+
+  .af-feeds .af-value span {
+    font-size: 12px;
+  }
+
+  
+}
+
+@media only screen and (min-width: 728px) and (max-width: 992px) {
+  .af-feed-name a, h4.af-feed-name {
+    font-size: 28px !important;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .filter-container button.btn.btn-default {
+    font-size: 14px;
+  }
+  feed-filter-button-group .btn-group-container .btn-group .btn {
+    padding: 7px;
+  }
+}
+
+
+@media (max-width: 768px) {
+   .af-feed-details span {
+    border: 1px solid #161616;
+    padding: 13px 25px 10px 25px;
+  }
+
+  .af-feed-type span:nth-child(4n) {
+    display: none;
+  }
+
+  .feed-container:nth-child(even) {
+    background: rgba(249, 250, 252, 0.9);
+  }
+
+  .af-feed-item {
+    padding: 25px 50px 25px 50px;
+  }
+}
+
+
+ /* iPad Styles */ 
+
+@media (min-width: 768px) and (max-width: 769px) {
+
+    .col-sm-7.af-value {
+    text-align: center !important;
+  }
+}

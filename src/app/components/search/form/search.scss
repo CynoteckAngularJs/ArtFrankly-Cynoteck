@@ -1,0 +1,117 @@
+@import '../../../../assets/css/_variables';
+@import '../../../../assets/css/_forms';
+@import '../../../../assets/css/_icons';
+@import '../../../../assets/css/_utils';
+
+$search-left-padding: 50px;
+
+.search-form {
+  .form-group {
+    border-bottom: 2px solid;
+    position: relative;
+    
+    .search-icon {
+      position: absolute;
+      top: 10px;
+      font-size: 35px;
+    }
+    input, .search-input {
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      font-size: 38px;
+      font-family: NeueHaasUnicaPro-Bold;
+      color: $color-white;
+      height: auto;
+      position: relative;
+      padding-left: $search-left-padding;
+      z-index: 2;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      &.search-input {
+        position: absolute;
+        top: 6px;
+        // left: 12px;
+        left: 0;
+        color: inherit;
+        z-index: 1;
+        .term-segment {
+          color: transparent;
+        }
+        .suffix-segment {
+          font-family: NeueHaasUnicaPro-Light;
+        }
+      }
+    } 
+  }
+  .af-btn {
+    letter-spacing: 1px;
+  }
+  footer {
+    font-size: 21px;
+  }  
+}
+
+.search-results {
+  margin-top: -30px;
+  
+  .search-result {
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid;
+    padding-left: 0;
+    padding-right: 0;
+    
+    > a {
+      display: block;
+      text-decoration: none;
+      text-transform: none !important;
+      > .row {
+        display: table;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        
+        > div {
+          display:table-cell;
+          vertical-align:middle;
+          float:none;
+          // display: table-cell;
+          // vertical-align: middle;
+        }
+      }
+    }
+    
+    .result-name, .result-location {
+      font-size: 25px;
+      height: auto;
+      font-family: NeueHaasUnicaPro-Light;
+      &.result-name * {
+        color: #FFF;
+      }
+    }
+    .result-type {
+      letter-spacing: 1px;
+    }
+    .result-image a img {
+      border: 0;
+    }
+  }
+}
+
+.result-image {
+  .thumbnail {
+    // max-width: 60px;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    margin: 0;
+  }
+}
+

@@ -1,0 +1,33 @@
+<select class="form-control" [ngControl]="ngControl" [required]="required" select2 (change)="updateProfile(form.controls.profile, $event)" >
+  <option *ngFor="#coption of options"
+    [value]="coption.value"
+    [selected]="option.value === selectedvalue"
+    [innerHTML]="option.label">
+  </option>
+</select>
+
+<!--<div class="md-modal md-effect-3 md-show"
+  *ngIf="modal && modal.opened">
+
+  <div class="md-content">
+    
+    <header class="md-modal-header">
+      <ul class="md-modal-action-bar">
+        <li>
+          <a href
+            class="md-modal-close"
+            *ngIf="modal.closeable"
+            (click)="onClose($event)">
+            <span>Close</span>
+            <span class="af-icon icon-close af-icon-s"></span>
+          </a>
+        </li>
+      </ul>
+      <ng-content select="modal-title"></ng-content>
+    </header>
+    
+    <ng-content select="modal-body"></ng-content>
+    
+  </div>
+  
+</div>-->

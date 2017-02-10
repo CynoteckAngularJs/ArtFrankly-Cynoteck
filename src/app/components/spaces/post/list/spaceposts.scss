@@ -1,0 +1,179 @@
+// @import '../../../feed/list/feeds.css';
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_forms';
+@import '../../../../../assets/css/_icons';
+@import '../../../../../assets/css/_utils';
+@import '../../../../../assets/css/_lists';
+@import '../../../feed/list/feeds.scss';
+.item-elements-offset {
+  padding-bottom: $distance-s;
+  margin: 0;
+}
+
+.jobposts-list {
+    padding: 0px 40px;
+}
+
+.my-jobposts {
+  .my-jobpost {
+    padding: $distance-m 0;
+    border-bottom: $border-1;
+    &:first-child {
+      padding-top: 0 !important;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .jobpost-position {
+    font-size: 12px;
+    color: $color-gray-3;
+    @extend .item-elements-offset;
+  }
+  .jobpost-title,
+  .jobpost-title a {
+    font-size: 22px;
+    text-transform: none;
+    color: $color-gray-6;
+    margin-right: 10px;
+    margin-bottom: 6px;
+    @extend .item-elements-offset;
+  }
+  .jobpost-description {
+    @extend .item-elements-offset;
+    @extend .af-truncated-description;
+    margin-bottom: $distance-s;
+  }
+  .jobpost-responses {
+    @extend .link-alike;
+  }
+  footer {
+    .jobpost-deadline {
+      @extend .item-elements-offset;
+      // .af-label {
+      //   @extend .link-alike;
+      // }
+      // .af-value {
+      //   @extend .link-alike;
+      //   margin-left: $distance-s;
+      // }
+    }
+  }
+}
+
+.af-bgr-item {
+  padding: $distance-s $distance-m;
+  margin-top: 40px;
+}
+
+.af-response {
+  color: inherit;
+}
+
+.af-bgr-item-style-2 {
+  .af-jobpost-details {
+  }
+  .jobpost-responses {
+    a {
+      text-decoration: none;
+    }
+    .jobpost-responses-number {
+      font-size: 14px;
+      font-family: NeueHaasUnicaPro-Medium;
+      text-align: right;
+      color: $color-gray-3;
+    }
+    .jobpost-responses-label {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.actionbar-buttons-lg {
+  .jobpost-position {
+    display: inline-block;
+    line-height: 78px;
+  }
+}
+
+h3.jobpost-title {
+  display: inline-block;
+  vertical-align: sub;
+}
+
+.jobpost-responses-number {
+  margin-top: 6px;
+  span {
+    font-family: NeueHaasUnicaPro-Light;
+  }
+    p {
+      display: inline-block;
+      margin: 0 5px 0 0;
+    }
+  }
+
+span.edit-link {
+ vertical-align: top;
+  margin-left: 12px;
+  border: none;
+  font-family: 'NeueHaasUnicaPro-Light';
+  letter-spacing: .5px;
+}
+
+.af-jobpost-details {
+  border-bottom: 1px solid #e9eaf2;
+}
+
+.reply-position {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.reply-title, .reply-title a {
+  padding-bottom: 0;
+}
+
+.replies-heading {
+  padding: 16px 5px 10px 5px;
+}
+
+
+@media only screen and (max-width: 1020px) {
+  .jobpost-responses-number {
+    span {
+      margin: 0;
+      text-align: right;
+      font-size: 12px;
+    }
+    p {
+      font-size: 12px ;
+      text-align: right;
+      }
+  }
+
+  .jobpost-responses {
+    padding: 0 15px 0 0;
+  }
+
+  .my-jobposts .jobpost-title {
+    a,
+    h3 {
+      padding-bottom: 10px;
+    }
+  }
+
+  .jobposts-list {
+    padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width : 768px) {
+  .filter-btn-nolink {
+    font-size: 20px;
+    line-height: 15px;
+    letter-spacing: .5px;
+  }
+  h3.jobpost-title {
+    margin-bottom: 4px !important;
+  }
+}

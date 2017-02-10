@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-12">
+      <header class="bottom-bordered">
+        <div class="sort-filter-wrap">
+          <feed-filter [total]="total"></feed-filter>
+        </div>
+        <div class="row feed-filter">
+          <div class="col-xs-12 col-sm-2 col-md-3 no-padding text-left">
+            <span class="filter-btn-nolink">My Profiles</span>
+          </div>
+          <div class="col-sm-7 col-md-7 no-padding text-center filter-container hidden-xs">
+            <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+          </div>
+          <div class="col-sm-2 col-md-2 no-padding text-right hidden-xs hidden-sm hidden-md">
+            <a [routerLink]="['AddProfile']">
+              <button type="button" class="btn af-button">Add Profile</button>
+            </a>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+<div *ngIf="profiles.length" class="url-profiles">
+  <div class="row">
+    <div class="col-sm-12">
+      <profile *ngFor="#profile of profiles; #i = index"
+                [profile]="profile"
+                [class.active]="select === profile.id"
+                class="profile profile-type-{{profileType}}">
+      </profile>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+@import '../../../../assets/css/_forms';
+
+form.editprofile {
+  // width: 80%;
+}
+.additional-fileds-actionbar {
+  width: 80%;
+  margin: $distance-m auto;
+  a {
+    margin-right: $distance-xs;
+    margin-bottom: $distance-xs;
+  }
+}
+
+.af-heading-2 {
+  margin-bottom: $distance-s;
+}
+
+.upload-area {
+    width: 160px;
+}
+
+.edit-profile-top {
+    width: calc(100% - 175px);
+}
+
+@media only screen and (max-width : 768px) {
+  .upload-area {
+    width: 100%;
+  }
+  .edit-profile-top {
+    width: calc(100% - 0px);
+  }
+}

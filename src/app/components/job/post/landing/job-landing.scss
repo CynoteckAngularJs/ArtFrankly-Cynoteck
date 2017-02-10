@@ -1,0 +1,52 @@
+// @import '../../../feed/list/feeds.css';
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_forms';
+@import '../../../../../assets/css/_icons';
+@import '../../../../../assets/css/_utils';
+@import '../../../../../assets/css/_lists';
+@import '../../../feed/list/feeds.scss';
+
+.job-landing p {
+    margin-bottom: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #e6e6e6;
+}
+
+#jobs-link, #spaces-link, #commissions-link {
+    padding: 40px;
+}
+
+.af-feed-name, .af-feed-name a {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 19px;
+    line-height: 124%;
+}
+
+@media only screen and (max-width : 768px) {
+   
+    h1 {
+        display: block;
+        vertical-align: bottom;
+    }
+
+     #jobs-link, #spaces-link, #commissions-link {
+        padding: 20px 10px;
+    }
+    
+    
+    .job-landing p {
+        margin-bottom: 10px;
+    }
+
+    .af-icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+
+}
+

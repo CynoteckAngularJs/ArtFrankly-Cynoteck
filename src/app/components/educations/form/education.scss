@@ -1,0 +1,28 @@
+@import '../../../../assets/css/_variables';
+@import '../../../../assets/css/_forms';
+
+.action-bar {
+  a {
+    margin-left: $distance-xs;
+  }
+}
+
+.present-label {
+  .af-form-label {
+    padding: 0 20px;
+  }
+}
+
+.present-checkbox.checkbox {
+  margin: 0;
+  height: 60px;
+  display: table;
+  padding: 0 20px;
+  label {
+    display: table-cell;
+    vertical-align: middle;
+    input[type="checkbox"] {
+      margin-top: 2px;
+    }
+  }
+}

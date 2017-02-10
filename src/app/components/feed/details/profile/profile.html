@@ -1,0 +1,14 @@
+<feed-professional-details *ngIf="feed.isProfessional()"
+      [feed]="feed"
+      (onreply)="onReplyHandler(feed)">
+</feed-professional-details>
+
+<feed-institution-details *ngIf="feed.isInstitution()"
+      [feed]="feed"
+      (onreply)="onReplyHandler(feed)">
+</feed-institution-details>
+
+<feed-vendor-details *ngIf="feed.isVendor()"
+      [feed]="feed"
+      (onreply)="onReplyHandler(feed)">
+</feed-vendor-details>

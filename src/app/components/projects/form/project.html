@@ -1,0 +1,54 @@
+<!--<pre>{{project | json}}</pre>-->
+<!--<div>{{project.profile['@id']}}</div>-->
+<form class="project-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': form.controls.name.dirty && !form.controls.name.valid}">
+    <div class="alert alert-danger" *ngIf="form.controls.name.dirty && form.controls.name.errors && form.controls.name.errors.required">name is required</div>
+    <label class="sr-only" for="projectnameInput">Name</label>
+    <input type="text" class="form-control" id="projectnameInput" ngControl="name" placeholder="NAME" autofocus required [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': form.controls.description.dirty && !form.controls.description.valid}">
+    <div class="alert alert-danger" *ngIf="form.controls.description.dirty && form.controls.description.errors && form.controls.description.errors.required">Description is required</div>
+    <label class="sr-only" for="descriptionInput">Description</label>
+    <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION*" required [disabled]="mode !== MODES.edit"></textarea>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': form.controls.company.dirty && !form.controls.company.valid}">
+    <div class="alert alert-danger" *ngIf="form.controls.company.dirty && form.controls.company.errors && form.controls.company.errors.required">company is required</div>
+    <label class="sr-only" for="companyInput">Company</label>
+    <input type="text" class="form-control" id="companyInput" ngControl="company" placeholder="COMPANY" [disabled]="mode !== MODES.edit">
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.startDate.dirty) && !form.controls.startDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.startDate.dirty) && form.controls.startDate.errors && form.controls.startDate.errors.required">Start Date is required</div>
+      <label class="sr-only" for="eventStartDateInput">Start Date</label>
+      <input type="text" class="form-control" id="eventStartDateInput" ngControl="startDate" placeholder="EVENT START DATE" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.endDate.dirty) && !form.controls.endDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.endDate.dirty) && form.controls.endDate.errors && form.controls.endDate.errors.required">End Date is required</div>
+      <label class="sr-only" for="eventEndDateInput">End Date</label>
+      <input type="text" class="form-control" id="eventEndDateInput" ngControl="endDate" placeholder="EVENT END DATE" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': form.controls.position.dirty && !form.controls.position.valid}">
+    <div class="alert alert-danger" *ngIf="form.controls.position.dirty && form.controls.position.errors && form.controls.position.errors.required">position is required</div>
+    <label class="sr-only" for="positionInput">Position</label>
+    <input type="text" class="form-control" id="positionInput" ngControl="position" placeholder="POSITION" [disabled]="mode !== MODES.edit">
+  </div>
+  
+</form>

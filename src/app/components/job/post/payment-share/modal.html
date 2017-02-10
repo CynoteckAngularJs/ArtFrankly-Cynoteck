@@ -1,0 +1,37 @@
+<modal [modal]="modal"
+    (close)="onClose($event)"
+    (onhide)="onHide($event)"
+    class="transparent-black-modal">
+  <modal-title>
+    <a class="navbar-brand" [routerLink]="['/Feeds']" style="margin-left: 15px;">
+      <img src="./assets/img/art_frankly_logo_white.png" alt="">
+    </a>
+  </modal-title>
+  
+  <modal-body>
+    
+    <notification *ngIf="notifications.length" 
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+    </notification>
+    
+    <div class="container jobpost">
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <jobpost-payment *ngIf="!isPaymentProcessed"
+            [jobpost]="jobpost"
+            (paymentsuccess)="onPaymentSuccess($event)"
+            (cancel)="closeModal($event)">
+          </jobpost-payment>
+          <jobpost-share [jobpost]="jobpost"
+            *ngIf="isPaymentProcessed"
+            (shared)="closeModal($event)">
+          </jobpost-share>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+    </div>
+    
+  </modal-body>
+</modal>

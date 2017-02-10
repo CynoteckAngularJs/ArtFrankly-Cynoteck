@@ -1,0 +1,237 @@
+<div class="my-spaceposts">
+  <div class="row">
+    <div class="col-sm-12">
+      <header class="bottom-bordered">
+        <div class="sort-filter-wrap">
+          <feed-filter [total]="total"></feed-filter>
+        </div>
+        <div class="row feed-filter">
+          <div class="col-sm-2 no-padding text-left hidden-xs">
+            <span class="filter-btn-nolink">Replies</span>
+          </div>
+          <div class="col-sm-8 text-center filter-container hidden-xs">
+            <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+          </div>
+          <div class="col-sm-2 no-padding text-right hidden-xs">
+            <a [routerLink]="['AddSpacePost']">
+              <button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Post a Space</button>
+            </a>
+          </div>
+        </div>
+
+      </header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" *ngIf="spaceposts.length">
+    <!--  <header class="af-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-7 actionbar-buttons-lg visible-md visible-lg">
+            <div class="row">
+              <div class="col-xs-12 col-sm-7 text-left">
+                <h5 class="spacepost-position text-uppercase">
+                  <a href (click)="getMySpacePostsHandler($event)">Check for new Responses</a>
+                </h5>
+              </div>
+              <div class="col-xs-12 col-sm-5 text-left">
+                <h5 class="spacepost-position text-uppercase">
+                  <a href (click)="goToArchived($event)">Go to Archived</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-7 visible-sm visible-xs">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h5 class="spacepost-position text-uppercase">
+                  <a href (click)="getMySpacePostsHandler($event)">Check for new Responses</a>
+                </h5>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <h5 class="spacepost-position text-uppercase">
+                  <a href (click)="goToArchived($event)">Go to Archived</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    -->
+    
+      <div *ngFor="#spacepost of spaceposts; #i = index" class="spaceposts-list">
+        <article class="af-bgr-item-style-2 replies-heading">
+          <div class="row">
+            <div class="no-padding text-left hidden-sm hidden-md hidden-lg">
+            <span class="filter-btn-nolink">Replies</span>
+          </div>
+            <div class="col-sm-12 af-spacepost-details no-padding-left no-padding">
+              <div class="row">
+  
+                <div class="col-sm-10 col-xs-9">
+                  <h3 class="col-sm-6 spacepost-title no-padding">
+                    <a href [routerLink]="['SpacePost', { id: spacepost.id }]">{{spacepost.title}}</a>
+                  </h3>
+                  <div class="af-feed-type col-sm-5">
+                    <span class="">
+                    {{spacepost.position}}
+                  </span>
+                     <span class="edit-link" *ngIf="spacepost.state !== SPACE_POST_STATES.PUBLISHED">
+                    <a href [routerLink]="['EditSpacePost', { id: spacepost.id }]">Edit</a>
+                  </span>
+                  </div>
+
+               
+                </div>
+                <div class="col-sm-2 col-xs-3 text-right spacepost-responses">
+                  <div class=" text-center">
+                    <a href (click)="toggleAllResponses(spacepost.id, $event)">
+                      <div class="spacepost-responses-number"><p>{{(spacepost.spaceResponses).length}}</p><span>Replies</span></div>
+                    </a>
+                  </div>
+                  <!--<h5 class="spacepost-position text-uppercase" *ngIf="spacepost.state === SPACE_POST_STATES.PUBLISHED">
+                    <a href (click)="archiveSpacePost($event, spacepost)">Archive this Post</a>
+                  </h5>-->
+                </div>
+                <!--  <div class="col-sm-12">
+                  Posted on: {{spacepost.datePosted}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Space Responses -->
+        <section class="af-feeds-list" *ngIf="expandedResponses[spacepost.id]">
+          <article *ngFor="#response of spacepost.deserializedSpaceResponses" [class.active]="select === response.id" class="af-feed-item af-response">
+            <reply-details [reply]="response" [spacepost]="spacepost">
+            </reply-details>
+          </article>
+        </section>
+      </div>
+      <!--<article *ngFor="#spacepost of spaceposts; #i = index" class="my-spacepost">
+        
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="spacepost-position text-uppercase">{{spacepost.position}}</h5>
+                <h3 class="spacepost-title">
+                  <a href [routerLink]="['SpacePost', { id: spacepost.id }]">{{spacepost.title}}</a>
+                </h3>
+                <div class="spacepost-description" [innerHTML]="spacepost.description"></div>
+              
+                <footer>
+                  <div class="row af-label-value spacepost-deadline">
+                    <div class="col-sm-6 af-label no-padding">Application Deadline</div>
+                    <div class="col-sm-6 af-value">10/08/2015</div>
+                  </div>
+                  <div *ngIf="spacepost.state !== 'published'">
+                    <a href (click)="onPublish($event, spacepost)">Publish Post</a>
+                  </div>
+                  <div *ngIf="spacepost.state === 'published'">
+                    <a href (click)="archiveSpacePost($event, spacepost)">Archive this Post</a>
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4 text-center text-uppercase">
+            <div>
+              <a href [routerLink]="['EditSpacePost', { id: spacepost.id }]" class="af-btn">
+                Edit Post
+              </a>
+            </div>
+            <br>
+            <div class="spacepost-responses">
+              {{(spacepost.spaceResponses).length}} Responses
+            </div>
+            <div>
+              <a href (click)="toggleAllResponses(spacepost.id, $event)">View All</a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="af-feeds-list" *ngIf="expandedResponses[spacepost.id]">
+          <article *ngFor="#response of spacepost.deserializedSpaceResponses"
+              [class.active]="select === response.id" 
+              class="af-feed-item af-response">
+            <reply-details [reply]="response" [spacepost]="spacepost">
+            </reply-details>
+          </article>
+        </section>
+        
+      </article>-->
+
+    </div>
+
+    <div class="col-sm-12 text-center af-empty-list" *ngIf="!spaceposts.length">
+      <h2 class="af-icon-cnt">
+        <i class="af-icon af-icon-xxxl icon-response_default"></i>
+      </h2>
+      <h1 class="af-heading">You have yet to post a space opportunity.</h1>
+      <!--<p class="af-description">There are currently 1,000,000 applicants waiting to apply.</p>-->
+      <div class="af-action-bar af-mt-s">
+        <a href [routerLink]="['AddSpacePost']" class="af-btn">Publish a space post</a>
+      </div>
+    </div>
+    <div class="" *ngIf="archivedSpaceposts.length">
+    <div class="col-sm-12 no-padding-left">
+      
+        <h2 id="archivedSpacePosts" class="filter-btn-nolink" style="margin-top: 40px;">Your Archived Space Posts</h2>
+        <!--<div *ngIf="!archivedSpaceposts.length">You have no archived posts.</div>-->
+      </div>
+  <section class="af-mt-m">
+    <div class="col-sm-12 no-padding">
+        <div *ngFor="#archivedSpace of archivedSpaceposts" class="spaceposts-list">
+     
+    
+
+ <article class="af-bgr-item-style-2 replies-heading">
+          <div class="">
+            <div class="col-sm-12 af-spacepost-details no-padding-left no-padding">
+              <div class="row">
+
+             <div class="col-sm-10 col-xs-9">
+                  <h3 class="col-sm-6 spacepost-title no-padding">
+                     <a href [routerLink]="['SpacePost', { id: archivedSpace.id }]">{{archivedSpace.title}}</a>
+                  </h3>
+                  <div class="af-feed-type col-sm-5">
+                    <span class="">
+                    {{archivedSpace.position}}
+                  </span>
+                  </div>
+
+          
+                </div>
+                <div class="col-sm-2 col-xs-3 text-right spacepost-responses">
+                  <div class=" text-center">
+                    <a href (click)="toggleAllResponses(archivedSpace.id, $event)">
+                      <div class="spacepost-responses-number"><p>{{(archivedSpace.spaceResponses).length}}</p><span>Replies</span></div>
+                    </a>
+                  </div>
+                  <!--<h5 class="spacepost-position text-uppercase" *ngIf="spacepost.state === SPACE_POST_STATES.PUBLISHED">
+                    <a href (click)="archiveSpacePost($event, spacepost)">Archive this Post</a>
+                  </h5>-->
+                </div>
+                <!--  <div class="col-sm-12">
+                  Posted on: {{spacepost.datePosted}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </article>
+
+
+          <!-- Space Responses -->
+          <section class="af-feeds-list" *ngIf="expandedResponses[archivedSpace.id]">
+            <article *ngFor="#response of archivedSpace.deserializedSpaceResponses" [class.active]="select === response.id" class="af-feed-item af-response">
+              <reply-details [reply]="response" [spacepost]="archivedSpace" [noReply]="true">
+              </reply-details>
+            </article>
+          </section>
+</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

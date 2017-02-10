@@ -1,0 +1,85 @@
+<article [class.active]="select === feed.id" class="af-feed-item af-feed-item-{{feed.type}}">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 url-profile-media">
+      <div class="af-feed-featured text-center">
+        <!--
+              <img class="featured-icon" src="./assets/img/semicolon-yellow.png" alt="Featured"> 
+          -->
+        <span class="featured-text">Service Provider</span>
+      </div>
+      <a href class="url-profile-media-avatar thumbnail" [routerLink]="routerLink">
+        <img *ngIf="!feed.image && feed.createdBy !== appSrv.activeProfileUserId" [src]="appSrv.defaultAvatar" alt="">
+        <img *ngIf="!feed.image && feed.createdBy === appSrv.activeProfileUserId" [src]="appSrv.defaultAvatar" alt="">
+        <img *ngIf="feed.image" [src]="feed.image" alt="">
+      </a>
+
+      <a href [routerLink]="routerLink" class="af-feed-details feed-cta hidden-sm hidden-xs">
+        <span>View Profile</span>
+      </a>
+
+      <div class="af-feed-featured text-center" *ngIf="feed.featured">
+        <img class="featured-icon" src="./assets/img/semicolon-yellow.png" alt="Featured"> <span class="featured-text">Featured</span>
+      </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 url-profile-general">
+
+      <div class="row">
+        <div class="col-sm-12 no-padding">
+          <h4 class="af-feed-name">
+            <a href [routerLink]="routerLink">{{feed.name}}</a>
+          </h4>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="feed.subtitle">
+        <div class="col-sm-12 af-feed-type no-padding-right" [innerHTML]="feed.subtitle | commatospacecommalimited"></div>
+      </div>
+
+      <div class="row" *ngIf="feed.description">
+        <div class="col-sm-12 af-feed-type">
+          {{feed.description}}
+        </div>
+      </div>
+
+      <div class="af-label-value row" *ngIf="feed.location">
+        <!-- <div class="col-sm-5 af-label">Location</div> -->
+        <div class="col-sm-12 af-value no-padding-left">
+          <span *ngIf="feed.location">{{feed.location}}</span>
+          <span *ngIf="!feed.location">Unspecified</span>
+        </div>
+      </div>
+      <a href [routerLink]="routerLink" class="af-feed-details feed-cta hidden-lg hidden-md">
+        <button class="btn af-button-no-fill" type="button">View Profile</button>
+      </a>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 af-feed-actions">
+      <ul>
+        <li *ngIf="feed.isProfile">
+          <a (click)="comingSoon($event)" href>
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill"><span class="af-icon icon-connect af-icon-s"></span>Connect</button>
+            </div>
+          </a>
+          <div class=""></div>
+        </li>
+        <!--
+        <li *ngIf="feed.isProfile">
+          <a href (click)="comingSoon($event)" class="">
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill"><span class="af-icon icon-checkmark af-icon-s"></span>Recommend</button>
+            </div>
+          </a>
+        </li>
+        -->
+        <li *ngIf="feed.isJobPost && (feed.createdById != auth.user)">
+          <a href (click)="onReply($event, feed)">
+            <div class="no-padding text-right">
+              <button type="button" class="btn af-button-no-fill"><span class="af-icon icon-reply af-icon-s"></span>Reply</button>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</article>

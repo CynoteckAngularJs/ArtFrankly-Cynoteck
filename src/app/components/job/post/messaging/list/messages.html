@@ -1,0 +1,110 @@
+<!--{{jobpost | json}}-->
+<div class="row">
+  
+  
+  <div class="col-sm-3">
+    <a class="thumbnail" href [routerLink]="['/ProfilePreview', { id: profileId, type: profileType }]">
+      <img *ngIf="jobresponse && !jobresponse.responseImageSrc" src="./assets/img/feed-icons/Fine_Art_Picture.jpg" alt="">
+      <img *ngIf="jobresponse && jobresponse.responseImageSrc" [src]="jobresponse.responseImageSrc" alt="" onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';">
+    </a>
+    <div class="row">
+      <div class="col-sm-12 no-padding" [ngClass]="{ 'col-md-6': !noReply, 'col-md-12': noReply }">
+        <div class="af-feed-featured text-center af-mt-xs">
+          <a href class="svg-thumbnail-wrapper">
+                          <button class="af-btn af-btn-sm">       
+            <span class="af-icon icon-connect af-icon-xs"></span> Connect     
+      </button>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 no-padding" *ngIf="!noReply">
+        <div class="af-feed-featured text-center af-mt-xs">
+          <a href (click)="onShowForm($event)" class="svg-thumbnail-wrapper">
+                              <button class="af-btn af-btn-sm">       
+            <span class="af-icon icon-reply"></span> Reply     
+      </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-9">
+    
+    <div class="row">
+      <div *ngIf="jobresponse && jobresponse.responseSubtitle" class="col-sm-12 af-feed-type">
+        <span *ngFor="#item of title">{{item}}</span>
+      </div>
+      <!--<div *ngIf="jobpost && jobpost.position" class="col-sm-12 af-feed-type">{{jobpost.position}}</div>-->
+      <div *ngIf="jobresponse && jobresponse.replyDate" class="col-sm-4 af-reply-date">{{jobresponse.replyDate | formatdate:'MMM YYYY'}}</div>
+      <!--<div *ngIf="jobpost && jobpost.datePosted" class="col-sm-4 af-reply-date">{{jobpost.datePosted | formatdate:'MMM YYYY'}}</div>-->
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 *ngIf="jobresponse && jobresponse.responseProfileName" class="af-feed-name">{{jobresponse.responseProfileName}}</h3>
+        <!--<h4 *ngIf="jobpost && jobpost.title" class="af-feed-name">{{jobpost.title}}</h4>-->
+      </div>
+    </div>
+    
+    <message-form *ngIf="jobresponse && showForm"
+      [jobResponse]="jobresponse" 
+      [jobpost]="jobpost"
+      [message]="message"
+      [profile]="profile && profile['@id']"
+      (uploadsuccess)="onUploadSuccess($event)"
+      (saved)="onMessageSaved($event)">
+    </message-form>
+    
+    <af-message
+      *ngFor="#message of messages | sortByDate:'-created'"
+      class="af-message af-feed-item"
+      [message]="message"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <af-message *ngIf="jobresponse"
+      class="af-message af-feed-item"
+      [message]="jobresponse.asMessage"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <!--<div *ngIf="!noReply">
+      <a href *ngIf="jobpost && reply"
+        [routerLink]="['JobPostReplyMessages', { id: jobpost.id, jobresponseId: reply.id }]"
+        class="">
+          <span class="af-icon icon-reply"></span> Reply
+      </a>
+    </div>-->
+    
+  </div>
+</div>
+
+<!--<reply-details [reply]="jobresponse" [jobpost]="jobpost" [noReply]="true">
+  
+  <reply-header>
+        
+    <message-form *ngIf="jobresponse"
+      [jobResponse]="jobresponse" 
+      [jobpost]="jobpost"
+      [profile]="profile && profile['@id']"
+      (saved)="onReplySaved($event)">
+    </message-form>
+    
+   <af-message
+      *ngIf="messages && messages.length > 0"
+      *ngFor="#message of messages"
+      class="af-message af-feed-item"
+      [message]="message"
+      [profile]="profile && profile.user">
+    </af-message>
+    
+    <af-message *ngIf="jobresponse"
+      class="af-message af-feed-item"
+      [message]="jobresponse.asMessage"
+      [profile]="profile && profile.user">
+    </af-message>
+        
+  </reply-header>
+  
+</reply-details>-->

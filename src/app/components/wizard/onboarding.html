@@ -1,0 +1,14 @@
+<modal [modal]="modal" class="af-onboarding">
+  <modal-title>
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/Home']">
+        <img src="./assets/img/art_frankly_logo.png" alt="">
+      </a>
+    </div>
+  </modal-title>
+  <modal-body>
+    
+    <wizard [steps]="steps" (done)="onFinished($event)"></wizard>
+    
+  </modal-body>
+</modal>

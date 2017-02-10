@@ -1,0 +1,141 @@
+@import './_variables';
+
+$xs-tickness: $distance-s - ($distance-s/4);
+$xs-tickness-lr: $distance-m - ($distance-m/4);
+.af-thickness-xs {
+  padding: $xs-tickness $xs-tickness-lr;
+}
+.af-thickness-s {
+  padding: $distance-s $distance-m;
+}
+
+.btn {
+  font-family: 'NeueHaasUnicaPro-Light';
+  border-radius: 0;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 13px 25px 10px 25px;
+}
+
+.af-button-base {
+  @extend .af-thickness-xs;
+  display: inline-block;
+  text-decoration: none;
+  background: $color-white;
+  color: $color-black;
+  border-color: #e1e1e1;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0;
+  &:hover {
+    background: $color-black;
+    color: $color-white;
+    border-color: $color-white;
+    text-decoration: none;
+  }
+}
+
+.af-button, .af-button-no-fill{
+  display: inline-block;
+  background: $color-black;
+  color: $color-white;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 13px 20px 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: NeueHaasUnicaPro-Bold;
+  @extend .af-thickness-xs;
+  
+  &.thickness-s {
+    @extend .af-thickness-s;
+  }
+}
+
+.af-button {
+  background: $color-black;
+  color: $color-white;
+  transition: all 0.3s ease 0s;
+  
+}
+
+.af-button-no-fill {
+    background: transparent;
+    color: #161616;
+    border: 1px solid #161616;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      background: #161616;
+      color: #fff;
+    }
+    .af-icon-s {
+      margin-right: 7px;
+    }
+}
+
+
+.af-btn, .af-btn-dashed {
+  @extend .af-button-base;
+  &.thickness-s {
+    @extend .af-thickness-s;
+  }
+  &.af-btn-dashed {
+    color: $color-gray-4;
+    border-color: $color-gray-4;
+    border-style: dashed;
+    &:hover {
+      background-color: transparent;
+      color: $color-black;
+      border-color: $color-black;
+    }
+    .af-icon {
+      margin-right: $distance-xxs;
+    }
+  }
+  &.transparent {
+    background-color: transparent;
+    &:hover {
+      background: $color-black;
+      color: $color-white; 
+    }
+  }
+}
+
+.af-button-streatched {
+  @extend .af-button-base;
+  padding: $distance-s $distance-l;
+}
+
+.af-button:hover {
+    background: #fed100;
+    color: #000;
+}
+
+.btn-default {
+  background-color: transparent;
+}
+
+.btn-default:active, .btn-default:focus, .btn-default:hover {
+  background-color: transparent;
+}
+
+.af-btn-sm {
+  padding: 9px 10px;
+}
+
+.actions-bar a {
+    text-decoration: none;
+}
+
+.af-button-plain {
+  background: none;
+  span {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+}
+
+.light-btn {
+  font-family: 'NeueHaasUnicaPro-Light';
+    padding: 14px;
+}

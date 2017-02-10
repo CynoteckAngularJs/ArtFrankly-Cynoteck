@@ -1,0 +1,114 @@
+<div class="my-jobposts">
+  <div class="row">
+    
+    <div class="col-sm-12" *ngIf="responses.length">
+      
+      <header class="af-header">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2 class="af-heading">Your Job Posts</h2>
+          </div>
+        </div>
+      </header>
+      
+      <article *ngFor="#response of responses; #i = index" class="my-jobpost">
+        
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="jobpost-position text-uppercase">{{response.jobPosting.position}}</h5>
+                <h3 class="jobpost-title">
+                  <a href [routerLink]="['JobPost', { id: response.jobPosting.id }]">{{response.jobPosting.title}}</a>
+                  <small *ngIf="response.jobPosting.state === JOB_POST_STATES.ARCHIVED" class="label label-warning">Archived</small>
+                </h3>
+                <div class="jobpost-description" [innerHTML]="response.jobPosting.description"></div>
+              
+                <footer>
+                  <div class="row af-label-value jobpost-deadline">
+                    <div class="col-sm-6 af-label no-padding">Application Deadline</div>
+                    <div class="col-sm-6 af-value">10/08/2015</div>
+                  </div>
+                  <!--<div *ngIf="jobpost.state !== 'published'">
+                    <a href (click)="onPublish($event, response.jobPosting)">Publish Post</a>
+                  </div>
+                  <div *ngIf="jobpost.state === 'published'">
+                    <a href (click)="archiveJobPost($event, jobpost)">Archive this Post</a>
+                  </div>-->
+                </footer>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4 text-center text-uppercase">
+            <div>
+              <!--<a href [routerLink]="['EditJobPost', { id: jobpost.id }]" class="af-btn">
+                Edit Post
+              </a>-->
+            </div>
+            <br>
+            <div class="jobpost-responses">
+              1 Responses
+            </div>
+            <div>
+              <a href (click)="toggleAllResponses(response.jobPosting.id, $event)">View All</a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="af-feeds-list" *ngIf="expandedResponses[response.jobPosting.id]">
+          <article class="af-feed-item af-response" [class.active]="select === response.id">
+            <reply-details [reply]="response" [jobpost]="response.jobPosting" [noReply]="response.jobPosting.state === JOB_POST_STATES.ARCHIVED">
+            </reply-details>
+          </article>
+        </section>
+        
+      </article>
+      
+      <!--<section class="af-mt-m">
+        <h2 class="af-heading">Your Archived Job Posts</h2>
+        
+        <div *ngIf="!archivedJobposts.length">You have no archived posts.</div>
+        
+        <div *ngIf="archivedJobposts && archivedJobposts.length">
+          <article class="af-bgr-item" *ngFor="#archivedJob of archivedJobposts">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="jobpost-position text-uppercase">
+                  {{archivedJob.position}}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                <h3 class="jobpost-title">
+                  <a href [routerLink]="['JobPost', { id: archivedJob.id }]">{{archivedJob.title}}</a>
+                </h3>
+              </div>
+              <div class="col-sm-4">
+                <a href>View Position</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                Posted on: {{archivedJob.datePosted}}
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>-->
+      
+    </div>
+    
+    <div class="col-sm-12 text-center af-empty-list" *ngIf="!responses.length">
+      <h2 class="af-icon-cnt">
+        <i class="af-icon af-icon-xxxl icon-response_default"></i>
+      </h2>
+      <h1 class="af-heading">You have yet to respond to a job opportunity.</h1>
+      <!--<p class="af-description">There are currently 1,000,000 applicants waiting to apply.</p>-->
+      <!--<div class="af-action-bar">
+        <a href [routerLink]="['AddJobPost']" class="af-btn">Publish a job post</a>
+      </div>-->
+    </div>
+  </div>
+</div>

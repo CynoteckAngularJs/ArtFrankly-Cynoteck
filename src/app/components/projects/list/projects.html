@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Projects</h5>
+    </header>
+    
+    <project-form *ngFor="#project of items"
+        [item]="project"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </project-form>
+    <project-form *ngFor="#unsavedProject of unsavedItems"
+        [item]="unsavedProject"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </project-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Project</span>
+      </a>
+    </footer>
+  </div>
+</div>

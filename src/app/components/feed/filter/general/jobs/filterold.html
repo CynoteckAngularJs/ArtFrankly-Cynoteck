@@ -1,0 +1,129 @@
+<form class="feed-filter-form" [ngFormModel]="form" (ngSubmit)="triggerFilter(form.value)">
+
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-10 col-xs-10">
+          <search-form [term]="term" [placeholder]="'Search all jobs'" [isShowSuggestionsList]="false" [isShowSearchButton]="false"
+            (onenter)="onSearchInputEnter($event)" (changeterm)="onSearchTermChange($event)">
+          </search-form>
+        </div>
+
+       <!--  <div class="col-sm-4 col-xs-10 hidden-xs">
+           <div class="">
+            <button type="submit" class="af-btn af-button">See Results</button>
+          </div> 
+         
+        </div>-->
+      </div>
+      </div>
+
+<div class="row">
+      <div class="col-xs-12 col-lg-12">
+        <header class="location-select">
+          <div class="row">
+            <div class="city-input">
+              <label class="sr-only" for="cityInput">City</label>
+              <input type="text" id="cityInput" ngControl="cities" placeholder="Select specific cities" autocomplete="off">
+              <!--<select class="form-control"
+                      multiple="multiple"
+                      [ng2select2]="cities"
+                      [ng2select2options]="select2Options"
+                      #cities="ngForm"
+                      ngControl="cities">
+                  <option *ngFor="#city of CITIES" [value]="city.value" [selected]="isChecked(form.controls.cities.value, city.value)">{{city.label}}</option>
+              </select>-->
+            </div>
+
+            <!--
+            <div class="col-sm-3 col-xs-6 radius-input">
+              <select class="form-control"
+                      (opened)="comingSoon($event)"
+                      [ng2select2]="radius"
+                      [ng2select2options]="radiusSelect2Options"
+                      #radius="ngForm"
+                      ngControl="radius">
+                  <option *ngFor="#cradius of RADIUSES" [value]="cradius.value">{{cradius.label}}</option>
+              </select>
+            </div>
+            -->
+          </div>
+        </header>
+      </div>
+</div>
+
+    
+  
+
+  <section class="body">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <header class="heading filter-inst hidden-xs">
+          <h5 class="">
+            Select job search criteria. Scroll down to see all options.
+          </h5>
+        </header>
+      </div>
+
+      <div class="col-sm-12">
+        <div class="">
+          <div class="col-sm-6 filter-column no-padding">
+            <header class="heading">
+              <h5 class="truncate">
+                Position Type
+              </h5>
+            </header>
+            <section class="content position-type-select">
+              <ul class="no-list">
+                <li *ngFor="#pType of JOB_POSITION_TYPES">
+                  <!--<input type="checkbox" [value]="pType.value"> {{pType.label}}-->
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"
+                        [checked]="isChecked(form.controls.jobPositionTypes.value, pType.value)"
+                        (change)="toggleFormControlValue(form.controls.jobPositionTypes, pType.value, $event)"> {{pType.label}}
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-sm-6 filter-column no-padding">
+            <header class="heading">
+              <h5 class="truncate">
+                Services
+              </h5>
+            </header>
+            <section class="content">
+              <div class="row">
+                <div class="col-sm-12">
+                  <ul class="two-column no-list">
+                    <li *ngFor="#service of JOB_SERVICES">
+                      <!--<input type="checkbox" [value]="service.value"> {{service.label}}-->
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"
+                            [checked]="isChecked(form.controls.jobServices.value, service.value)"
+                            (change)="toggleFormControlValue(form.controls.jobServices, service.value, $event)"> {{service.label}}
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </section>
+
+  <footer class="filter-footer">
+    <button type="submit" class="af-btn af-button">See All Results</button>
+  </footer>
+
+</form>

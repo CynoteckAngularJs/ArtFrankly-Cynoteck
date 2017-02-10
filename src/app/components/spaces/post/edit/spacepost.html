@@ -1,0 +1,355 @@
+<!-- <div class="feed-account-nav url-non-authenticated-menu" style="">
+	<span>
+	<a href [routerLink]="['/Feeds']">Feed </a>
+	</span>
+	<span>
+            <a [routerLink]="['/AddSpacePost']">Post a Space <span class="sr-only current-arrow">(current)</span></a>
+	</span>
+	<span>
+            <a [routerLink]="['/EditProfile', { '@id': selectedProfileId }]">Edit Profile</a>
+          </span>
+</div>
+-->
+<form class="jobpost url-centered" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="hiringProfessional">
+  <input type="hidden" ngControl="hiringVendor">
+  <input type="hidden" ngControl="hiringInstitution">
+  <header>
+    <div class="text-left af-form-heading-1">
+      <h3 class="filter-btn-nolink">Post a Space</h3>
+    </div>
+    <div class="formset-description fsd-1">
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-1">
+          <span class="af-icon icon-flag af-icon-xl"></span>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-11">
+          <p>Feature your post across top industry professional feeds. <a href (click)="commingSoon($event)">More info here.</a></p>
+          <span class="form-inst">Fields marked with an indicator are required.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.title.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.title.errors && form.controls.title.errors.required">Title is required</div>
+    <label class="sr-only" for="titleInput">Space Title</label>
+    <input type="text" class="form-control" id="titleInput" ngControl="title" placeholder="SPACE TITLE" autofocus required (blur)="persistData()">
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.position.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.position.errors && form.controls.position.errors.required">Space type is required</div>
+    <select class="form-control" ngControl="position" required select2 (selected)="persistData()">
+      <option value="">SPACE TYPE</option>
+      <option *ngFor="#pos of SPACE_POSITION_TYPES" [value]="pos.value" [selected]="form.controls.position.value === pos.value">{{pos.label}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="sizeInput">Space Size</label>
+    <input type="text" class="form-control" id="sizeInput" ngControl="size" placeholder="Space Size (Sq. Ft. or Sq. Meters)"
+      (blur)="persistData()">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="pricingInput">Space Pricing</label>
+    <input type="text" class="form-control" id="pricingInput" ngControl="pricing" placeholder="Space Pricing" (blur)="persistData()">
+  </div>
+  <div class="formset-description fsd-2">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-11">
+        <p>Featured Image</p>
+      </div>
+    </div>
+  </div>
+  <div class="form-group upload-form" style="text-align: center">
+    <af-uploader [classvalue]="UPLOADER.class.SPACES" [objectvalue]="spacepost['@id']" [autoUpload]="isAutoUpload" [multiple]="false" [featuredImage] = "featuredImage" [isFeaturedImage] = "isFeaturedImage" 
+      (savesuccess)="onMediaUploaded($event)" (removesuccess)="onMediaRemoved($event)" [isShowProgress]="false" (change)="onFileChange($event)">
+      </af-uploader>
+  </div>
+  <div class="formset-description fsd-2">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-11">
+        <p>Additional Images</p>
+      </div>
+    </div>
+  </div>
+  <div class="formset-description fsd-2">
+    <div *ngIf="multiFilesToUpload.length" class="row">
+      <div class="col-xs-12">
+        <div *ngFor="#uploadedItem of multiFilesToUpload; #fIndex = index" class="col-xs-4" style="margin-bottom: 20px;">
+          <!--<a href (click)="onFileRemove($event, fIndex)" class="reply-file">-->
+          <div class="thumbnail" style="width: 100%; position: relative">
+            <!--<div class="file-name truncate">{{uploadedItem.name}}</div>-->
+            <img src="{{GetImage(uploadedItem)}}">
+            <a href (click)="onFileRemove($event, fIndex)" style="position: relative; right: -105px; top: 0">
+              <span class="af-icon af-icon-s" [ngClass]="{ 'icon-close': isFocused, 'icon-close-white': !isFocused }">
+                        </span>
+            </a>
+          </div>
+          <!--</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group upload-form">
+    <af-multi-uploader [classvalue]="UPLOADER.class.SPACEADDITIONALIMAGE" [objectvalue]="spacepost['@id']" [autoUpload]="isAutoUpload"
+      [multiple]="true" (savesuccess)="onMediaUploaded($event)" (removesuccess)="onMediaRemoved($event)" [isShowProgress]="false"
+      (change)="onMultiFileChange($event)">
+      </af-multi-uploader>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.description.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.description.errors && form.controls.description.errors.required">Description is required</div>
+    <label class="sr-only" for="descriptionInput">Description</label>
+    <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION" (blur)="persistData()"></textarea>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.profile.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.profile.errors && form.controls.profile.errors.required">Profile is required</div>
+    <select class="form-control" ngControl="profile" required select2 (change)="updateProfile(form.controls.profile, $event)"
+      (selected)="persistData()">
+      <option value="">PROFILE</option>
+      <option *ngFor="#cprofile of myprofiles" [value]="cprofile['@id']" [selected]="form.controls.profile.value === cprofile['@id']"
+        [innerHTML]="cprofile.toString()"></option>
+        <!--<select class="form-control" [ng2select2]="profile" [ng2select2options]="profileSelect2Options" #profile="ngForm" ngControl="profile" (change)="updateProfile(form.controls.profile, $event)">
+      <option *ngFor="#cprofile of myprofiles" [value]="cprofile['@id']" [innerHTML]="cprofile.toString()"></option>-->
+        </select>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.organization.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.organization.errors && form.controls.organization.errors.required">Organization is required</div>
+    <label class="sr-only" for="organizationInput">Organization</label>
+    <input type="text" class="form-control" id="organizationInput" ngControl="organization" placeholder="ORGANIZATION" (blur)="persistData()">
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.url.dirty) && !form.controls.url.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.url.dirty) && form.controls.url.errors && form.controls.url.errors.url">Not a valid url.</div>
+    <label class="sr-only" for="urlInput">Website</label>
+    <input type="text" class="form-control" id="urlInput" ngControl="url" placeholder="WEBSITE" (blur)="persistData()">
+  </div>
+
+  <div class="formset-description fsd-2">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-11">
+        <p>How To Apply</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Form #1 Addition -->
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.contactemail.dirty) && !form.controls.contactemail.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.contactemail.dirty) && form.controls.contactemail.errors && form.controls.contactemail.errors.emailValidationWithoutRequired">Not a valid email</div>
+    <label class="sr-only" for="">Contact email</label>
+    <input type="text" class="form-control" id="contactspaceInput" placeholder="CONTACT EMAIL" (blur)="persistData()"
+      ngControl="contactemail">
+  </div>
+
+<!--
+   <div class="form-group" [ngClass]="{'has-error': email.dirty && !email.valid}">
+      <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.required">Email is required</div>
+      <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.email">Email is not valid</div>
+      <label class="sr-only" for="emailInput">Email address</label>
+      <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" required>
+    </div>-->
+
+
+
+  <div class="form-group">
+    <label class="sr-only" for="">Additional Application Instructions</label>
+    <textarea type="text" class="form-control" id="applicationadditionalInput" placeholder="ADDITIONAL APPLICATION INSTRUCTIONS"
+      (blur)="persistData()" ngControl="additional" for="additionalInput"></textarea>
+  </div>
+  <!--<div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.image.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.image.errors && form.controls.image.errors.required">Image is required</div>
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.image.errors && form.controls.image.errors.url">Not a valid url</div>
+    <label class="sr-only" for="imageInput">Image</label>
+    <input type="text" class="form-control" id="imageInput" ngControl="image" placeholder="IMAGE*"  (blur)="persistData()">
+  </div>-->
+  <input type="hidden" ngControl="image">
+  <div class="formset-description fsd-2">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-11">
+        <p>Space Contact Info </p>
+      </div>
+    </div>
+  </div>
+  <!-- Form #3 Addition-->
+  <div class="form-group">
+    <label class="sr-only" for="">Name</label>
+    <input type="text" class="form-control" id="contactnameInput" placeholder="CONTACT NAME" (blur)="persistData()" ngControl="contactname">
+  </div>
+  <!-- Form #4 Addition -->
+  <div class="form-group">
+    <label class="sr-only" for="">Phone</label>
+    <input type="text" class="form-control" id="contacttelephoneInput" placeholder="CONTACT PHONE" (blur)="persistData()" ngControl="contactphone">
+  </div>
+  <!--<div ngControlGroup="jobLocation">
+    <input type="hidden" ngControl="@id">
+    <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.name.valid}">
+      <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.jobLocation.controls.name.errors && form.controls.jobLocation.controls.name.errors.required">Job Name is required</div>
+      <label class="sr-only" for="contactNameInput">Job Location Name</label>
+      <input type="text" class="form-control" id="contactNameInput" ngControl="name" placeholder="JOB LOCATION NAME*" (blur)="persistData()">
+    </div>
+    
+    <div ngControlGroup="address">
+      <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.telephone.valid}">
+        <label class="sr-only" for="contactAddressTelephoneInput">Job Phone</label>
+        <input type="text" class="form-control" id="contactAddressTelephoneInput" ngControl="telephone" placeholder="JOB PHONE" (blur)="persistData()">
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-8" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.streetAddress.valid}">
+          <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.jobLocation.controls.address.controls.streetAddress.errors && form.controls.jobLocation.controls.address.controls.streetAddress.errors.required">Street is required</div>
+          <label class="sr-only" for="contactAddressStreetAddressInput">Street</label>
+          <input type="text" class="form-control" id="contactAddressStreetAddressInput" ngControl="streetAddress" placeholder="STREET*" (blur)="persistData()">
+        </div>
+        
+        <div class="form-group col-sm-4" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.apartment.valid}">
+          <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.jobLocation.controls.address.controls.apartment.errors && form.controls.jobLocation.controls.address.controls.apartment.errors.required">Apartment is required</div>
+          <label class="sr-only" for="contactAddressapartmentInput">Apartment</label>
+          <input type="text" class="form-control" id="contactAddressapartmentInput" ngControl="apartment" placeholder="APARTMENT*" (blur)="persistData()">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.city.valid}">
+        <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.jobLocation.controls.address.controls.city.errors && form.controls.jobLocation.controls.address.controls.city.errors.required">City is required</div>
+        <label class="sr-only" for="contactAddressCityInput">City</label>
+        <input type="text" class="form-control" id="contactAddressCityInput" ngControl="city" placeholder="CITY*" (blur)="persistData()">
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.addressRegion.valid}">
+          <select class="form-control" [ng2select2]="addressRegion" [ng2select2options]="stateSelect2Options" #addressRegion="ngForm" ngControl="addressRegion" (change)="persistData()">
+            <option *ngFor="#cstate of US_STATES" [value]="cstate.value">{{cstate.label}}</option>
+          </select>
+        </div>
+        
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.postalCode.valid}">
+          <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.jobLocation.controls.address.controls.postalCode.errors && form.controls.jobLocation.controls.address.controls.postalCode.errors.required">ZIP is required</div>
+          <label class="sr-only" for="contactAddressPostalCodeInput">ZIP</label>
+          <input type="text" class="form-control" id="contactAddressPostalCodeInput" ngControl="postalCode" placeholder="ZIP*" (blur)="persistData()">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.jobLocation.controls.address.controls.addressCountry.valid}">
+        <select class="form-control" [ng2select2]="addressCountry" [ng2select2options]="countrySelect2Options" #addressCountry="ngForm" ngControl="addressCountry" (change)="persistData()">
+          <option *ngFor="#ccountry of COUNTIRES" [value]="ccountry.value">{{ccountry.label}}</option>
+        </select>
+      </div>
+    </div>
+  </div>-->
+  <div class="formset-description fsd-2">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-11">
+        <p>Space Address</p>
+      </div>
+    </div>
+  </div>
+  <!--<div class="formset-description fsd-3">
+    <div class="row">
+      <div class="col-sm-1">
+        <span class="af-icon icon-flag af-icon-xl"></span>
+      </div>
+      <div class="col-sm-10">
+        <p>Unconnected users will not see your contact information.</p>
+      </div>
+    </div>
+  </div>-->
+  <!--<div ngControlGroup="contactLocation">
+    <input type="hidden" ngControl="@id">
+    <div class="form-group" [ngClass]="{'has-error': form.controls.contactLocation.controls.name.dirty && !form.controls.contactLocation.controls.name.valid}">
+      <div class="alert alert-danger" *ngIf="form.controls.contactLocation.controls.name.dirty && form.controls.contactLocation.controls.name.errors && form.controls.contactLocation.controls.name.errors.required">Contact Name is required</div>
+      <label class="sr-only" for="contactNameInput">Contact Name</label>
+      <input type="text" class="form-control" id="contactNameInput" ngControl="name" placeholder="CONTACT NAME*" (blur)="persistData()">
+    </div>
+    
+    <div ngControlGroup="address">
+      <div class="form-group" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.telephone.dirty && !form.controls.contactLocation.controls.address.controls.telephone.valid}">
+        <label class="sr-only" for="contactAddressTelephoneInput">Contact Phone</label>
+        <input type="text" class="form-control" id="contactAddressTelephoneInput" ngControl="telephone" placeholder="CONTACT PHONE" (blur)="persistData()">
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-8" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.streetAddress.dirty && !form.controls.contactLocation.controls.address.controls.streetAddress.valid}">
+          <div class="alert alert-danger" *ngIf="form.controls.contactLocation.controls.address.controls.streetAddress.dirty && form.controls.contactLocation.controls.address.controls.streetAddress.errors && form.controls.contactLocation.controls.address.controls.streetAddress.errors.required">Street is required</div>
+          <label class="sr-only" for="contactAddressStreetAddressInput">Street</label>
+          <input type="text" class="form-control" id="contactAddressStreetAddressInput" ngControl="streetAddress" placeholder="STREET*" (blur)="persistData()">
+        </div>
+        
+        <div class="form-group col-sm-4" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.apartment.dirty && !form.controls.contactLocation.controls.address.controls.apartment.valid}">
+          <div class="alert alert-danger" *ngIf="form.controls.contactLocation.controls.address.controls.apartment.dirty && form.controls.contactLocation.controls.address.controls.apartment.errors && form.controls.contactLocation.controls.address.controls.apartment.errors.required">Apartment is required</div>
+          <label class="sr-only" for="contactLocationAddressapartmentInput">Street</label>
+          <input type="text" class="form-control" id="contactLocationAddressapartmentInput" ngControl="apartment" placeholder="APARTMENT*" (blur)="persistData()">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.city.dirty && !form.controls.contactLocation.controls.address.controls.city.valid}">
+        <div class="alert alert-danger" *ngIf="form.controls.contactLocation.controls.address.controls.city.dirty && form.controls.contactLocation.controls.address.controls.city.errors && form.controls.contactLocation.controls.address.controls.city.errors.required">City is required</div>
+        <label class="sr-only" for="contactAddressCityInput">City</label>
+        <input type="text" class="form-control" id="contactAddressCityInput" ngControl="city" placeholder="CITY*" (blur)="persistData()">
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.addressRegion.dirty && !form.controls.contactLocation.controls.address.controls.addressRegion.valid}">
+          <select class="form-control" ngControl="addressRegion" select2 (selected)="persistData()">
+            <option *ngFor="#cstate of US_STATES" [value]="cstate.value">{{cstate.label}}</option>
+          </select>
+        </div>
+        
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.postalCode.dirty && !form.controls.contactLocation.controls.address.controls.postalCode.valid}">
+          <div class="alert alert-danger" *ngIf="form.controls.contactLocation.controls.address.controls.postalCode.dirty && form.controls.contactLocation.controls.address.controls.postalCode.errors && form.controls.contactLocation.controls.address.controls.postalCode.errors.required">ZIP is required</div>
+          <label class="sr-only" for="contactAddressPostalCodeInput">ZIP</label>
+          <input type="text" class="form-control" id="contactAddressPostalCodeInput" ngControl="postalCode" placeholder="ZIP*" (blur)="persistData()">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': form.controls.contactLocation.controls.address.controls.addressCountry.dirty && !form.controls.contactLocation.controls.address.controls.addressCountry.valid}">
+        <select class="form-control" ngControl="addressCountry" select2 (selected)="persistData()">
+          <option *ngFor="#ccountry of COUNTIRES" [value]="ccountry.value">{{ccountry.label}}</option>
+        </select>
+      </div>
+    </div>
+  </div>-->
+  <address-form #spaceLocationForm [location]="spacepost && spacepost.spaceLocation" (change)="onAddressChange($event, 'spaceLocation')"></address-form>
+  <footer>
+    <div class="formset-description fsd-4">
+      <div class="row">
+        <div class="col-sm-2 col-xs-2">
+          <span class="af-icon icon-flag af-icon-xl"></span>
+        </div>
+        <div class="col-sm-10 col-xs-10">
+          <p>Need help? Contact classified support at <a href="mailto:info@artfrankly.com">info@artfrankly.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <div class="actions-group" *ngIf="spacepost && spacepost.id && (spacepost.state === SPACE_POST_STATES.DRAFT || spacepost.state === SPACE_POST_STATES.PENDING)">
+        <a href class="jobpost-pay af-btn mb-20" (click)="showPaymentShareModal($event)">
+          Checkout <!--<span class="af-icon icon-paypal af-icon-s"></span>-->
+        </a>
+      </div>
+      <div class="actions-group">
+        <button type="submit" [disabled]="formInvalid$ | async">Post Space</button>
+      </div>
+      <div class="signin-link">
+        <a href [routerLink]="['SpacePost', { id: form.controls.id.value || 'preview' }] ">PREVIEW</a>
+      </div>
+    </div>
+  </footer>
+</form>
+<spacepost-payment-share-modal *ngIf="isShowPaymentModal" [spacepost]="spacepost" (paymentsuccess)="onPaymentSuccess()" (close)="onPaymentShareModalClose($event)">
+</spacepost-payment-share-modal>
+<spacepost-payment-share-modal *ngIf="paymentModal && paymentModal.opened" [modal]="paymentModal" [spacepost]="spacepost"
+  (paymentsuccess)="onPaymentSuccess($event)" (close)="onPaymentShareModalClose($event)" (onhide)="onPaymentShareModalClose($event)">
+  </spacepost-payment-share-modal>
+  <spacepost-share-modal *ngIf="isShowShareModal" [spacepost]="spacepost" (close)="onShareModalClose($event)">
+  </spacepost-share-modal>

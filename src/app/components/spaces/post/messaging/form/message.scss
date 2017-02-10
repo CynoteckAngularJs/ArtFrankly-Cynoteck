@@ -1,0 +1,84 @@
+@import '../../../../../../assets/css/_variables';
+@import '../../../../../../assets/css/_forms';
+@import '../../../../../../assets/css/_utils';
+@import '../../../../../../assets/css/_icons';
+@import '../../../../../../assets/css/_lists';
+@import '../../../../feed/list/feeds.scss';
+
+.reply-files {
+  padding: 0 20px 20px;
+  .reply-file-meta {
+    background: $color-gray-2;
+    .file-name, .file-size {
+      color: $color-black;
+    }
+    .file-size-wrapper {
+      font-size: 10px;
+      line-height: 20px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.transparent-black-modal {
+  .reply-files {
+    .reply-file-meta {
+      background: $color-white;
+      .file-name, .file-size {
+        color: $color-black;
+      }
+    }
+  }
+  
+  form {
+    .reply-form-body.focused {
+      .reply-files {
+        .reply-file-meta {
+          background: $color-gray-2;
+        }
+      }
+    }
+  }
+
+}
+
+form {
+  textarea {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    height: 140px;
+    resize: none;
+    &:focus {
+      border: none;
+      background-color: transparent;
+    }
+  }
+  
+  .reply-form-body {
+    border: 1px solid $color-black;
+    &.focused {
+      background: #FFF;
+      * {
+        color: #000;
+      }
+      
+      // .reply-files {
+      //   .reply-file-meta {
+      //     background: $color-gray-2;
+      //   }
+      // }
+
+    }
+  }
+  
+  .message-action-bar {
+    padding: 0;
+    margin-top: $distance-s;
+    margin-bottom: 0;
+  }
+}
+
+.icon-close-white {
+  background-image: url('./assets/img/icons/close.png') !important;
+}

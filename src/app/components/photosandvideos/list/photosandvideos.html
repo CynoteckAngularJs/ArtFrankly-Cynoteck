@@ -1,0 +1,34 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Photos and Video</h5>
+    </header>
+    
+    <photo-and-video-form *ngFor="#photoandvideo of items"
+        [item]="photoandvideo"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (removed)="onRemovedItem($event)"
+        (saved)="onUploadSuccess($event)"
+        (save)="onSaveItem($event)">
+    </photo-and-video-form>
+    <photo-and-video-form *ngFor="#unsavedPhotoAndVideo of unsavedItems"
+        [item]="unsavedPhotoAndVideo"
+        [opened]="isAutoOpen"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (removed)="onRemovedItem($event)"
+        (saved)="onUploadSuccess($event)"
+        (save)="onSaveItem($event)">
+    </photo-and-video-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Photo or Video</span>
+      </a>
+    </footer>
+  </div>
+</div>

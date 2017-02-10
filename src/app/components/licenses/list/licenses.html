@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Certifications</h5>
+    </header>
+    
+    <license-form *ngFor="#license of items"
+        [item]="license"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </license-form>
+    <license-form *ngFor="#unsavedLicense of unsavedItems"
+        [item]="unsavedLicense"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </license-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add License</span>
+      </a>
+    </footer>
+  </div>
+</div>

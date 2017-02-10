@@ -1,0 +1,88 @@
+$color-black: #000;
+$color-black-1: #1A1718;
+$color-white: #FFF;
+$color-gray-1: #DFDFDF;
+$color-gray-2: #F1F1F1;
+$color-gray-3: #B5B5B5;
+$color-gray-4: #898989;
+$color-gray-5: #EBEBEB;
+$color-gray-6: #161616;
+$color-yellow-1: #FED100;
+
+$font-200: 200;
+$font-300: 300;
+
+.font-family-bold {
+  font-family: NeueHaasUnicaPro-Bold;
+}
+.font-family-light {
+  font-family: NeueHaasUnicaPro-Light;
+}
+.font-family-medium {
+  font-family: NeueHaasUnicaPro-Medium;
+}
+
+$size-10: 10px;
+$size-12: 12px;
+$h1-font-size: 50px;
+$af-form-heading-1: 28px;
+$size-14: 14px;
+$size-16: 16px;
+
+$input-bgr-color: $color-gray-2;
+// $input-color: #9b9b9b;
+$input-color: #8F8F8F;
+
+$input-height: 60px;
+$input-font-height: 16px;
+$input-label-font-height: 12px;
+$input-font-weight: normal;
+
+$links-color: #161616;
+
+$button-bgr-color: #FFFFFF;
+$button-color: $links-color;
+$button-border: 2px solid $button-color;
+$border-style-1: 2px solid $color-black;
+
+$distance-unit: 20px;
+$distance-xxs: $distance-unit/4;
+$distance-xs: $distance-unit/2;
+$distance-s: $distance-unit;
+$distance-ss: $distance-s - $distance-s/4;
+$distance-sb: $distance-s + $distance-s/2;
+$distance-m: 2*$distance-s;
+$distance-mb: 2*$distance-s + $distance-s/2;
+$distance-l: 3*$distance-s;
+$distance-xl: 4*$distance-s;
+$distance-xxl: 5*$distance-s;
+$distance-xxll: 6*$distance-s;
+$distance-xxxl: 10*$distance-s;
+
+$footer-bgr-color: #161616;
+
+$yellow-dot: #FDCA0B;
+$gray-dot: #EDEDED;
+
+$modal-bgr: #FFF;
+$modal-color: #000;
+
+$sidebar-menu-bgr-color: #ffffff;
+$sidebar-menu-color: $color-gray-4;
+$sidebar-nav-name-padding-tb: $distance-s/2;
+$sidebar-nav-name-padding-lr: $distance-m;
+$sidebar-nav-name-first-level-active-color: #1A1718;
+$sidebar-nav-name-third-level-active-bgr: #E4E4E4;
+$sidebar-nav-name-third-level-active-color: #000000;
+
+$form-input-cursor-color: #FDCA0B;
+$form-error-color: #FF7900;
+
+$profile-list-item-border: $sidebar-menu-color;
+
+$slider-pagination-color-active: #FDCA0B;
+$slider-pagination-color: #EDEDED;
+
+$border-1: 1px solid $color-gray-2;
+$border-2: 1px solid $color-gray-3;
+$border-3: 1px solid $color-gray-5;

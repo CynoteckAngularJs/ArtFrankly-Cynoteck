@@ -1,0 +1,106 @@
+<form class="jobpost url-centered" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)">
+
+  <div class="text-center url-heading">
+    <h3 class="url-heading-title">Post a Job</h3>
+  </div>
+  
+  <div class="formset-description">
+    <div class="row">
+      <div class="col-sm-1">
+        <span class="af-icon icon-search af-icon-m"></span>
+      </div>
+      <div class="col-sm-10">
+        <p>Feature your post across top industry professional feeds. <a href>More info here.</a></p>
+        <p>Fields marked with an asterisk are required.</p>
+      </div>
+    </div>
+  </div>
+      
+  <div ngControlGroup="general">
+      <div class="form-group" [ngClass]="{'has-error': title.dirty && !title.valid}">
+        <div class="alert alert-danger" *ngIf="title.dirty && title.errors && title.errors.required">Title is required</div>
+        <label class="sr-only" for="titleInput">Title</label>
+        <input type="text" class="form-control" id="titleInput" ngControl="title" placeholder="TITLE*" autofocus required>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': position.dirty && !position.valid}">
+        <select class="form-control" ngControl="position" required>
+          <option value="">POSITION TYPE</option>
+          <option *ngFor="#position of JOB_POSITION_TYPES" [value]="position.value">{{position.label}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': industry.dirty && !industry.valid}">
+        <select class="form-control" ngControl="industry" required>
+          <option value="">INDUSTRY/SECTOR</option>
+          <option *ngFor="#industry of JOB_SERVICES" [value]="industry.value">{{industry.label}}</option>
+        </select>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': description.dirty && !description.valid}">
+        <div class="alert alert-danger" *ngIf="description.dirty && description.errors && description.errors.required">Description is required</div>
+        <label class="sr-only" for="descriptionInput">Description</label>
+        <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION*" required></textarea>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': organization.dirty && !organization.valid}">
+        <div class="alert alert-danger" *ngIf="organization.dirty && organization.errors && organization.errors.required">Organisation is required</div>
+        <label class="sr-only" for="organizationInput">Organisation</label>
+        <input type="text" class="form-control" id="organizationInput" ngControl="organization" placeholder="ORGANISATION*" required>
+      </div>
+  </div>
+      
+  <div class="formset-description">
+    <div class="row">
+      <div class="col-sm-1">
+        <span class="af-icon icon-search af-icon-m"></span>
+      </div>
+      <div class="col-sm-10">
+        <p>Unconnected users will not see your contact information.</p>
+      </div>
+    </div>
+  </div>
+
+  <addressform></addressform>
+
+  <div ngControlGroup="contactLocation">
+    <!--<input type="hidden" ngControl="id">
+    <div class="form-group" [ngClass]="{'has-error': name.dirty && !name.valid}">
+      <div class="alert alert-danger" *ngIf="name.dirty && name.errors && name.errors.required">Contact Name is required</div>
+      <label class="sr-only" for="contactNameInput">Contact Name</label>
+      <input type="text" class="form-control" id="contactNameInput" ngControl="name" placeholder="CONTACT NAME*" required>
+    </div>-->
+    
+    <!--CLAaddressCountry
+    CLAaddressLocality
+    CLAaddressRegion
+    CLApostalCode
+    CLApostOfficeBoxNumber
+    CLAstreetAddress
+    CLAtelephone
+    CLAapartment
+    CLAcity-->
+  </div>
+    
+  <div class="formset-description">
+    <div class="row">
+      <div class="col-sm-1">
+        <span class="af-icon icon-search af-icon-m"></span>
+      </div>
+      <div class="col-sm-10">
+        <p>Neeed help? Contact classified support at <a href="mailto:info@artfrankly.com">info@artfrankly.com</a></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <div class="actions-group">
+      <button type="submit"  [disabled]="formInvalid$ | async">Post Job</button>
+    </div>
+    
+    <div class="signin-link">
+      <a href [routerLink]="['Signin']">PREVIEW</a>
+    </div>
+  </div>
+  
+</form>

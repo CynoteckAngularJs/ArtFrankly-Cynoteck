@@ -1,0 +1,23 @@
+<div class="url-sidebar-menu-item">
+  <a href="{{menu.url}}"
+      class="url-sm-item-name"
+      (click)="toggle($event)">
+    <span class="sidebar-menu-item-name">{{menu.name}}</span> 
+    <span *ngIf="!menu.expanded" class="url-sidebar-menu-icon {{menu.icon}}"></span>
+    <span *ngIf="menu.expanded" class="url-sidebar-menu-icon {{menu.iconActive}}"></span
+    >
+    <span class="sidebar-menu-item-html" *ngIf="menu.innerHTML" [innerHTML]="menu.innerHTML"></span>
+    <!--<span activeprofilejobpostsnumber></span>-->
+  </a>
+
+  <ul class="url-sm-submenu"
+      *ngIf="menu.expandable && menu.children.length">
+      <li *ngFor="#child of menu.children"
+          class="url-sm-item"
+          [class.active]="child.expanded"
+          [class.af-separator]="child.type === 'separator'">
+        <sidebar-menu-item [menu]="child" *ngIf="child.type !== 'separator'" id="{{child.id}}">
+        </sidebar-menu-item>
+      </li>
+  </ul>
+</div>

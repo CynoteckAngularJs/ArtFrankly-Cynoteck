@@ -1,0 +1,104 @@
+<footer class="af-footer text-center">
+  <div class="container context">
+    <div class="af-footer-top">
+      <img class="footer-logo" src="./assets/img/semicolon-white.png" alt="">
+      <h3 class="af-footer-moto">The art world, connected</h3>
+
+       <div class="footer-social-icons">
+            <a href="https://www.facebook.com/Art-Frankly-472367272942130/?fref=ts" target="_blank" class="social-link">
+              <img src="./assets/img/images/icons/fb.png" title=""/>
+            </a>
+            <a href="https://www.linkedin.com/company/art-frankly" target="_blank" class="social-link">
+              <img src="./assets/img/images/icons/ln.png" title=""/>
+            </a>
+            <a href="https://twitter.com/artfrankly" target="_blank" class="social-link">
+              <img src="./assets/img/images/icons/twit.png" title=""/>
+            </a>
+            <a href="https://www.instagram.com/artfrankly/" target="_blank" class="social-link">
+              <img src="./assets/img/images/icons/inst.png" title=""/>
+            </a>
+            <!--
+            <a href="https://www.facebook.com/Art-Frankly-472367272942130/?fref=ts" target="_blank" class="social-link">
+              <img src="./assets/img/images/social/facebook.png" title=""/>
+            </a>
+            <a href="http://twitter.com" target="_blank" class="social-link">
+              <img src="./assets/img/images/social/twitter.png" title=""/>
+            </a>
+            <a href="http://google.com" target="_blank" class="social-link">
+              <img src="./assets/img/images/social/google.png" title=""/>
+            </a>
+            <a href="http://pinterest.com" target="_blank" class="social-link">
+              <img src="./assets/img/images/social/pinterest.png" title=""/>
+            </a>
+            <a href="http://google.com" target="_blank" class="social-link">
+              <img src="./assets/img/images/social/t.png" title=""/>
+            </a>-->
+          </div>
+    </div>
+  </div>
+  <div class="row af-footer-bottom">
+   
+    <div class="col-sm-9 text-right no-padding-right footer-links-wrap">
+      <nav class="af-footer-nav">
+        <ul class="horizontal-list reset-mp">
+          <li>
+            <a href [routerLink]="['/Home']">Home</a>
+          </li>
+          <!--<li *ngFor="#page of FOOTER_PAGES">
+            <a href [routerLink]="['/FooterPages', { slug: page.slug }]">{{page.label}}</a>
+          </li>-->
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'pricing' }]">Pricing</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'about' }]">About Art Frankly</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'terms-of-use' }]">Terms of Use</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'privacy-policy' }]">Privacy Policy</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'security' }]">Security</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'contact-us' }]">Contact Us</a>
+          </li>
+          <li>
+            <a href [routerLink]="['/FooterPages', { slug: 'send-us-your-feedback' }]">Send Us Your Feedback</a>
+          </li>
+        </ul>
+      </nav>
+    </div> 
+     <div class="col-sm-3 text-left no-pdding-left copyright-footer">
+      <p class="reset-mp">&copy; 2017 Art Frankly. All Rights Reserved.</p>
+    </div>  
+  </div>
+    
+</footer>
+<!--
+<modal *ngIf="mobileModal && mobileModal.opened"
+    [modal]="mobileModal"
+    (close)="onHide($event)"
+    (onhide)="onHide($event)"
+    class="mobile-dialog">
+  <modal-title>
+    <a class="navbar-brand" [routerLink]="['/Feeds']">
+      <img src="./assets/img/art_frankly_logo_white.png" alt="">
+      <img src="./assets/img/art_frankly_logo.png"  alt="">
+    </a>
+  </modal-title>
+  <modal-body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>Thank you for your interest in Art Frankly.</p>
+          <p class="af-mb-s">Our mobile version is coming soon!</p>
+          <p class="af-mb-s">Please use Art Frankly on a computer or tablet.</p>
+          <p>App is coming soon!</p>
+        </div>
+      </div>
+    </div>
+  </modal-body>
+</modal>-->

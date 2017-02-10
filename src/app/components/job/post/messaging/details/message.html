@@ -1,0 +1,64 @@
+<!--<pre *ngIf="message">{{message.parent | json}}</pre>-->
+
+<header class="af-mb-s">
+  <b>
+    <span class="message-created-by" *ngIf="message">
+      <span *ngIf="message.createdBy === profile">
+        You responded
+      </span>
+      <span *ngIf="message.createdBy !== profile && message && message.responseProfileName">
+        {{message.responseProfileName}} wrote
+      </span>
+    </span>
+    <span *ngIf="message && message.created" class="message-created-on">
+      on {{message.created | formatdate:'dddd, MMM D, YYYY'}}
+    </span>
+  </b>
+</header>
+
+<div class="message-body row" [ngClass]="{ 'af-mb-s': message && message.messageAttachments && message.messageAttachments.length }">
+  <div *ngIf="message && message.text" class="col-sm-12" [innerHTML]="message.text | smarttext"></div>
+</div>
+
+<footer class="message-attachments">
+  <div *ngIf="message && message.messageAttachments.length" class="row">
+    <div class="col-xs-12">
+      <div class="row">
+      <div *ngFor="#messageAttachment of message.messageAttachments; #fIndex = index"
+            class="reply-files"
+            [ngClass]="{ 'col-sm-12': message.messageAttachments.length === 1, 'col-sm-6': message.messageAttachments.length === 2, 'col-sm-4': message.messageAttachments.length > 2 }">
+            <div class="row">
+              <div [ngClass]="{ 'col-xs-11 col-sm-10': removeableAttachments, 'col-xs-12': !removeableAttachments }">
+                <a target="_blank" [href]="messageAttachment.mediaObject.contentUrl">
+                  <div class="reply-file-meta af-p-xs">
+                    <div class="row">
+                      <div class="col-xs-12 col-md-8">
+                        <div class="file-name truncate">{{messageAttachment.mediaObject.originalFileName}}</div>
+                      </div>
+                      <div class="col-xs-12 col-md-12 col-lg-4 file-size-wrapper text-right visible-lg">
+                        <div class="file-size">({{messageAttachment.mediaObject.contentSize | filesize}})</div>
+                      </div>
+                      <div class="col-xs-12 col-md-12 col-lg-4 file-size-wrapper visible-md  visible-sm  visible-xs">
+                        <div class="file-size">({{messageAttachment.mediaObject.contentSize | filesize}})</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-xs-1 col-sm-2 no-padding-left" *ngIf="removeableAttachments">
+                <div class="af-ptb-xs">
+                  <a href (click)="onFileRemove($event, fIndex)">
+                    <span class="af-icon af-icon-s"
+                          [ngClass]="{ 'icon-close': isFocused, 'icon-close-white': !isFocused }">
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</footer>
+
+<af-message *ngIf="message && message.parent" [message]="message.parent"></af-message>

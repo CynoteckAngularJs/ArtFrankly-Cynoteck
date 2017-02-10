@@ -1,0 +1,114 @@
+<div class="my-spaceposts">
+  <div class="row">
+    
+    <div class="col-sm-12" *ngIf="responses.length">
+      
+      <header class="af-header">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2 class="af-heading">Your Space Posts</h2>
+          </div>
+        </div>
+      </header>
+      
+      <article *ngFor="#response of responses; #i = index" class="my-spacepost">
+        
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="spacepost-position text-uppercase">{{response.spacePosting.position}}</h5>
+                <h3 class="spacepost-title">
+                  <a href [routerLink]="['SpacePost', { id: response.spacePosting.id }]">{{response.spacePosting.title}}</a>
+                  <small *ngIf="response.spacePosting.state === SPACE_POST_STATES.ARCHIVED" class="label label-warning">Archived</small>
+                </h3>
+                <div class="spacepost-description" [innerHTML]="response.spacePosting.description"></div>
+              
+                <footer>
+                  <div class="row af-label-value spacepost-deadline">
+                    <div class="col-sm-6 af-label no-padding">Application Deadline</div>
+                    <div class="col-sm-6 af-value">10/08/2015</div>
+                  </div>
+                  <!--<div *ngIf="spacepost.state !== 'published'">
+                    <a href (click)="onPublish($event, response.spacePosting)">Publish Post</a>
+                  </div>
+                  <div *ngIf="spacepost.state === 'published'">
+                    <a href (click)="archiveSpacePost($event, spacepost)">Archive this Post</a>
+                  </div>-->
+                </footer>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4 text-center text-uppercase">
+            <div>
+              <!--<a href [routerLink]="['EditSpacePost', { id: spacepost.id }]" class="af-btn">
+                Edit Post
+              </a>-->
+            </div>
+            <br>
+            <div class="spacepost-responses">
+              1 Responses
+            </div>
+            <div>
+              <a href (click)="toggleAllResponses(response.spacePosting.id, $event)">View All</a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="af-feeds-list" *ngIf="expandedResponses[response.spacePosting.id]">
+          <article class="af-feed-item af-response" [class.active]="select === response.id">
+            <reply-details [reply]="response" [spacepost]="response.spacePosting" [noReply]="response.spacePosting.state === SPACE_POST_STATES.ARCHIVED">
+            </reply-details>
+          </article>
+        </section>
+        
+      </article>
+      
+      <!--<section class="af-mt-m">
+        <h2 class="af-heading">Your Archived Space Posts</h2>
+        
+        <div *ngIf="!archivedSpaceposts.length">You have no archived posts.</div>
+        
+        <div *ngIf="archivedSpaceposts && archivedSpaceposts.length">
+          <article class="af-bgr-item" *ngFor="#archivedSpace of archivedSpaceposts">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="spacepost-position text-uppercase">
+                  {{archivedSpace.position}}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                <h3 class="spacepost-title">
+                  <a href [routerLink]="['SpacePost', { id: archivedSpace.id }]">{{archivedSpace.title}}</a>
+                </h3>
+              </div>
+              <div class="col-sm-4">
+                <a href>View Position</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                Posted on: {{archivedSpace.datePosted}}
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>-->
+      
+    </div>
+    
+    <div class="col-sm-12 text-center af-empty-list" *ngIf="!responses.length">
+      <h2 class="af-icon-cnt">
+        <i class="af-icon af-icon-xxxl icon-response_default"></i>
+      </h2>
+      <h1 class="af-heading">You have yet to respond to a space opportunity.</h1>
+      <!--<p class="af-description">There are currently 1,000,000 applicants waiting to apply.</p>-->
+      <!--<div class="af-action-bar">
+        <a href [routerLink]="['AddSpacePost']" class="af-btn">Publish a space post</a>
+      </div>-->
+    </div>
+  </div>
+</div>

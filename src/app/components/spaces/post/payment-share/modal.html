@@ -1,0 +1,37 @@
+<modal [modal]="modal"
+    (close)="onClose($event)"
+    (onhide)="onHide($event)"
+    class="transparent-black-modal">
+  <modal-title>
+    <a class="navbar-brand" [routerLink]="['/Feeds']" style="margin-left: 15px;">
+      <img src="./assets/img/art_frankly_logo_white.png" alt="">
+    </a>
+  </modal-title>
+  
+  <modal-body>
+    
+    <notification *ngIf="notifications.length" 
+                  *ngFor="#notification of notifications | async" 
+                  [notification]="notification">
+    </notification>
+    
+    <div class="container spacepost">
+      <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+          <spacepost-payment *ngIf="!isPaymentProcessed"
+            [spacepost]="spacepost"
+            (paymentsuccess)="onPaymentSuccess($event)"
+            (cancel)="closeModal($event)">
+          </spacepost-payment>
+          <spacepost-share [spacepost]="spacepost"
+            *ngIf="isPaymentProcessed"
+            (shared)="closeModal($event)">
+          </spacepost-share>
+        </div>
+        <div class="col-xs-1"></div>
+      </div>
+    </div>
+    
+  </modal-body>
+</modal>

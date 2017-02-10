@@ -1,0 +1,38 @@
+@import '../../../../../assets/css/_variables';
+@import '../../../../../assets/css/_forms';
+@import '../../../../../assets/css/_utils';
+
+.transparent-black-modal {
+  .section {
+    border-bottom: none !important;
+  }
+  
+  form {
+    .reply-form-body {
+      border: 1px solid $color-white !important;
+    }
+  }
+}
+
+.jobpost-title {
+  font-family: 'NeueHaasUnicaPro-Light';
+  a {
+    text-transform: none;
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+.mobile-job-icon {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.mobile-job-icon img {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}

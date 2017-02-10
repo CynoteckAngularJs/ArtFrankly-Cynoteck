@@ -1,0 +1,78 @@
+<!-- <div class="feed-account-nav url-non-authenticated-menu" style="">
+          <span>
+           
+            <a href [routerLink]="['/Feeds']">Feed </a>
+          </span>
+          <span>
+            <a [routerLink]="['/AddJobPost']">Post a Job</a>
+          </span>
+          <span>
+            <a [routerLink]="['/EditProfile', { '@id': selectedProfileId }]">Edit Profile <span class="sr-only current-arrow">(current)</span></a>
+          </span>
+  </div>
+  -->
+<!--{{profile | json}}-->
+
+<div class="row">
+<div class="text-left af-form-heading-1">
+			<h3 class="filter-btn-nolink">Edit Profile</h3>
+		</div>
+</div>
+<div class="row">
+  <div class="upload-area pull-left">
+    <af-uploader *ngIf="profileModel"
+                  [autoUpload]="isAutoUpload"
+                  [classvalue]="UPLOADER.class.AVATAR"
+                  [objectvalue]="profileModel['@id']"
+                  (savesuccess)="onProfilePhotoUploaded($event)"
+                  [media]="profileModel.image">
+    </af-uploader>
+  </div>
+  <div class="col-xs-12 edit-profile-top">
+
+    <form class="editprofile" [ngFormModel]="form">
+      <div class="form-group" [ngClass]="{'has-error': form.controls.profileType.dirty && !form.controls.profileType.valid}">
+        <!--<select class="form-control" ngControl="profileType" required select2 (change)="onProfileTypeChange($event)">
+          <option *ngFor="#pType of profiles" [value]="pType.value">{{pType.label}}</option>
+        </select>-->
+        <select class="form-control" [ng2select2]="profileType" [ng2select2options]="profileTypeSelect2Options" #profileType="ngForm" ngControl="profileType" required  (change)="onProfileTypeChange($event)" (selected)="changeProfileType($event)">
+          <option *ngFor="#pType of profiles" [value]="pType.value">{{pType.label}}</option>
+        </select>
+      </div>
+    </form>
+    
+      <!--[user]="user.value"-->
+    <professional-form
+      *ngIf="selectedProfile === profileTypes.professional" 
+      [profile]="profileModel"
+      (savesuccess)="onSaveSuccess($event)"
+      (saveerror)="onSaveError($event)"
+      (imagechange)="onImageChange($event)">
+    </professional-form>
+    <institution-form
+      *ngIf="selectedProfile === profileTypes.institution" 
+      [profile]="profileModel"
+      [user]="user.value"
+      (savesuccess)="onSaveSuccess($event)"
+      (saveerror)="onSaveError($event)"
+      (imagechange)="onImageChange($event)">
+    </institution-form>
+    <vendor-form
+      *ngIf="selectedProfile === profileTypes.vendor" 
+      [profile]="profileModel"
+      [user]="user.value"
+      (savesuccess)="onSaveSuccess($event)"
+      (saveerror)="onSaveError($event)"
+      (imagechange)="onImageChange($event)">
+    </vendor-form>
+    
+  </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-11">      
+      <profile-submodel-forms *ngIf="profileModel && profileModel['@id']"
+                              [profile]="profileModel">
+      </profile-submodel-forms>
+    </div>
+  </div>

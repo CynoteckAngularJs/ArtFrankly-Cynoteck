@@ -1,0 +1,61 @@
+<!--<pre>{{item | json}}</pre>-->
+<!--<div>{{item.profile['@id']}}</div>-->
+<form class="event-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.photo.dirty) && !form.controls.photo.valid}">
+    <!--<div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.photo.dirty) && form.controls.photo.errors && form.controls.photo.errors.required">Photo is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.photo.dirty) && form.controls.photo.errors && form.controls.photo.errors.url">Not a valid url</div>-->
+    <div>
+      <af-uploader
+                    [classvalue]="UPLOADER.class.EVENT"
+                    [objectvalue]="item['@id']"
+                    [autoUpload]="isAutoUpload"
+                    (savesuccess)="onMediaUploaded($event)"
+                    (removesuccess)="onMediaRemoved($event)"
+                    [media]="mediaObject">
+      </af-uploader>
+    </div>
+    <label class="sr-only" for="photoInput">Photo</label>
+    <!--<input type="text" class="form-control" id="photoInput" ngControl="photo" placeholder="ADD PHOTO" [disabled]="mode !== MODES.edit" required>-->
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.title.dirty) && !form.controls.title.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.title.dirty) && form.controls.title.errors && form.controls.title.errors.required">Title is required</div>
+    <label class="sr-only" for="eventTitleInput">Title</label>
+    <input type="text" class="form-control" id="eventTitleInput" ngControl="title" placeholder="TITLE*" autofocus required [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.startDate.dirty) && !form.controls.startDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.startDate.dirty) && form.controls.startDate.errors && form.controls.startDate.errors.required">Start Date is required</div>
+      <div class="alert alert-danger" *ngIf="(isShowErrors) && form.controls.startDate.errors && form.controls.startDate.errors.datetime">Format unsupported! <small>'MM/DD/YYY hh:mm am' supported</small></div>
+      <label class="sr-only" for="eventStartDateInput">Start Date</label>
+      <input type="text" class="form-control" id="eventStartDateInput" ngControl="startDate" placeholder="EVENT START DATE (MM/DD/YYYY hh:mm am|pm)" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.endDate.dirty) && !form.controls.endDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.endDate.dirty) && form.controls.endDate.errors && form.controls.endDate.errors.required">End Date is required</div>
+      <div class="alert alert-danger" *ngIf="(isShowErrors) && form.controls.endDate.errors && form.controls.endDate.errors.datetime">Format unsuported! <small>'MM/DD/YYY hh:mm am' supported</small></div>
+      <label class="sr-only" for="eventEndDateInput">End Date</label>
+      <input type="text" class="form-control" id="eventEndDateInput" ngControl="endDate" placeholder="EVENT END DATE  (MM/DD/YYYY hh:mm am|pm)" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.description.dirty) && !form.controls.description.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.description.dirty) && form.controls.description.errors && form.controls.description.errors.required">Description is required</div>
+    <label class="sr-only" for="descriptionInput">Description</label>
+    <textarea type="text" class="form-control" id="descriptionInput" ngControl="description" placeholder="DESCRIPTION*" [disabled]="mode !== MODES.edit"></textarea>
+  </div>
+  
+</form>

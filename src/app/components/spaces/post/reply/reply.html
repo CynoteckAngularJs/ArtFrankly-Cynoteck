@@ -1,0 +1,85 @@
+<modal [modal]="modal"
+  (close)="onClose($event)"
+  (onhide)="onHide($event)"
+  class="transparent-black-modal">
+
+  <modal-title>
+    <a class="navbar-brand" [routerLink]="['/Feeds']" style="margin-left: 15px;">
+      <img src="./assets/img/art_frankly_logo_white.png" alt="">
+    </a>
+  </modal-title>
+
+  <modal-body>
+    
+    <div class="container spacepost" *ngIf="!successfullySaved">
+      <div class="row">
+        <div class="col-sm-2 hidden-xs">
+          <!--<h2 class="af-icon-cnt af-icon-xxl white pull-right">
+            <i class="af-icon icon-equal-checkmark af-icon-xxl"></i>
+          </h2>-->
+          <h2 class="af-icon-cnt af-icon-xxl white text-left" style="padding: 20px;">
+            <div class="thumbnail svg-thumbnail" style="width: 100%;height: 100%;margin-left: 0px;margin-top: -2px;">
+              <img class="state-regular" src="./assets/img/svg/spaces-icon.svg">
+              <img class="state-hovered" src="./assets/img/svg/spaces-icon.svg">
+            </div>
+          </h2>
+        </div>
+        <div class="col-xs-12 col-sm-10">
+          
+          <header>
+              <span class="mobile-space-icon hidden-sm hidden-lg hidden-md hidden-xl af-icon-xl">
+               <img class="text-left" src="./assets/img/svg/spaces-icon.svg"></span>
+            <h5 class="af-heading-2 af-normal-height">
+              Send a reply to space post
+            </h5>
+          </header>
+          
+          <div class="section">
+            <h2 *ngIf="spacepost.title" class="spacepost-title">
+              <a href [routerLink]="['SpacePost', { id: spacepost.id }]">{{spacepost.title}}</a>
+            </h2>
+          </div>
+          
+          <footer class="section">
+            <div class="af-heading-uppercased-1 af-mb-s">Customize your message</div>
+            <div>
+              <spacepost-reply-form [reply]="reply"
+                [spacepost]="spacepost"
+                [profile]="profileId"
+                (saved)="onReplySaved($event)">
+              </spacepost-reply-form>
+            </div>  
+          </footer>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="container spacepost" *ngIf="successfullySaved">
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <header class="text-center">
+            <h2 class="af-icon-cnt af-icon-xxxl white" style="padding: 20px;">
+              <div class="thumbnail svg-thumbnail" style="width: 80%;height: 80%;margin-left: 15%;margin-top: 5%;">
+                <img class="state-regular" src="./assets/img/svg/regular/art_frankly_space_post_icon.svg">
+                <img class="state-hovered" src="./assets/img/svg/regular/art_frankly_space_post_icon.svg">
+              </div>
+            </h2>
+            
+            <h2 class="spacepost-title af-mt-m">
+              <span>Space post reply sent to</span> 
+              <a *ngIf="spacepost.title" href [routerLink]="['SpacePost', { id: spacepost.id }]">{{spacepost.title}}</a>
+            </h2>
+
+            <div class="af-mt-m">
+              <a href (click)="onReplySentHide($event)" class="af-btn">Close</a>
+            </div>
+          </header>
+                    
+        </div>
+      </div>
+    </div>
+    
+  </modal-body>
+</modal>

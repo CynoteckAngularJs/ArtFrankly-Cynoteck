@@ -1,0 +1,130 @@
+@import '../../../../../../assets/css/_variables';
+@import '../../../../../../assets/css/_forms';
+@import '../../../../../../assets/css/_icons';
+@import '../../../../../../assets/css/_utils';
+
+$bottom-margin: $distance-m + $distance-xs;
+$bottom-margin-sm: $distance-s + $distance-xs; 
+
+.jobpost {
+  color: #1A1718;
+  
+  .jobpost-heading {
+    @extend .af-heading-2;
+    font-family: 'NeueHaasUnicaPro-Light';
+    margin-bottom: $bottom-margin-sm;
+    margin-top: 30px;
+  }
+  .feed-filter {
+
+  }
+  
+  header {
+    border-bottom: $border-1;
+    
+    .jobpost-heading {
+      margin: 0;
+    }
+    
+    .edit-post-btn {
+      margin-top: 0;
+      span {
+        margin-right: $distance-s/4;
+      }
+    }
+    
+    .jobpost-title {
+      @extend .af-heading-1;
+      margin: $bottom-margin 0;
+    } 
+  }
+  
+  .body {
+    .jobpost-description {
+    }
+    .jobpost-contact {
+      margin-top: $distance-m;
+    }
+  }
+  
+  footer {
+    border-top: $border-1;
+    margin-top: $distance-mb;
+    padding-top: $distance-mb;
+  }
+}
+
+.af-media-avatar {
+  margin-bottom: 1px;
+  padding-bottom: 4px;
+}
+
+.af-label-value {
+  margin-bottom: $distance-s;
+}
+
+button.reveal-map {
+    background: none;
+    border: none;
+    padding: 10px 10px 10px 0px;
+    margin-bottom: 0px;
+    display: block;
+    font-family: 'NeueHaasUnicaPro-Medium';
+}
+
+.location-embed {
+    display: block;
+    text-align: center;
+}
+
+ .location-embed iframe {
+    border: 0;
+    height: 205px;
+    width: 283px;
+    border:0;
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+    filter: gray;
+	  -webkit-filter: grayscale(99%);
+	  -webkit-backface-visibility: hidden;
+  }
+
+  .jobpost-top-info {
+    padding: 30px 30px;
+    border-bottom: 1px solid #e9eaf2;
+}
+
+.location-map {
+  margin-top: 10px;
+}
+
+h2.af-title-1 {
+    line-height: 115%;
+}
+
+@media only screen and (max-width : 768px) {
+
+  .jobpost .feed-filter {
+    padding-top: 20px;
+  }
+
+  .jobpost .bottom-bordered {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border: none;
+  }
+  .af-column-right {
+    width: calc(100% - 100px);
+    padding-left: 20px;
+  }
+
+  .af-column-left {
+    
+  }
+  .jobpost-top-info .thumbnail {
+    height: 100px;
+    width: 100px;
+  }
+  .job-cta-nav {
+    text-align: left !important;
+  }
+}

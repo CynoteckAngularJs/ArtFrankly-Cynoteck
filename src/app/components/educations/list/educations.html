@@ -1,0 +1,29 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Education</h5>
+    </header>
+    
+    <education-form *ngFor="#education of items | sortByDate:'-startDate'"
+        [item]="education"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </education-form>
+    <education-form *ngFor="#unsavedEducation of unsavedItems"
+        [item]="unsavedEducation"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)">
+    </education-form>
+    
+    <footer>
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Education</span>
+      </a>
+    </footer>
+  </div>
+</div>

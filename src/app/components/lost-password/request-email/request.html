@@ -1,0 +1,31 @@
+<form class="send-email url-centered" [ngFormModel]="form" (ngSubmit)="sendEmail({ email: email.value })">
+
+    <div class="text-center url-heading">
+        <img width="50" src="./assets/img/semicolon-black.png" alt="">
+        <h3 class="url-heading-title">Reset Password</h3>
+    </div>
+
+    <div *ngIf="showResetForm">
+
+        <div class="form-group email-group" [ngClass]="{'has-error': email.dirty && !email.valid}">
+            <div class="reset-instructions">Please enter the email address associated with you ArtFrankly account:</div>
+            <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.required">Email is required</div>
+            <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.email">Email is not valid</div>
+            <label class="sr-only" for="emailInput">Email address</label>
+            <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" autofocus>
+        </div>
+
+        <div class="text-center">
+            <div class="actions-group">
+                <button type="submit" [disabled]="!form.valid">Send email</button>
+            </div>
+
+            <a class="dont-have-an-account-btn" [routerLink]="['Signup']">Don't have an account?</a>
+        </div>
+    </div>
+    <div *ngIf="!showResetForm">
+        The email with instructions for resetting password has been sent.
+    </div>
+
+</form>
+

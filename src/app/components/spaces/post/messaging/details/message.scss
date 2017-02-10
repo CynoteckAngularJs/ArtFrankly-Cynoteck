@@ -1,0 +1,21 @@
+@import '../../../../../../assets/css/_variables';
+@import '../../../../../../assets/css/_forms';
+@import '../../../../../../assets/css/_utils';
+@import '../../../../../../assets/css/_icons';
+@import '../../../../../../assets/css/_lists';
+@import '../../../../feed/list/feeds.scss';
+
+.reply-files {
+  padding: 0 20px 20px;
+  .reply-file-meta {
+    background: $color-gray-2;
+    .file-name, .file-size {
+      color: $color-black;
+    }
+    .file-size-wrapper {
+      font-size: 9px;
+      line-height: 20px;
+      vertical-align: middle;
+    }
+  }
+}

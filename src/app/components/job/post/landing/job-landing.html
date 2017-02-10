@@ -1,0 +1,62 @@
+<div class="job-landing">
+  <div class="row">
+    <div class="col-sm-12">
+      <header class="bottom-bordered">
+        <div class="sort-filter-wrap">
+          <feed-filter [total]="total"></feed-filter>
+        </div>
+        <div class="row feed-filter">
+          <div class="col-sm-2 no-padding text-left hidden-xs">
+            <span class="filter-btn-nolink">Posts </span>
+          </div>
+          <div class="col-sm-8 text-center filter-container hidden-xs">
+            <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+          </div>
+          <div class="col-sm-2 no-padding text-right hidden-xs">
+            <a [routerLink]="['MyJobPosts']">
+              <button type="button" class="btn af-button">See Your Posts</button>
+            </a>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-4" id="jobs-link">
+        <a href [routerLink]="['AddJobPost']">
+        <span class="af-icon icon-jobs af-icon-xxl"></span>
+        <h1 class="af-feed-name">Jobs</h1>
+        <h2 class="font-family-light"> Find everyone you need from picture framers to curators. </h2>
+        <p> Full-time, Part-time, Internships, Freelance, and Volunteering </p>
+          <button type="button" class="btn af-button-no-fill">Post a Job</button>
+        </a>
+      </div>
+      <div class="col-sm-4" id="spaces-link">
+        <a href [routerLink]="['AddSpacePost']">
+        <span class="af-icon icon-spaces af-icon-xxl"></span>
+        <h1 class="af-feed-name">Spaces</h1>
+        <h2 class="font-family-light"> List your space and find your perfect tenant. </h2>
+        <p> Pop Ups, Artist Studios, Galleries, Office Spaces, Event Spaces, Commercial Spaces </p>
+          <button type="button" class="btn af-button-no-fill">Post a Space</button>
+        </a>
+      </div>
+
+
+
+      <div class="col-sm-4" id="commissions-link">
+        <a (click)="comingSoon($event)" href>
+        <span class="af-icon icon-commissions af-icon-xxl"></span>
+        <h1 class="af-feed-name">Opportunities</h1>
+        <h2 class="font-family-light"> See opportunities from across the professional art world.</h2>
+        <p> Grants, Residencies, Call for Artists, Awards, Fellowships, Volunteering, Workshops, Classes </p>
+          <button type="button" class="btn af-button-no-fill">Post an Opportunity</button>
+          </a>
+      </div>
+    </div>
+  </div>
+</div>
+ <div *ngFor="#feed of feeds" class="feed-container">
+          <feed-jobpost-details *ngIf="feed.type === 'job_posting'" [feed]="feed" (onreply)="onReplyHandler(feed)">
+          </feed-jobpost-details>
+        </div>

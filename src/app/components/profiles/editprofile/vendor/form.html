@@ -1,0 +1,130 @@
+<form class="editprofile vendor-form" [ngFormModel]="model.form" (ngSubmit)="saveOrUpdate(model.form.value)">
+  <input type="hidden" class="form-control" id="userInput" ngControl="user"/>
+  <input type="hidden" class="form-control" id="idInput" ngControl="@id"/>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.name.dirty) && !model.form.controls.name.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.name.dirty) && model.form.controls.name.errors && model.form.controls.name.errors.required">Vendor Name is required</div>
+    <label class="sr-only" for="nameInput">Service Provider Name</label>
+    <input type="text" class="form-control" id="nameInput" ngControl="name" placeholder="SERVICE PROVIDER NAME" autofocus required>
+  </div>
+
+  <div ngControlGroup="location">
+    <input type="hidden" ngControl="@id">
+    <!--<div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.location.controls.name.valid}">
+      <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.location.controls.name.errors && form.controls.location.controls.name.errors.required">Address name is required</div>
+      <label class="sr-only" for="contactNameInput">Address Name</label>
+      <input type="text" class="form-control" id="contactNameInput" ngControl="name" placeholder="ADDRESS LOCATION NAME">
+    </div>-->
+    
+    <div ngControlGroup="address">
+      <!--<div class="form-group" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.telephone.valid}">
+        <div class="alert alert-danger" *ngIf="isShowErrors && model.form.controls.location.controls.address.controls.telephone.errors && model.form.controls.location.controls.address.controls.telephone.errors.required">Job Phone is required</div>
+        <label class="sr-only" for="contactAddressTelephoneInput">Phone</label>
+        <input type="text" class="form-control" id="contactAddressTelephoneInput" ngControl="telephone" placeholder="PHONE">
+      </div>-->
+      
+      <div class="row">
+        <div class="form-group col-sm-8" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.streetAddress.valid}">
+          <!--<div class="alert alert-danger" *ngIf="isShowErrors && model.form.controls.location.controls.address.controls.streetAddress.errors && model.form.controls.location.controls.address.controls.streetAddress.errors.required">Street is required</div>-->
+          <label class="sr-only" for="contactAddressStreetAddressInput">Street</label>
+          <input type="text" class="form-control" id="contactAddressStreetAddressInput" ngControl="streetAddress" placeholder="STREET">
+        </div>
+        
+        <div class="form-group col-sm-4" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.apartment.valid}">
+          <!--<div class="alert alert-danger" *ngIf="isShowErrors && model.form.controls.location.controls.address.controls.apartment.errors && model.form.controls.location.controls.address.controls.apartment.errors.required">Apartment is required</div>-->
+          <label class="sr-only" for="contactAddressapartmentInput">Apartment</label>
+          <input type="text" class="form-control" id="contactAddressapartmentInput" ngControl="apartment" placeholder="APARTMENT">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.city.valid}">
+        <!--<div class="alert alert-danger" *ngIf="isShowErrors && model.form.controls.location.controls.address.controls.city.errors && model.form.controls.location.controls.address.controls.city.errors.required">City is required</div>-->
+        <label class="sr-only" for="contactAddressCityInput">City</label>
+        <input type="text" class="form-control" id="contactAddressCityInput" ngControl="city" placeholder="CITY">
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.addressRegion.valid}">
+          <select class="form-control" [ng2select2]="addressRegion" [ng2select2options]="stateSelect2Options" #addressRegion="ngForm" ngControl="addressRegion">
+            <option *ngFor="#cstate of US_STATES" [value]="cstate.value">{{cstate.label}}</option>
+          </select>
+        </div>
+        
+        <div class="form-group col-sm-6" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.postalCode.valid}">
+          <!--<div class="alert alert-danger" *ngIf="isShowErrors && model.form.controls.location.controls.address.controls.postalCode.errors && model.form.controls.location.controls.address.controls.postalCode.errors.required">ZIP is required</div>-->
+          <label class="sr-only" for="contactAddressPostalCodeInput">ZIP</label>
+          <input type="text" class="form-control" id="contactAddressPostalCodeInput" ngControl="postalCode" placeholder="ZIP">
+        </div>
+      </div>
+      
+      <div class="form-group" [ngClass]="{'has-error': isShowErrors && !model.form.controls.location.controls.address.controls.addressCountry.valid}">
+        <select class="form-control" [ng2select2]="addressCountry" [ng2select2options]="countrySelect2Options" #addressCountry="ngForm" ngControl="addressCountry">
+            <option *ngFor="#ccountry of COUNTIRES" [value]="ccountry.value">{{ccountry.label}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.shareContactInfo.dirty) && !model.form.controls.shareContactInfo.valid}">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ngControl="shareContactInfo"> Share contact info. (Your contact info is private by default.)
+      </label>
+    </div>
+  </div>-->
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.email.dirty) && !model.form.controls.email.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.email.dirty) && model.form.controls.email.errors && model.form.controls.email.errors.required">Email is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.email.dirty) && model.form.controls.email.errors && model.form.controls.email.errors.email">Email is not valid</div>
+    <label class="sr-only" for="emailInput">Email address</label>
+    <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" required>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.telephone.dirty) && !model.form.controls.telephone.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.telephone.dirty) && model.form.controls.telephone.errors && model.form.controls.telephone.errors.phone">Not a valid telephone number.</div>
+    <label class="sr-only" for="telephoneInput">Telephone</label>
+    <input type="text" class="form-control" id="telephoneInput" ngControl="telephone" placeholder="TELEPHONE">
+  </div>
+  
+  <!--<div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.image.dirty) && !model.form.controls.image.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.image.dirty) && model.form.controls.image.errors && model.form.controls.image.errors.url">Not a valid url.</div>
+    <label class="sr-only" for="imageInput">Image</label>
+    <input type="text" class="form-control" id="imageInput" ngControl="image" placeholder="IMAGE (http://...)" (blur)="onImageChange(model.form.controls.image.value)" disabled>
+  </div>-->
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.url.dirty) && !model.form.controls.url.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.url.dirty) && model.form.controls.url.errors && model.form.controls.url.errors.url">Not a valid url.</div>
+    <label class="sr-only" for="urlInput">Website</label>
+    <input type="text" class="form-control" id="urlInput" ngControl="url" placeholder="WEBSITE">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.industry.dirty) && !model.form.controls.industry.valid}">
+    <!--<select class="form-control" ngControl="industry" select2>-->
+    <select class="form-control" multiple="multiple" [ng2select2]="industry" [ng2select2options]="industrySelect2Options" #industry="ngForm" ngControl="industry">
+      <option *ngFor="#cindustry of INDUSTRIES" [value]="cindustry.value">{{cindustry.label}}</option>
+    </select>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.availability.dirty) && !model.form.controls.availability.valid}">
+    <select class="form-control" ngControl="availability" select2>
+      <option *ngFor="#cavailability of AVAILABILITY" [value]="cavailability.value">{{cavailability.label}}</option>
+    </select>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.hoursOfOperation.dirty) && !model.form.controls.hoursOfOperation.valid}">
+    <label class="sr-only" for="hoursOfOperationInput">Hours of Operation</label>
+    <input type="text" class="form-control" id="hoursOfOperationInput" ngControl="hoursOfOperation" placeholder="HOURS OF OPERATION">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.yearEstablished.dirty) && !model.form.controls.yearEstablished.valid}">
+    <label class="sr-only" for="yearEstablishedInput">Year Established</label>
+    <input type="text" class="form-control" id="yearEstablishedInput" ngControl="yearEstablished" placeholder="YEAR ESTABLISHED">
+  </div>
+  
+  <div class="text-center">
+    <div>
+      <button type="submit" [disabled]="formInvalid$ | async">Save</button>
+    </div>
+  </div>
+  
+</form>

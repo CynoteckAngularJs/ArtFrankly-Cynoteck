@@ -1,0 +1,67 @@
+<!--<pre>{{license | json}}</pre>-->
+<!--<div *ngIf="license && license.profile">{{license.profile['@id']}}</div>-->
+<form class="license-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+  <input type="hidden" ngControl="@id">
+  <input type="hidden" ngControl="profile">
+  
+  <header class="form-group">
+    <div class="text-right action-bar">
+      <a href *ngIf="mode === MODES.edit" (click)="setMode(MODES.view, $event)">Cancel</a>
+      <a href (click)="onDelete(item, $event)">Delete</a>
+      <a href *ngIf="mode !== MODES.edit" (click)="setMode(MODES.edit, $event)">Edit</a>
+      <a href *ngIf="mode === MODES.edit" (click)="saveOrUpdate(form.value, $event)">Save</a>
+    </div>
+  </header>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.title.dirty) && !form.controls.title.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.title.dirty) && form.controls.title.errors && form.controls.title.errors.required">Title is required</div>
+    <label class="sr-only" for="licenseTitleInput">Title</label>
+    <input type="text" class="form-control" id="licenseTitleInput" ngControl="title" placeholder="TITLE*" autofocus required [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.organization.dirty) && !form.controls.organization.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.organization.dirty) && form.controls.organization.errors && form.controls.organization.errors.required">Organization is required</div>
+      <label class="sr-only" for="licenseOrganizationInput">Agency/Organization</label>
+      <input type="text" class="form-control" id="licenseOrganizationInput" ngControl="organization" placeholder="AGENCY/ORGANIZATION" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.licenseNr.dirty) && !form.controls.licenseNr.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.licenseNr.dirty) && form.controls.licenseNr.errors && form.controls.licenseNr.errors.required">License nr. is required</div>
+      <label class="sr-only" for="licenseLicenseNrInput">License Number</label>
+      <input type="text" class="form-control" id="licenseLicenseNrInput" ngControl="licenseNr" placeholder="LICENSE NUMBER" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.certificationUrl.dirty) && !form.controls.certificationUrl.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.certificationUrl.dirty) && form.controls.certificationUrl.errors && form.controls.certificationUrl.errors.required">Certification url is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.certificationUrl.dirty) && form.controls.certificationUrl.errors && form.controls.certificationUrl.errors.url">Not a valid url</div>
+    <label class="sr-only" for="certificationUrlInput">Certification certificationUrl</label>
+    <input type="text" class="form-control" id="certificationUrlInput" ngControl="certificationUrl" placeholder="CERTIFICATION URL" [disabled]="mode !== MODES.edit">
+  </div>
+  
+  <div class="row">
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.validStartDate.dirty) && !form.controls.validStartDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.validStartDate.dirty) && form.controls.validStartDate.errors && form.controls.validStartDate.errors.required">Start Date is required</div>
+      <div class="alert alert-danger" *ngIf="(isShowErrors) && form.controls.validStartDate.errors && form.controls.validStartDate.errors.date">Format unsupported! <small>'MM/DD/YYYY' supported</small></div>
+      <label class="sr-only" for="eventvalidStartDateInput">Valid Start Date</label>
+      <input type="text" class="form-control" id="eventvalidStartDateInput" ngControl="validStartDate" placeholder="START DATE (MM/DD/YYYY)" [disabled]="mode !== MODES.edit">
+    </div>
+    
+    <div class="form-group col-sm-6" [ngClass]="{'has-error': (isShowErrors || form.controls.endDate.dirty) && !form.controls.endDate.valid}">
+      <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.endDate.dirty) && form.controls.endDate.errors && form.controls.endDate.errors.required">End Date is required</div>
+      <div class="alert alert-danger" *ngIf="(isShowErrors) && form.controls.endDate.errors && form.controls.endDate.errors.date">Format unsuported! <small>'MM/DD/YYYY' supported</small></div>
+      <label class="sr-only" for="eventEndDateInput">End Date</label>
+      <input type="text" class="form-control" id="eventEndDateInput" ngControl="endDate" placeholder="END DATE (MM/DD/YYYY)" [disabled]="mode !== MODES.edit">
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.doesntExpire.dirty) && !form.controls.doesntExpire.valid}">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ngControl="doesntExpire" [disabled]="mode !== MODES.edit"> THIS CERTIFICATION DOES NOT EXPIRE
+      </label>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,78 @@
+<!--{{submodeltype}}-->
+<div *ngIf="profile && profile['@id']">
+
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.photosAndVideos">
+    <photo-and-videos-forms [profile]="profile"
+                            [items]="profile.photosAndVideos">
+    </photo-and-videos-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.artworks">
+    <artwork-forms [profile]="profile"
+                            [items]="profile.artworks">
+    </artwork-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.description">
+    <description-form [profile]="profile"></description-form>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.period">
+    <periods-form [profile]="profile"></periods-form>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.languages">
+    <languages-form [profile]="profile"></languages-form>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.artists">
+    <artist-forms [profile]="profile">
+    </artist-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.honorsAndAwards">
+    <honor-forms [profile]="profile">
+    </honor-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.licenseAndCertification">
+    <license-forms [profile]="profile">
+    </license-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.projects">
+    <project-forms [profile]="profile">
+    </project-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.events">
+    <event-forms [profile]="profile">
+    </event-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.educations">
+    <education-forms [profile]="profile">
+    </education-forms>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.experiences">
+    <experience-forms [profile]="profile">
+    </experience-forms>
+  </div>
+  
+  <!--
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.clients">
+    Clients
+  </div>
+  -->
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.skills">
+    <skills-form [profile]="profile"></skills-form>
+  </div>
+  
+  <div *ngIf="submodeltype === SUBMODEL_TYPES.specialities">
+    <specialities-form [profile]="profile"></specialities-form>
+  </div>
+  
+  <!--<div [ngSwitchDefault]>Non registered submodel type!</div>-->
+</div>

@@ -1,0 +1,88 @@
+$footer-font-color: #B5B5B5;
+$footer-moto-font-color: #D6D6D6;
+
+.horizontal-list {
+  list-style: none;
+  li {
+    display: inline-block;
+  }
+}
+
+.context {
+  position: relative
+}
+
+.af-footer {
+  background-color: $footer-bgr-color;
+  // margin-top: $distance-l;
+  position: relative;
+  z-index: 4;
+  font-family: 'NeueHaasUnicaPro-Light';
+  
+  * {
+    color: $footer-font-color;
+    font-weight: normal;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: none;
+  }
+  
+  a {
+    text-decoration: none;
+    &:hover {
+      color: #FFF;
+    }
+  }
+  
+  .af-footer-moto {
+    font-size: 16px;
+    color: $footer-moto-font-color;
+    letter-spacing: .5px;
+    font-family: 'NeueHaasUnicaPro-Light';
+  }
+  
+  .af-footer-top {
+    padding: $distance-xxl 0;
+    vertical-align: middle;
+  }
+  
+  .af-footer-bottom {
+    padding: $distance-m 0;
+    margin-left: 30px + 15px;
+    margin-right: 30px + 15px;
+    border-top: 1px solid $footer-font-color;
+    .af-footer-nav {
+      li {
+        margin-right: $distance-s;
+        &:last-child {
+          margin-right: 0;
+        }
+        .social-link {
+          margin-right: $distance-xxs;
+          
+          border-radius: 50%;
+          background-color: #FFF;
+          display: inline-block;
+          img {
+            width: $distance-s;
+          }
+          
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer-social-icons a img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+a.social-link:last-child img {
+    margin-right: 0;
+}

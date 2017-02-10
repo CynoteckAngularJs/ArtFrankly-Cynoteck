@@ -1,0 +1,128 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <form class="reply-form" [ngFormModel]="form" (ngSubmit)="saveOrUpdate(form.value)" novalidate>
+      <input type="hidden" ngControl="spaceResponse">
+      <input type="hidden" ngControl="profile">
+      
+      <div class="reply-form-body" [ngClass]="{ focused: isFocused }">
+        <div class="form-group"  *ngIf="(isShowErrors || form.controls.spaceResponse.dirty) && form.controls.spaceResponse.errors && form.controls.spaceResponse.errors.required" [ngClass]="{'has-error': (isShowErrors || form.controls.spaceResponse.dirty) && !form.controls.spaceResponse.valid}">
+          <div class="alert alert-danger">Space Posting id is required</div>
+        </div>
+        <div class="form-group"  *ngIf="(isShowErrors || form.controls.profile.dirty) && form.controls.profile.errors && form.controls.profile.errors.required" [ngClass]="{'has-error': (isShowErrors || form.controls.profile.dirty) && !form.controls.profile.valid}">
+          <div class="alert alert-danger">Profile id is required</div>
+        </div>
+        
+        <div class="form-group" [ngClass]="{'has-error': (isShowErrors || form.controls.text.dirty) && !form.controls.text.valid}">
+          <div class="alert alert-danger" *ngIf="(isShowErrors || form.controls.text.dirty) && form.controls.text.errors && form.controls.text.errors.required">Message is required</div>
+          <label class="sr-only" for="textInput">Message</label>
+          <textarea type="text" class="form-control" id="textInput" ngControl="text" placeholder="MESSAGE*" required (focus)="toggleFocused($event)" (blur)="toggleFocused($event)"></textarea>
+        </div>
+        
+        <!--<div *ngFor="#messageAttachment of message.messageAttachments; #fIndex = index"
+            class="reply-files"
+            [ngClass]="{ 'col-sm-12': message.messageAttachments.length === 1, 'col-sm-6': message.messageAttachments.length === 2, 'col-sm-4': message.messageAttachments.length > 2 }">
+            <div class="row">
+              <div [ngClass]="{ 'col-xs-11 col-sm-10': removeableAttachments, 'col-xs-12': !removeableAttachments }">
+                <a target="_blank" [href]="messageAttachment.mediaObject.contentUrl">
+                  <div class="reply-file-meta af-p-xs">
+                    <div class="row">
+                      <div class="col-xs-12 col-md-8">
+                        <div class="file-name truncate">{{messageAttachment.mediaObject.originalFileName}}</div>
+                      </div>
+                      <div class="col-xs-12 col-md-12 col-lg-4 file-size-wrapper text-right visible-lg">
+                        <div class="file-size">({{messageAttachment.mediaObject.contentSize | filesize}})</div>
+                      </div>
+                      <div class="col-xs-12 col-md-12 col-lg-4 file-size-wrapper visible-md  visible-sm  visible-xs">
+                        <div class="file-size">({{messageAttachment.mediaObject.contentSize | filesize}})</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-xs-1 col-sm-2 no-padding-left" *ngIf="removeableAttachments">
+                <div class="af-ptb-xs">
+                  <a href (click)="onFileRemove($event, fIndex)">
+                    <span class="af-icon af-icon-s"
+                          [ngClass]="{ 'icon-close': isFocused, 'icon-close-white': !isFocused }">
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>-->
+        <div *ngIf="filesToUpload.length" class="row">
+          <div class="col-xs-12">
+            <div *ngFor="#uploadedItem of filesToUpload; #fIndex = index"
+                class="reply-files"
+                [ngClass]="{ 'col-sm-12': filesToUpload.length === 1, 'col-sm-6': filesToUpload.length === 2, 'col-sm-4': filesToUpload.length > 2 }">
+            <!--<div *ngFor="#uploadedItem of filesToUpload; #fIndex = index"
+                class="reply-files col-md-4 col-sm-6 col-xs-12">-->
+                <div class="row">
+                  <div class="col-xs-11 col-sm-10">
+                    <div class="reply-file-meta af-p-xs">
+                      <div class="row">
+                        <div class="col-lg-8 col-md-7 visible-lg visible-md">
+                          <div class="file-name truncate">{{uploadedItem.name}}</div>
+                        </div>
+                        <div class="col-lg-4 col-md-5 no-padding-left text-right file-size-wrapper visible-lg visible-md">
+                          <div class="file-size">({{uploadedItem.size | filesize}})</div>
+                        </div>
+                        
+                        <div class="col-md-12 visible-sm  visible-xs">
+                          <div class="file-name truncate">{{uploadedItem.name}}</div>
+                        </div>
+                        <div class="col-md-12 file-size-wrapper visible-sm  visible-xs">
+                          <div class="file-size">({{uploadedItem.size | filesize}})</div>
+                        </div>
+                        <!--<div class="col-xs-8">
+                          <div class="file-name truncate">{{uploadedItem.name}}</div>
+                        </div>
+                        <div class="col-xs-4 no-padding file-size-wrapper">
+                          <div class="file-size">({{uploadedItem.size | filesize}})</div>
+                        </div>-->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-1 col-sm-2 no-padding-left">
+                    <div class="af-ptb-xs">
+                      <a href (click)="onFileRemove($event, fIndex)">
+                        <span class="af-icon af-icon-s"
+                              [ngClass]="{ 'icon-close': isFocused, 'icon-close-white': !isFocused }">
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer class="form-group message-action-bar">
+        <div class="row">
+          <div class="col-sm-6">
+              <af-uploader-link
+                        [classvalue]="UPLOADER.class.MESSAGE"
+                        [objectvalue]="message['@id']"
+                        [autoUpload]="isAutoUpload"
+                        [multiple]="true"
+                        (savesuccess)="onMediaUploaded($event)"
+                        (removesuccess)="onMediaRemoved($event)"
+                        [isShowProgress]="false"
+                        (change)="onFileChange($event)">
+              </af-uploader-link>
+          </div>
+          <div class="col-sm-6">
+            <div class="text-right action-bar">
+              <!--<a class="af-btn" href (click)="onCancel($event)">Cancel</a>-->
+              <a class="af-btn" href (click)="saveOrUpdate(form.value, $event)">Reply</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+    </form>
+    
+  </div>
+</div>

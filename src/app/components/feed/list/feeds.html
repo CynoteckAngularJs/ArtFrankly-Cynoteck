@@ -1,0 +1,92 @@
+<!-- <div class="feed-account-nav url-non-authenticated-menu" style="">
+          <span>
+            <a href [routerLink]="['/Feeds']">Feed <span class="sr-only current-arrow">(current)</span></a>
+          </span>
+          <span>
+            <a [routerLink]="['/AddJobPost']">Post a Job</a>
+          </span>
+          <span>
+            <a [routerLink]="['/EditProfile', { '@id': selectedProfileId }]">Edit Profile</a>
+          </span>
+  </div>
+-->
+<div class="af-feeds" >
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <header>
+            <div class="search-header af-heading-2" *ngIf="getSearchTerm()">
+              Search Results for
+              <em>---- 
+                <!--<a href [routerLink]="['/SearchModal', { term: getSearchTerm() }]">-->
+                  <span class="search-term">{{getSearchTerm()}}</span>
+                <!--</a>-->
+              </em>
+              <a class="clear-search" href [routerLink]="['/Feeds']">
+                <span _ngcontent-ldn-8="" class="af-icon icon-x-out af-icon-xs"></span>
+              </a>
+            </div>
+            <div class="sort-filter-wrap">
+              <feed-filter [total]="total"></feed-filter>
+            </div>
+            <div class="row feed-filter">
+              <div class="col-sm-2 col-md-2 text-left hidden-xs">
+                <span class="filter-btn-nolink">Feed</span>
+              </div>
+              <div class="col-sm-10 col-md-8 text-center filter-container">
+                <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+              </div>
+              <div class="col-sm-2 no-padding text-right hidden-xs hidden-sm">
+                <a [routerLink]="['MyLanding']">
+                  <button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Create a Post</button>
+                </a>
+              </div>
+            </div>
+          </header>
+        </div>
+      </div>
+      <div class="af-feeds-list">
+        <div *ngFor="#feed of feeds" class="feed-container">
+          <feed-jobpost-details *ngIf="feed.type === 'job_posting'" [feed]="feed" (onreply)="onReplyHandler(feed)">
+          </feed-jobpost-details>
+            <feed-spacepost-details *ngIf="feed.type === 'space_posting'" [feed]="feed" (onreply)="onReplyHandler(feed)">
+          </feed-spacepost-details>
+          <feed-profile-details *ngIf="feed.type === 'profile'" [feed]="feed" (onreply)="onReplyHandler(feed)">
+          </feed-profile-details>
+        </div>
+        <div class="well" *ngIf="!islength">
+          <div class="app-loading">
+            <div class="vertical-align">
+              <div *ngIf="hasData">
+                <div>
+                  <img class="loading-icon" alt="" src="../assets/img/logos/Art_Frankly_Symbol_yellow.png" style="display: inline-block;">
+                </div>
+                <span>Loading</span>
+              </div>
+              <div *ngIf="!hasData">
+                <h2 class="filter-btn-nolink" style="margin-top: 40px;">"No results for your search, please try different key words"</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="af-feed-loadmore" (ngSubmit)="onLoadMore()" *ngIf="nextPage && islength">
+        <div class="text-center">
+          <div class="actions-group">
+            <button type="submit">Load More</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- (replysuccess)="onReplySuccess($event)" -->
+  <jobpost-reply-modal *ngIf="replyModal && replyModal.opened" [modal]="replyModal" (onhide)="onReplyModalHide($event)" [jobpost]="selectedJobPost">
+  </jobpost-reply-modal>
+
+  <!--<jobpost-reply-success-modal *ngIf="replySuccessModal && replySuccessModal.opened"
+                      [modal]="replySuccessModal"
+                      [jobpost]="selectedJobPost">
+  </jobpost-reply-success-modal>-->
+
+</div>

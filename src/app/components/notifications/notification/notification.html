@@ -1,0 +1,7 @@
+<div *ngIf="notification && notification.meta" class="alert alert-{{notification.meta.type}} alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeNotification($event)">
+    <!--<span aria-hidden="true">&times;</span>-->
+    <span aria-hidden="true" class="af-icon icon-x-out af-icon-xs"></span>
+  </button>
+  <div [innerHTML]="notification.meta.message"></div>
+</div>

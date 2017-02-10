@@ -1,0 +1,69 @@
+<form class="signup url-centered" [ngFormModel]="form" (ngSubmit)="signup(form.value)">
+
+  <div class="text-center url-heading">
+    <!--<span class="glyphicon glyphicon-pencil url-heading-icon"></span>-->
+    <img width="50" src="./assets/img/semicolon-black.png" alt="">
+    <h3 class="url-heading-title">The art world, connected</h3>
+  </div>
+
+  <!-- TODO: show only signup form tagged notifications here -->
+  
+  <div class="form-group profile-type-drop" [ngClass]="{'has-error': isShowErrors && !profileType.valid}">
+    <select class="form-control" ngControl="profileType" required  autofocus select2>
+    <!--<select class="form-control" [ng2select2]="profileType" [ng2select2options]="profileTypeSelect2Options" #profileType="ngForm" ngControl="profileType" required  autofocus>-->
+      <option *ngFor="#profile of profiles" [value]="profile.value">{{profile.label}}</option>
+    </select>
+  </div>
+  
+  <div ngControlGroup="nonProfessional">
+    <div class="form-group" [ngClass]="{'has-error': name.dirty && !name.valid}" *ngIf="profileType.value !== profileTypes.professional">
+      <div class="alert alert-danger" *ngIf="name.dirty && name.errors && name.errors.required">Name is required</div>
+      <label class="sr-only" for="nameInput">Name</label>
+      <input type="text" class="form-control" id="nameInput" ngControl="name" placeholder="NAME" autofocus required>
+    </div>
+  </div>
+  
+  <div ngControlGroup="professional">
+    <div class="form-group" [ngClass]="{'has-error': givenName.dirty && !givenName.valid}" *ngIf="profileType.value === profileTypes.professional">
+      <div class="alert alert-danger" *ngIf="givenName.dirty && givenName.errors && givenName.errors.required">First name is required</div>
+      <label class="sr-only" for="givenNameInput">First Name</label>
+      <input type="text" class="form-control" id="givenNameInput" ngControl="givenName" placeholder="FIRST NAME" autofocus required>
+    </div>
+    
+    <div class="form-group" [ngClass]="{'has-error': familyName.dirty && !familyName.valid}" *ngIf="profileType.value === profileTypes.professional">
+      <div class="alert alert-danger" *ngIf="familyName.dirty && familyName.errors && familyName.errors.required">Last name is required</div>
+      <label class="sr-only" for="familyNameInput">Last Name</label>
+      <input type="text" class="form-control" id="familyNameInput" ngControl="familyName" placeholder="LAST NAME" required>
+    </div>
+  </div>
+  
+  <div ngControlGroup="general">
+    <div class="form-group" [ngClass]="{'has-error': email.dirty && !email.valid}">
+      <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.required">Email is required</div>
+      <div class="alert alert-danger" *ngIf="email.dirty && email.errors && email.errors.email">Email is not valid</div>
+      <label class="sr-only" for="emailInput">Email address</label>
+      <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" required>
+    </div>
+    
+    <div class="form-group" [ngClass]="{'has-error': password.dirty && !password.valid}">
+      <div class="alert alert-danger" *ngIf="password.dirty && password.errors && password.errors.required">Password is required</div>
+      <div class="alert alert-danger" *ngIf="password.dirty && password.errors && password.errors.minlength">Password too short</div>
+      <label class="sr-only" for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" ngControl="password" required minlength="6" class="form-control" placeholder="PASSWORD">
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <div class="actions-group">
+      <button type="submit"  [disabled]="formInvalid$ | async">Create your account</button>
+    </div>
+    
+    <div class="signin-link">
+      <a href [routerLink]="['Signin']">Already have an account? Log in</a>
+    </div>
+    
+    <p>By creating an account, you agree to Art Frankly's  <a href="#/pages/terms-of-use">User Agreement</a> and <a href="#/pages/privacy-policy">Privacy Policy</a>.</p>
+    
+  </div>
+  
+</form>

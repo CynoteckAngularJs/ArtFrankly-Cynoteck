@@ -1,0 +1,84 @@
+<!--<pre>{{profile | json}}</pre>-->
+<form class="editprofile professional-form" [ngFormModel]="model.form" (ngSubmit)="saveOrUpdate(model.form.value)">
+  <input type="hidden" class="form-control" id="userInput" ngControl="user"/>
+  <input type="hidden" class="form-control" id="idInput" ngControl="@id"/>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.givenName.dirty) && !model.form.controls.givenName.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.givenName.dirty) && model.form.controls.givenName.errors && model.form.controls.givenName.errors.required">First name is required</div>
+    <label class="sr-only" for="givenNameInput">First Name</label>
+    <input type="text" class="form-control" id="givenNameInput" ngControl="givenName" placeholder="FIRST NAME" autofocus required>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.familyName.dirty) && !model.form.controls.familyName.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.familyName.dirty) && model.form.controls.familyName.errors && model.form.controls.familyName.errors.required">Last name is required</div>
+    <label class="sr-only" for="familyNameInput">Last Name</label>
+    <input type="text" class="form-control" id="familyNameInput" ngControl="familyName" placeholder="LAST NAME" required>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.birthDate.dirty) && !model.form.controls.birthDate.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.birthDate.dirty) && model.form.controls.birthDate.errors && model.form.controls.birthDate.errors.required">Date Of Birth is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors) && model.form.controls.birthDate.errors && model.form.controls.birthDate.errors.date">Format unsuported! <small>'MM/DD/YYYY' supported</small></div>
+    <label class="sr-only" for="nameInput">Date Of Birth</label>
+    <input type="text" class="form-control" id="nameInput" ngControl="birthDate" placeholder="DATE OF BIRTH (MM/DD/YYYY)">
+  </div>
+
+  <address-form [location]="profile && profile.location"
+      [hidelocationname]="true"
+      [hidelocationtelephone]="true"
+      [hidezip]="true"
+      [hidestreetaddress]="true"
+      [hideappartment]="true"
+      >
+  </address-form>
+
+  <!--<div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.shareContactInfo.dirty) && !model.form.controls.shareContactInfo.valid}">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ngControl="shareContactInfo"> Share contact info. (Your contact info is private by default.)
+      </label>
+    </div>
+  </div>-->
+
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.email.dirty) && !model.form.controls.email.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.email.dirty) && model.form.controls.email.errors && model.form.controls.email.errors.required">Email is required</div>
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.email.dirty) && model.form.controls.email.errors && model.form.controls.email.errors.email">Email is not valid</div>
+    <label class="sr-only" for="emailInput">Email address</label>
+    <input type="email" id="emailInput" ngControl="email" required class="form-control" placeholder="EMAIL" required>
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.telephone.dirty) && !model.form.controls.telephone.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.telephone.dirty) && model.form.controls.telephone.errors && model.form.controls.telephone.errors.phone">Not a valid telephone number.</div>
+    <label class="sr-only" for="telephoneInput">Telephone</label>
+    <input type="text" class="form-control" id="telephoneInput" ngControl="telephone" placeholder="TELEPHONE">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.url.dirty) && !model.form.controls.url.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.url.dirty) && model.form.controls.url.errors && model.form.controls.url.errors.url">Not a valid url.</div>
+    <label class="sr-only" for="urlInput">Website</label>
+    <input type="text" class="form-control" id="urlInput" ngControl="url" placeholder="WEBSITE">
+  </div>
+  
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.availability.dirty) && !model.form.controls.availability.valid}">
+    <select class="form-control" ngControl="availability" select2>
+      <option value="">HIRING AVAILABILITY</option>
+      <option *ngFor="#cAvailability of AVAILABILITY" [value]="cAvailability.value">{{cAvailability.label}}</option>
+    </select>
+  </div>
+
+  <h5 class="af-light af-heading-2">Profession</h5>
+  <div class="form-group" [ngClass]="{'has-error': (isShowErrors || model.form.controls.profession.dirty) && !model.form.controls.profession.valid}">
+    <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.profession.dirty) && model.form.controls.profession.errors && model.form.controls.profession.errors.required">Profession is required</div>
+
+    <select class="form-control" multiple="multiple" [ng2select2]="profession" [ng2select2options]="professionSelect2Options" #profession="ngForm" ngControl="profession"> 
+      <option *ngFor="#cProfession of PROFESSIONS" [value]="cProfession.value">{{cProfession.label}}</option>
+    </select>
+  </div>
+  <div class="alert alert-danger" *ngIf="(isShowErrors || model.form.controls.user.dirty) && model.form.controls.user.errors && model.form.controls.user.errors.required">User is required but not found!</div>
+  
+  <div class="text-center">
+    <div>
+      <button type="submit" [disabled]="formInvalid$ | async">Save</button>
+    </div>
+  </div>
+  
+</form>

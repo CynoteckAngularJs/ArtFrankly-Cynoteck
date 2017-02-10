@@ -1,0 +1,291 @@
+<div class="my-jobposts">
+  <div class="row">
+    <div class="col-sm-12">
+      <header>
+        <div class="sort-filter-wrap">
+          <feed-filter [total]="total"></feed-filter>
+        </div>
+        <div class="row feed-filter">
+          <div class="col-sm-2 col-md-2 text-left text-left no-padding-left">
+            <span class="filter-btn-nolink">Replies</span>
+          </div>
+          <div class="col-sm-10 col-md-8 text-center filter-container hidden-xs">
+            <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+          </div>
+          <div class="col-sm-2 no-padding text-right hidden-xs hidden-sm">
+            <a [routerLink]="['MyLanding']">
+              <button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Create a Post</button>
+            </a>
+          </div>
+        </div>
+
+      </header>
+    </div>
+  </div>
+  <div class="row">
+    <section class="af-mt-m">
+      <div class="col-sm-12" *ngIf="jobPostReplyModel.length">
+        <div *ngFor="#jobPostReply of jobPostReplyModel; #i = index" class="jobposts-list">
+          <article class="af-bgr-item-style-2">
+            <div class="row">
+              <div class="col-sm-12 af-jobpost-details replies-heading">
+                <div class="row">
+
+                  <div class="col-sm-10 col-xs-9">
+                    <h3 class="jobpost-title no-padding reply-title">
+                      <a href [routerLink]="createRouterLink(jobPostReply.jobPosting, jobPostReply.jobPosting.title)">{{jobPostReply.jobPosting.title}}</a>
+                    </h3>
+                    <div class="af-feed-type reply-position hidden-xs hidden-sm">
+                      <span class="">
+                    {{jobPostReply.jobPosting.position}}
+                  </span>
+                    </div>
+
+
+                  </div>
+                  <div class="col-sm-2 col-xs-3 text-right jobpost-responses">
+                    <div class=" text-center">
+                      <a href (click)="toggleAllResponses(jobPostReply.jobPosting.id, $event)">
+                        <div class="jobpost-responses-number">
+                          <p>{{1 + jobPostReply.messages.length}}</p><span>Replies</span></div>
+                      </a>
+                    </div>
+                    <!--<h5 class="jobpost-position text-uppercase" *ngIf="jobpost.state === JOB_POST_STATES.PUBLISHED">
+                    <a href (click)="archiveJobPost($event, jobpost)">Archive this Post</a>
+                  </h5>-->
+                  </div>
+                  <!--  <div class="col-sm-12">
+                  Posted on: {{jobpost.datePosted}}
+                </div> -->
+                </div>
+              </div>
+            </div>
+          </article>
+          <!--<div *ngFor="#jobpost of jobPostReply.jobPosting" class="jobposts-list">-->
+
+          <!-- Job Responses -->
+          <section class="af-feeds-list" *ngIf="expandedResponses[jobPostReply.jobPosting.id]">
+          <article  class="af-feed-item af-response">
+            <reply-details [reply]="jobPostReply" [jobpost]="jobPostReply.jobPosting">
+            </reply-details>
+          </article>
+        </section>
+          <!--</div>-->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12" *ngIf="jobposts.length">
+      <!--  <header class="af-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-7 actionbar-buttons-lg visible-md visible-lg">
+            <div class="row">
+              <div class="col-xs-12 col-sm-7 text-left">
+                <h5 class="jobpost-position text-uppercase">
+                  <a href (click)="getMyJobPostsHandler($event)">Check for new Responses</a>
+                </h5>
+              </div>
+              <div class="col-xs-12 col-sm-5 text-left">
+                <h5 class="jobpost-position text-uppercase">
+                  <a href (click)="goToArchived($event)">Go to Archived</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-7 visible-sm visible-xs">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h5 class="jobpost-position text-uppercase">
+                  <a href (click)="getMyJobPostsHandler($event)">Check for new Responses</a>
+                </h5>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <h5 class="jobpost-position text-uppercase">
+                  <a href (click)="goToArchived($event)">Go to Archived</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    -->
+
+      <div *ngFor="#jobpost of jobposts; #i = index" class="jobposts-list">
+        <article class="af-bgr-item-style-2">
+          <div class="row">
+
+            <div class="col-sm-12 af-jobpost-details replies-heading">
+              <div class="row">
+
+                <div class="col-sm-10 col-xs-9">
+                  <h3 class="jobpost-title no-padding reply-title">
+                    <a href [routerLink]="createRouterLink(jobpost, jobpost.title)">{{jobpost.title}}</a>
+                  </h3>
+                  <div class="af-feed-type reply-position hidden-xs hidden-sm">
+                    <span class="">
+                    {{jobpost.position}}
+                  </span>
+                    <span class="edit-link" *ngIf="jobpost.state !== JOB_POST_STATES.PUBLISHED">
+                    <a href href (click)="editJob($event, jobpost.title, jobpost.id)">Edit</a>
+                  </span>
+                  </div>
+
+
+                </div>
+                <div class="col-sm-2 col-xs-3 text-right jobpost-responses">
+                  <div class=" text-center">
+                    <a href (click)="toggleAllResponses(jobpost.id, $event)">
+                      <div class="jobpost-responses-number">
+                        <p>{{(jobpost.jobResponses).length}}</p><span>Replies</span></div>
+                    </a>
+                  </div>
+                  <!--<h5 class="jobpost-position text-uppercase" *ngIf="jobpost.state === JOB_POST_STATES.PUBLISHED">
+                    <a href (click)="archiveJobPost($event, jobpost)">Archive this Post</a>
+                  </h5>-->
+                </div>
+                <!--  <div class="col-sm-12">
+                  Posted on: {{jobpost.datePosted}}
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- Job Responses -->
+        <section class="af-feeds-list" *ngIf="expandedResponses[jobpost.id]">
+          <article *ngFor="#response of jobpost.deserializedJobResponses" [class.active]="select === response.id" class="af-feed-item af-response">
+            <reply-details [reply]="response" [jobpost]="jobpost">
+            </reply-details>
+          </article>
+        </section>
+      </div>
+      <!--<article *ngFor="#jobpost of jobposts; #i = index" class="my-jobpost">
+        
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-12">
+                <h5 class="jobpost-position text-uppercase">{{jobpost.position}}</h5>
+                <h3 class="jobpost-title">
+                  <a href [routerLink]="['JobPost', { id: jobpost.id }]">{{jobpost.title}}</a>
+                </h3>
+                <div class="jobpost-description" [innerHTML]="jobpost.description"></div>
+              
+                <footer>
+                  <div class="row af-label-value jobpost-deadline">
+                    <div class="col-sm-6 af-label no-padding">Application Deadline</div>
+                    <div class="col-sm-6 af-value">10/08/2015</div>
+                  </div>
+                  <div *ngIf="jobpost.state !== 'published'">
+                    <a href (click)="onPublish($event, jobpost)">Publish Post</a>
+                  </div>
+                  <div *ngIf="jobpost.state === 'published'">
+                    <a href (click)="archiveJobPost($event, jobpost)">Archive this Post</a>
+                  </div>
+                </footer>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4 text-center text-uppercase">
+            <div>
+              <a href [routerLink]="['EditJobPost', { id: jobpost.id }]" class="af-btn">
+                Edit Post
+              </a>
+            </div>
+            <br>
+            <div class="jobpost-responses">
+              {{(jobpost.jobResponses).length}} Responses
+            </div>
+            <div>
+              <a href (click)="toggleAllResponses(jobpost.id, $event)">View All</a>
+            </div>
+          </div>
+        </div>
+        
+        <section class="af-feeds-list" *ngIf="expandedResponses[jobpost.id]">
+          <article *ngFor="#response of jobpost.deserializedJobResponses"
+              [class.active]="select === response.id" 
+              class="af-feed-item af-response">
+            <reply-details [reply]="response" [jobpost]="jobpost">
+            </reply-details>
+          </article>
+        </section>
+        
+      </article>-->
+
+    </div>
+
+    <div class="col-sm-12 text-center af-empty-list" *ngIf="!jobposts.length && !jobPostReplyModel.length">
+      <h2 class="af-icon-cnt">
+        <i class="af-icon af-icon-xxxl icon-response_default"></i>
+      </h2>
+      <h1 class="af-heading">You have yet to post a job opportunity.</h1>
+      <!--<p class="af-description">There are currently 1,000,000 applicants waiting to apply.</p>-->
+      <div class="af-action-bar af-mt-s">
+        <a href [routerLink]="['AddJobPost']" class="af-btn">Publish a job post</a>
+      </div>
+    </div>
+    <div class="" *ngIf="archivedJobposts.length">
+      <div class="col-sm-12">
+
+        <h2 id="archivedJobPosts" class="filter-btn-nolink" style="margin-top: 40px;">Your Archived Job Posts</h2>
+        <!--<div *ngIf="!archivedJobposts.length">You have no archived posts.</div>-->
+      </div>
+      <section class="af-mt-m">
+        <div class="col-sm-12">
+          <div *ngFor="#archivedJob of archivedJobposts" class="jobposts-list">
+
+
+
+            <article class="af-bgr-item-style-2">
+              <div class="row">
+                <div class="col-sm-12 af-jobpost-details replies-heading">
+                  <div class="row">
+
+                    <div class="col-sm-10 col-xs-9">
+                      <h3 class="jobpost-title no-padding reply-title">
+                        <a href [routerLink]="createRouterLink(archivedJob, archivedJob.title)">{{archivedJob.title}}</a>
+                      </h3>
+                      <div class="af-feed-type reply-position hidden-xs hidden-sm">
+                        <span class="">
+                    {{archivedJob.position}}
+                  </span>
+                      </div>
+
+
+                    </div>
+                    <div class="col-sm-2 col-xs-3 text-right jobpost-responses">
+                      <div class=" text-center">
+                        <a href (click)="toggleAllResponses(archivedJob.id, $event)">
+                          <div class="jobpost-responses-number">
+                            <p>{{(archivedJob.jobResponses).length}}</p><span>Replies</span></div>
+                        </a>
+                      </div>
+                      <!--<h5 class="jobpost-position text-uppercase" *ngIf="jobpost.state === JOB_POST_STATES.PUBLISHED">
+                    <a href (click)="archiveJobPost($event, jobpost)">Archive this Post</a>
+                  </h5>-->
+                    </div>
+                    <!--  <div class="col-sm-12">
+                  Posted on: {{jobpost.datePosted}}
+                </div> -->
+                  </div>
+                </div>
+              </div>
+            </article>
+
+
+            <!-- Job Responses -->
+            <section class="af-feeds-list" *ngIf="expandedResponses[archivedJob.id]">
+              <article *ngFor="#response of archivedJob.deserializedJobResponses" [class.active]="select === response.id" class="af-feed-item af-response">
+                <reply-details [reply]="response" [jobpost]="archivedJob" [noReply]="true">
+                </reply-details>
+              </article>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

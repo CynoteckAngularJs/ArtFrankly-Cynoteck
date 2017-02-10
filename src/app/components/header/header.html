@@ -1,0 +1,153 @@
+<nav class="navbar navbar-default" [class.authenticated]="state.isAuthenticated">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> -->
+      <div class="centered-nav mobile-center">
+
+        <div class="mobile-account-btn mobile-nav-item" *ngIf="state.isAuthenticated">
+          <div class="">
+            <div class="dropdown">
+              <button class="btn btn-default" type="button" id="account-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <div class="thumbnail">
+                  <!--<img [src]="state.selectedProfile && state.selectedProfile.image && state.selectedProfile.image.contentUrl" onError="this.src='{{appSrv.defaultAvatar}}';">-->
+                    <img *ngIf="!state.selectedProfile || !state.selectedProfile.image || !state.selectedProfile.image.contentUrl" [src]="appSrv.defaultAvatar" fallbackimg>
+                      <div class="thumbnail-img" *ngIf="state.selectedProfile && state.selectedProfile.image && state.selectedProfile.image.contentUrl"
+                      [ngStyle]="{ 'background-image': 'url(' + state.selectedProfile.image.contentUrl + ')' }">
+                    </div>
+                </div> 
+                <span class="af-icon icon-arrow-down af-icon-xs hidden-xs"></span>
+              </button>
+              <!-- Duplicated (due to issue W ngIf W only 1 profile) -->
+              <ul *ngIf="state && state.myProfiles.length === 1" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li><a href (click)="signout($event)">Sign out</a></li>
+              </ul>
+              <ul *ngIf="state && state.myProfiles.length >= 2" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li>
+                  <a class="pb">Switch Profile</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li *ngFor="#profile of state.myProfiles; #i = index" class="account-profile" [class.active]="state && profile && state.selectedProfile && profile['@id'] === state.selectedProfile['@id']">
+                  <a href class="normal-weight" [class.pb-brl]="i === state.myProfiles.length - 1" [class.pb-trl]="i === 0" (click)="activateProfile(profile, $event)">
+                      {{profile.toString()}}
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href class="pb" (click)="signout($event)">Sign out</a></li>
+              </ul>
+              <ul *ngIf="!state || (state && !state.myProfiles.length)" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li><a href class="pb" (click)="signout($event)">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div *ngIf="state.isAuthenticated" class="mobile-nav-item">
+          <div class="col-sm-2 no-padding text-right">
+            <a [routerLink]="['/MyLanding']">
+              <button type="button" class="btn af-button-plain"><span class="af-icon icon-posts af-icon-xs"></span>Post</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-search-btn mobile-nav-item" *ngIf="state.isAuthenticated">
+          <a href (click)="showSearchModal($event)">
+            <i class="af-icon icon-search af-icon-s"></i>
+          </a>
+          <search-modal *ngIf="searchModal && searchModal.opened" [modal]="searchModal" (onhide)="onSearchModalHide($event)">
+          </search-modal>
+        </div>
+
+        <div *ngIf="!state.isAuthenticated" class="mobile-nav-item mobile-signin">
+          <a href [routerLink]="['Signin']">Sign in</a>
+        </div>
+      </div>
+      <a class="navbar-brand logo-desktop" [routerLink]="['/Feeds']">
+        <img src="../assets/img/art_frankly_logo.png" alt="">
+      </a>
+
+      <a class="navbar-brand logo-mobile" [routerLink]="['/Feeds']">
+        <img src="../assets/img/semicolon-black.png" alt="">
+      </a>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="state.isAuthenticated">
+          <!--<a>Hello, {{state.user.username}}</a>-->
+          <a *ngIf="state.user" href (click)="goToProfile($event)">{{(state.selectedProfile && state.selectedProfile.toString()) || state.user.username}}</a>
+
+          <a *ngIf="state.user" href class="edit-link no-padding-left" (click)="editProfile($event)"><span style="margin-right: 3px" class="af-icon icon-posts af-icon-xs"></span>Edit Profile</a>
+
+          <!--<a href [routerLink]="['/ProfilePreview', { 'type': '', 'id': selectedProfileId }]">{{(state.selectedProfile && state.selectedProfile.toString()) || state.user.username}}</a>-->
+        </li>
+        <li *ngIf="state.isAuthenticated">
+          <div class="primary-menu-cnt">
+            <div class="dropdown">
+              <button class="btn btn-default" type="button" id="account-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <!--<span *ngIf="!state.selectedProfile || !state.selectedProfile.image || !state.selectedProfile.image.contentUrl"
+                        class="active-profile-icon af-icon account-menu af-icon-l"></span>
+               -->
+                <div class="thumbnail">
+                  <!--<img [src]="state.selectedProfile && state.selectedProfile.image && state.selectedProfile.image.contentUrl" onError="this.src='{{appSrv.defaultAvatar}}';">-->
+                  <img *ngIf="!state.selectedProfile || !state.selectedProfile.image || !state.selectedProfile.image.contentUrl" [src]="appSrv.defaultAvatar" fallbackimg>
+        
+          <div class="thumbnail-img" *ngIf="state.selectedProfile && state.selectedProfile.image && state.selectedProfile.image.contentUrl"
+      [ngStyle]="{ 'background-image': 'url(' + state.selectedProfile.image.contentUrl + ')' }">
+          </div>
+                </div>
+                <span class="af-icon icon-arrow-down af-icon-xs"></span>
+              </button>
+              <!-- Duplicated (due to issue W ngIf W only 1 profile) -->
+              <ul *ngIf="state && state.myProfiles.length === 1" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li><a href (click)="signout($event)">Sign out</a></li>
+              </ul>
+              <ul *ngIf="state && state.myProfiles.length >= 2" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li>
+                  <a class="pb">Switch Profile</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li *ngFor="#profile of state.myProfiles; #i = index" class="account-profile" [class.active]="state && profile && state.selectedProfile && profile['@id'] === state.selectedProfile['@id']">
+                  <a href class="normal-weight" [class.pb-brl]="i === state.myProfiles.length - 1" [class.pb-trl]="i === 0" (click)="activateProfile(profile, $event)">
+                      {{profile.toString()}}
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href class="pb" (click)="signout($event)">Sign out</a></li>
+              </ul>
+              <ul *ngIf="!state || (state && !state.myProfiles.length)" class="dropdown-menu" aria-labelledby="account-dropdown-menu">
+                <li><a href class="pb" (click)="signout($event)">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="login-links" *ngIf="!state.isAuthenticated">
+          <a href [routerLink]="['Signin']">Login</a>
+          <span>|</span>
+          <a href [routerLink]="['Signup']">Sign up</a>
+        </li>
+        <li *ngIf="state.isAuthenticated">
+          <a href (click)="showSearchModal($event)">
+            <i class="af-icon icon-search af-icon-s"></i>
+          </a>
+          <search-modal *ngIf="searchModal && searchModal.opened" [modal]="searchModal" (onhide)="onSearchModalHide($event)">
+          </search-modal>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<!-- <div class="beta-sign">
+  Beta
+</div> -->

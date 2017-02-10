@@ -1,0 +1,33 @@
+<div class="row formlist">
+  <div class="col-sm-12">
+    
+    <header>
+      <h5 class="af-light af-heading-2">Portfolio</h5>
+    </header>
+    
+    <artwork-form *ngFor="#artwork of items"
+        [item]="artwork"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)"
+        (saved)="onSaved($event)"
+        (removed)="onRemoved($event)">
+    </artwork-form>
+    <artwork-form *ngFor="#unsavedArtwork of unsavedItems"
+        [item]="unsavedArtwork"
+        [profile]="profile"
+        (remove)="onRemoveItem($event)"
+        (save)="onSaveItem($event)"
+        (saved)="onSaved($event)"
+        (removed)="onRemoved($event)">
+    </artwork-form>
+    
+    <footer *ngIf="canAddMore">
+      <a href (click)="onAddItem($event)"
+        class="btn btn-block af-btn-dashed">
+        <span class="af-icon icon-add"></span>
+        <span>Add Portfolio Item</span>
+      </a>
+    </footer>
+  </div>
+</div>

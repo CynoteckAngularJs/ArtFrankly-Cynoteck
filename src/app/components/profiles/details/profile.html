@@ -1,0 +1,745 @@
+<!--{{profile | json}}-->
+<div class="profile-preview">
+  <div class="row hidden-xs">
+    <div class="col-sm-12">
+
+      <header class="bottom-bordered">
+
+        <div class="sort-filter-wrap lg-hidden">
+          <feed-filter [total]="total"></feed-filter>
+        </div>
+        <div class="row feed-filter">
+          <div class="col-sm-2 no-padding text-left hidden-xs">
+            <span class="filter-btn-nolink">Profile</span>
+          </div>
+          <div class="col-sm-8 text-center filter-container hidden-xs">
+            <feed-filter-button-group (filterchange)="onFilterChange($event)"></feed-filter-button-group>
+          </div>
+          <div class="col-sm-2 no-padding text-right hidden-xs">
+            <a [routerLink]="['AddJobPost']">
+              <button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Post a Job</button>
+            </a>
+          </div>
+
+
+        </div>
+      </header>
+    </div>
+  </div>
+  <div class="row bottom-bordered row-full-width">
+    <div class="mobile-wrap">
+      <div class="af-column-left profile-img">
+
+
+        <!--<div class="col-sm-3">-->
+
+
+
+        <div class="url-profile-media-avatar thumbnail">
+
+          <img *ngIf="!profile.image || !profile.image.contentUrl" [src]="appSrv.defaultAvatar" alt="profile.toString()" fallbackimg>
+
+          <div class="thumbnail-img" *ngIf="profile.image && profile.image.contentUrl" [ngStyle]="{ 'background-image': 'url(' + profile.image.contentUrl + ')'}"
+            alt="profile.toString()">
+        </div>
+
+      </div>
+
+      <div class="profile-head-mobile">
+        <h5 class="af-title-1">{{profile.toString()}}</h5>
+        <span *ngIf="hasAddress(profile.location)">{{profile.location | formataddress}}</span>
+        <span class=""></span>
+      </div>
+      <div class="actions-bar-mobile">
+        <a href (click)="comingSoon($event)" class="svg-thumbnail-wrapper">
+          <button class="af-btn af-btn-sm">   
+            <span class="af-icon icon-add"></span>
+      </button>
+        </a>
+      </div>
+    </div>
+    <!--<div class="col-sm-1"></div>-->
+    <div class="af-column-right profile-main-info">
+      <!--<div class="col-sm-9">-->
+      <!--<div class="row af-label-value">
+          <div class="col-sm-4 af-label">Address</div>
+          <div class="col-sm-8 af-value">{{profile.address}}</div>
+        </div>-->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="col-sm-6 af-heading-meta no-padding">
+            <h5 class="af-title-1 hidden-xs">{{profile.toString()}}</h5>
+            <h6 class="af-sub-title-1" *ngIf="profile.profession || profile.industry">
+              <!--<span class="af-uppercased-grayed">{{profile.profession}}</span>-->
+              <span *ngIf="profile && profile.isProfessional()" class="af-feed-type" [innerHTML]="profile.profession | commatospacecomma"></span>
+              <span *ngIf="profile && !profile.isProfessional()" class="af-feed-type" [innerHTML]="profile.industry | commatospacecomma"></span>
+            </h6>
+            <!-- <div class="col-sm-12 no-padding">
+                <span class="badge-label">Posts</span>
+                <span activeprofilejobpostsnumber class="badge"></span>
+              </div> -->
+            <div class="actions-bar message-preview-actions">
+              <a href (click)="comingSoon($event)" class="svg-thumbnail-wrapper">
+                <button class="af-btn af-btn-sm">       
+            <span class="af-icon icon-connect af-icon-xs"></span> Connect     
+      </button>
+              </a>
+            </div>
+          </div>
+          <!--
+        <div class="row" *ngIf="profile.availability">
+          <div class="col-sm-12">
+            <div class="af-tags-wrapper">
+              <span class="label label-warning">{{profile.availability}}</span>
+            </div>
+          </div>
+        </div>
+        -->
+          <div class="col-sm-6">
+            <div class="row af-label-value">
+              <div *ngIf="profile && profile.isProfessional()" class="col-sm-12 col-xs-5 af-label">DOB</div>
+              <div *ngIf="profile && !profile.isProfessional()" class="col-sm-12  col-xs-5 af-label">Established</div>
+              <div class="col-sm-12 col-xs-7 af-value" *ngIf="profile && profile.isProfessional()">
+                <span *ngIf="profile.birthDate">{{profile.birthDate | formatdate:'MMMM D'}}</span>
+                <span *ngIf="!profile.birthDate">Unspecified</span>
+              </div>
+              <div class="col-sm-12 col-xs-7 af-value" *ngIf="profile && !profile.isProfessional()">
+                <span *ngIf="profile.yearEstablished">{{profile.yearEstablished}}</span>
+                <span *ngIf="!profile.yearEstablished">Unspecified</span>
+              </div>
+            </div>
+            <div class="row af-label-value">
+              <div class="col-sm-12 col-xs-5 af-label">Location</div>
+              <div class="col-sm-12 col-xs-7 af-value">
+                <span *ngIf="hasAddress(profile.location)">{{profile.location | formataddress}}</span>
+                <span *ngIf="!hasAddress(profile.location)">Unspecified</span>
+                <span *ngIf="hasAddress(profile.location)">
+            			<div class="location-map">
+							<button data-toggle="collapse" data-target="#reveal-map-1" class="af-button-plain no-border collapsed" value="Show map" *ngIf="profile.location"> <span class="af-icon icon-arrow-down af-icon-xs"></span>                Show map</button>
+              </div>
+
+              <div class="col-sm-12">
+                <div id="reveal-map-1" class="collapse">
+                  <div class="location-embed" id="googlemap" *ngIf="profile.location">
+                    <iframe class="location-embed-frame" src="https://www.google.com/maps/embed/v1/place?q={{profile.location | formataddress}}&zoom=10&key=AIzaSyAcMta2szaRvyJGWiU3keRw8-Ct_MW44bw"
+                      frameborder="0" style="border:0">
+                      </iframe>
+                  </div>
+                </div>
+              </div>
+              </span>
+            </div>
+          </div>
+          <!--<div class="row af-label-value">
+          <div class="col-sm-3 af-label">Email</div>
+          <div class="col-sm-9 af-value">
+            <a *ngIf="profile.email" href="mailto:{{profile.email}}">{{profile.email}}</a>
+            <span *ngIf="!profile.email">Unspecified</span>
+          </div>
+        </div>-->
+          <div class="row af-label-value">
+            <div class="col-sm-12 col-xs-5 af-label">Phone</div>
+            <div *ngIf="profile.telephone" class="col-sm-9 col-xs-7 af-value">{{profile.telephone}}</div>
+            <div *ngIf="!profile.telephone" class="col-sm-9 col-xs-7 af-value">Unspecified</div>
+          </div>
+          <div class="row af-label-value" *ngIf="profile.url">
+            <div class="col-sm-12 col-xs-5 af-label">Website</div>
+            <div class="col-sm-12 col-xs-7 af-value">
+              <a *ngIf="profile.url" [href]="profile.url | urlcorrect" target="_blank">{{profile.url}}</a>
+              <span *ngIf="!profile.url">Unspecified</span>
+            </div>
+          </div>
+        </div>
+        <!--<div class="row af-label-value">
+          <div class="col-sm-3 af-label">Hours</div>
+          <div class="col-sm-9 af-value">{{profile.hours}}</div>
+        </div>-->
+        <!--
+        <div class="row af-label-value" *ngIf="profile.established">
+          <div class="col-sm-3 af-label">Established</div>
+          <div *ngIf="profile.established" class="col-sm-9 af-value">{{profile.established}}</div>
+          <div *ngIf="!profile.established" class="col-sm-9 af-value">Unspecified</div>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="body">
+  <!--<ng2owlcarousel *ngIf="profile.photosAndVideos && profile.photosAndVideos.length" class="bottom-bordered" [options]="carouselOptions">
+      <carouselitems>
+        <div *ngFor="#mediaWrapper of profile.photosAndVideos" class="item">
+          <img *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)"
+                [src]="mediaWrapper.mediaObject.contentUrl"
+                [alt]="mediaWrapper.mediaObject.name">
+          <video  *ngIf="isVideo(mediaWrapper.mediaObject.fileFormat)" 
+            class="video-js vjs-default-skin"
+            controls preload="auto" width="auto" height="auto"
+            data-setup='{"example_option":true}'>
+            <source [src]="mediaWrapper.mediaObject.contentUrl" [type]="mediaWrapper.mediaObject.fileFormat" />
+            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+          </video>
+        </div>
+      </carouselitems>
+      <carouselthumbs>
+        <div *ngFor="#mediaWrapper of profile.photosAndVideos" class="item">
+          <img *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)"
+                [src]="mediaWrapper.mediaObject.contentUrl"
+                [alt]="mediaWrapper.mediaObject.name">
+          <img *ngIf="isVideo(mediaWrapper.mediaObject.fileFormat)"
+                src="http://grooveline.org/wp-content/themes/LiveTheme_201/images/video-placeholder.jpg"
+                [alt]="mediaWrapper.mediaObject.name">
+        </div>
+      </carouselthumbs>
+    </ng2owlcarousel>-->
+  <ng2owlcarousel *ngIf="mediaFiles.length" class="bottom-bordered" [options]="carouselOptions" [items]="mediaFiles">
+    <carouselitems>
+      <div *ngFor="#mediaWrapper of mediaFiles" class="item">
+        <!--<div class="thumbnail" *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)" style="height: 100%; max-height: 100%;">
+            <img
+                [src]="mediaWrapper.mediaObject.contentUrl"
+                [alt]="mediaWrapper.mediaObject.name">
+          </div>-->
+        <img *ngIf="!isVideo(mediaWrapper.mediaObject.fileFormat)" [src]="mediaWrapper.mediaObject.contentUrl" [alt]="mediaWrapper.mediaObject.name">
+        <video *ngIf="isVideo(mediaWrapper.mediaObject.fileFormat)" class="video-js vjs-default-skin" controls preload="auto" width="auto"
+          height="auto" data-setup='{"example_option":true}'>
+          <source [src]="mediaWrapper.mediaObject.contentUrl" [type]="mediaWrapper.mediaObject.fileFormat" />
+          <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href="http://videojs.com/html5-video-support/"
+              target="_blank">supports HTML5 video</a>
+          </p>
+          </video>
+      </div>
+    </carouselitems>
+    <carouselthumbs>
+      <div *ngFor="#thumbMediaWrapper of mediaFiles" class="item">
+        <img *ngIf="!isVideo(thumbMediaWrapper.mediaObject.fileFormat)" [src]="thumbMediaWrapper.mediaObject.contentUrl" [alt]="thumbMediaWrapper.mediaObject.name">
+        <img *ngIf="isVideo(thumbMediaWrapper.mediaObject.fileFormat)" src="http://grooveline.org/wp-content/themes/LiveTheme_201/images/video-placeholder.jpg"
+          onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';" [alt]="thumbMediaWrapper.mediaObject.name">
+      </div>
+    </carouselthumbs>
+    <carouseldetails>
+      <div *ngFor="#mediaWrapper of mediaFiles" class="item">
+        <div *ngIf="mediaWrapper['@id'].indexOf('/artworks/') === 0" class="text-center">
+          <div>
+            <span class="bold" *ngIf="">{{mediaWrapper.headline}}</span>
+          </div>
+          <div>
+            <span class="bold" *ngIf="mediaWrapper.medium">{{mediaWrapper.medium}}</span>
+          </div>
+          <div>
+            <small *ngIf="mediaWrapper.size">(size: {{mediaWrapper.size}})</small>
+            <small *ngIf="mediaWrapper.author">by {{mediaWrapper.author}}</small>
+            <small *ngIf="mediaWrapper.datePublished">on {{mediaWrapper.datePublished | formatdate:'MMM YYYY'}}</small>
+          </div>
+          <div *ngIf="mediaWrapper.text" [innerHTML]="mediaWrapper.text"></div>
+        </div>
+      </div>
+    </carouseldetails>
+  </ng2owlcarousel>
+
+  <div class="clearfix bottom-bordered profile-description" *ngIf="profile.description">
+    <div class="col-sm-12">
+      <h5 class="af-title-2">Description</h5>
+      <div class="profile-description" [innerHTML]="profile.description | smarttext"></div>
+
+      <div class="af-mt-s" *ngIf="profile.period || profile.languages || profile.skills || profile.specialities">
+        <div class="row">
+          <div class="col-sm-12 af-mt-xs" *ngIf="profile.period">
+            <span class="profile-heading bold"><span class="bold">Period</span></span>
+            <span class="profile-period">
+                <!--<span *ngFor="#period of profile.periodArray; #ind = index">
+                  <u>{{period}}</u><span *ngIf="ind < profile.periodArray.length - 1">, </span>
+            </span>-->
+            <span class="profile-heading-value" [innerHTML]="profile.period | commatospacecomma"></span>
+            </span>
+          </div>
+
+          <div class="col-sm-12 af-mt-xs" *ngIf="profile.languages">
+            <span class="profile-heading bold"><span class="bold">Languages</span></span>
+            <span class="profile-languages">
+                <!--<span *ngFor="#language of profile.languagesArray; #ind = index">
+                  <u>{{language}}</u><span *ngIf="ind < profile.languagesArray.length - 1">, </span>
+            </span>-->
+            <span class="profile-heading-value" [innerHTML]="profile.languages | commatospacecomma"></span>
+            </span>
+          </div>
+
+          <div class="col-sm-12 af-mt-xs" *ngIf="profile.skills">
+            <span class="profile-heading bold"><span class="bold">Skills</span></span>
+            <span class="profile-languages">
+                <!--<span *ngFor="#skill of profile.skillsArray; #ind = index">
+                  <u>{{skill}}</u><span *ngIf="ind < profile.skillsArray.length - 1">, </span>
+            </span>-->
+            <span class="profile-heading-value" [innerHTML]="profile.skills | commatospacecomma"></span>
+            </span>
+          </div>
+
+          <div class="col-sm-12 af-mt-xs" *ngIf="profile.specialities">
+            <span class="profile-heading bold"><span class="bold">Specialities</span></span>
+            <span class="profile-languages">
+                <!--<span *ngFor="#speciality of profile.specialitiesArray; #ind = index">
+                  <u>{{speciality}}</u><span *ngIf="ind < profile.specialitiesArray.length - 1">, </span>
+            </span>-->
+            <span class="profile-heading-value" [innerHTML]="profile.specialities | commatospacecomma"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- If no description than show below 4 fileds (priority is to show them in description box as is set above!) -->
+  <div class="af-mt-s bottom-bordered clearfix" *ngIf="!profile.description && (profile.period || profile.languages || profile.skills || profile.specialities)">
+    <div class="col-sm-12 af-mt-xs" *ngIf="profile.period">
+      <span class="profile-heading bold"><span class="bold">Period</span></span>
+      <span class="profile-period">
+          <!--<span *ngFor="#period of profile.periodArray; #ind = index">
+            <u>{{period}}</u><span *ngIf="ind < profile.periodArray.length - 1">, </span>
+      </span>-->
+      <span class="profile-heading-value" [innerHTML]="profile.period | commatospacecomma"></span>
+      </span>
+    </div>
+
+    <div class="col-sm-12 af-mt-xs" *ngIf="profile.languages">
+      <span class="profile-heading bold"><span class="bold">Languages</span></span>
+      <span class="profile-languages">
+          <!--<span *ngFor="#language of profile.languagesArray; #ind = index">
+            <u>{{language}}</u><span *ngIf="ind < profile.languagesArray.length - 1">, </span>
+      </span>-->
+      <span class="profile-heading-value" [innerHTML]="profile.languages | commatospacecomma"></span>
+      </span>
+    </div>
+
+    <div class="col-sm-12 af-mt-xs" *ngIf="profile.skills">
+      <span class="profile-heading bold"><span class="bold">Skills</span></span>
+      <span class="profile-languages">
+          <!--<span *ngFor="#skill of profile.skillsArray; #ind = index">
+            <u>{{skill}}</u><span *ngIf="ind < profile.skillsArray.length - 1">, </span>
+      </span>-->
+      <span class="profile-heading-value" [innerHTML]="profile.skills | commatospacecomma"></span>
+      </span>
+    </div>
+
+    <div class="col-sm-12 af-mt-xs" *ngIf="profile.specialities">
+      <span class="profile-heading bold"><span class="bold">Specialities</span></span>
+      <span class="profile-languages">
+          <!--<span *ngFor="#speciality of profile.specialitiesArray; #ind = index">
+            <u>{{speciality}}</u><span *ngIf="ind < profile.specialitiesArray.length - 1">, </span>
+      </span>-->
+      <span class="profile-heading-value" [innerHTML]="profile.specialities | commatospacecomma"></span>
+      </span>
+    </div>
+  </div>
+
+
+  <div class="list-group" *ngIf="jobposts && jobposts.length">
+    <div class="col-sm-12">
+      <h5 class="af-title-2">Available Jobs</h5>
+
+      <div href class="list-group-item list-style-1 row" *ngFor="#job of jobposts; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.availableJobs ? 'block' : 'none') }">
+        <a href="/jobposts/{{replaceChar(job.title)}}?uId={{job.id}}">
+          <div class="no-padding-left col-sm-5">
+            <div>
+              <span class="bold">{{job.title}}</span>
+            </div>
+
+            <div>
+              <span class="af-uppercased-grayed">
+                {{job.position}}
+              </span>
+            </div>
+          </div>
+        </a>
+        <!-- end col-sm-5 -->
+
+        <div class="col-sm-7">
+          <div class="description-wrapper">
+            <div>
+              <a href="/jobposts/{{replaceChar(job.title)}}?uId={{job.id}}">
+                <span class="bold">
+                          <span *ngIf="job.jobLocation.name">
+                              {{job.jobLocation.name}},
+                          </span>
+                <span *ngIf="job.jobLocation.address.addressCountry">
+                              {{job.jobLocation.address.addressCountry}}
+                          </span>
+                <span *ngIf="job.jobLocation.address.city">
+                              {{job.jobLocation.address.city}}
+                          </span>
+                </span>
+              </a>
+            </div>
+
+            <div>
+              <div class="af-uppercased-grayed">
+                <span class="bold">{{job.datePostedWords}}</span>
+              </div>
+              <div class="af-show-more small-case">
+                <a href="/jobposts/{{replaceChar(job.title)}}?uId={{job.id}}">
+                  <span class="af-icon af-icon-s icon-arrow-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end col-sm-7 -->
+
+      </div>
+      <!-- end list style-1 -->
+      <div href class="list-group-item list-style-1 row" *ngIf="jobposts.length > visibleItemsNumber && !expandedSections.availableJobs">
+        <div class="no-padding-left col-sm-12">
+          <a href class="view-all" (click)="toggleExpanding($event, 'availableJobs')">
+            <span class="af-icon af-icon-s icon-arrow-down"></span>
+            <span class="bold">View All Available Jobs</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end col-som-12 -->
+  </div>
+
+
+
+  <!--Published spaces list-->
+    <div class="list-group" *ngIf="spaceposts && spaceposts.length">
+    <div class="col-sm-12">
+      <h5 class="af-title-2">Available Spaces</h5>
+
+      <div href class="list-group-item list-style-1 row" *ngFor="#space of spaceposts; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.availableSpaces ? 'block' : 'none') }">
+        <a href="/spaceposts/{{replaceChar(space.title)}}?uId={{space.id}}">
+          <div class="no-padding-left col-sm-5">
+            <div>
+              <span class="bold">{{space.title}}</span>
+            </div>
+
+            <div>
+              <span class="af-uppercased-grayed">
+                {{space.position}}
+              </span>
+            </div>
+          </div>
+        </a>
+        <!-- end col-sm-5 -->
+
+        <div class="col-sm-7">
+          <div class="description-wrapper">
+            <div>
+              <a href="/spaceposts/{{replaceChar(space.title)}}?uId={{space.id}}">
+                <span class="bold">
+                          <span *ngIf="space.spaceLocation.name">
+                              {{space.spaceLocation.name}},
+                          </span>
+                <span *ngIf="space.spaceLocation.address.addressCountry">
+                              {{space.spaceLocation.address.addressCountry}}
+                          </span>
+                <span *ngIf="space.spaceLocation.address.city">
+                              {{space.spaceLocation.address.city}}
+                          </span>
+                </span>
+              </a>
+            </div>
+
+            <div>
+              <div class="af-uppercased-grayed">
+                <span class="bold">{{space.datePostedWords}}</span>
+              </div>
+              <div class="af-show-more small-case">
+                <a href="/spaceposts/{{replaceChar(space.title)}}?uId={{space.id}}">
+                  <span class="af-icon af-icon-s icon-arrow-right"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end col-sm-7 -->
+
+      </div>
+      <!-- end list style-1 -->
+      <div href class="list-group-item list-style-1 row" *ngIf="spaceposts.length > visibleItemsNumber && !expandedSections.availableSpaces">
+        <div class="no-padding-left col-sm-12">
+          <a href class="view-all" (click)="toggleExpanding($event, 'availableSpaces')">
+            <span class="af-icon af-icon-s icon-arrow-down"></span>
+            <span class="bold">View All Available Spaces</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end col-som-12 -->
+  </div>
+  <!-- end div List group -->
+
+
+  <div class="list-group" *ngIf="profile.experiences && profile.experiences.length">
+    <div class="col-sm-12">
+      <h5 class="af-title-2">Experience</h5>
+
+      <div href class="list-group-item list-style-1 row" *ngFor="#experience of profile.experiences | sortByDate:'-startDate'; #i = index"
+        [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.experiences ? 'block' : 'none') }">
+        <div class="no-padding-left col-sm-5">
+          <div>
+            <span class="bold">{{experience.title}}</span>
+          </div>
+          <div>
+            <span class="af-uppercased-grayed" *ngIf="experience.startDate || experience.endDate">
+                <span *ngIf="experience.startDate">{{experience.startDate | formatdate:'MMM YYYY'}}</span>
+            <span *ngIf="experience.endDate || experience.present"> - </span>
+            <span *ngIf="!experience.present && experience.endDate">{{experience.endDate | formatdate:'MMM YYYY'}}</span>
+            <span *ngIf="experience.present">Present</span>
+            </span>
+          </div>
+          <div>
+            <span class="x-small-case-bold-uppercased bold">
+                {{experience.location}}
+              </span>
+          </div>
+        </div>
+        <div class="col-sm-7 no-padding-right">
+          <div class="description-wrapper">
+            <div>
+              <span class="bold">{{experience.company}}</span>
+            </div>
+            <div class="small-case" [innerHTML]="experience.description | smarttext"></div>
+            <!--<div class="af-show-more small-case">
+                <a href>
+                  <span class="af-icon af-icon-s icon-arrow-right"></span>
+                </a>
+              </div>-->
+          </div>
+        </div>
+    </div>
+    <div href class="list-group-item list-style-1 row" *ngIf="profile.experiences.length > visibleItemsNumber && !expandedSections.experiences">
+      <div class="no-padding-left col-sm-12">
+        <a href class="view-all" (click)="toggleExpanding($event, 'experiences')">
+          <span class="af-icon af-icon-s icon-arrow-down"></span>
+          <span class="bold">View All Experiences</span>
+        </a>
+      </div>
+    </div>
+    <!--<div href class="list-group-item row"  *ngFor="#experience of profile.experiences">
+          <div class="col-sm-5">
+            <div>{{experience.title}}</div>
+            <div>{{experience.startDate | formatdate:'YYYY'}} - {{experience.endDate | formatdate:'YYYY'}}</div>
+            <div>{{experience.location}}</div>
+          </div>
+          <div class="col-sm-7">
+            <div>{{experience.company}}</div>
+            <div [innerHTML]="experience.description"></div>
+          </div>
+        </div>-->
+  </div>
+</div>
+
+<div class="list-group" *ngIf="profile.educations && profile.educations.length">
+  <div class="col-sm-12">
+    <h5 class="af-title-2">Education</h5>
+
+    <div href class="list-group-item list-style-1 row" *ngFor="#education of profile.educations | sortByDate:'-startDate'">
+      <div class="no-padding-left col-sm-5">
+        <div>
+          <span class="bold">{{education.school}}</span>
+        </div>
+        <div>
+          <span class="af-uppercased-grayed" *ngIf="education.startDate || education.endDate">
+                <span *ngIf="education.startDate">{{education.startDate | formatdate:'MMM YYYY'}}</span>
+          <span *ngIf="education.endDate || education.present"> - </span>
+          <span *ngIf="!education.present && education.endDate">{{education.endDate | formatdate:'MMM YYYY'}}</span>
+          <span *ngIf="education.present">Present</span>
+          </span>
+        </div>
+        <div *ngIf="education.degree">
+          <span class="bold x-small-case-bold-uppercased">
+                {{education.degree}}
+              </span>
+        </div>
+        <div>
+          <span class="bold x-small-case-bold-uppercased">
+                {{education.location}}
+              </span>
+        </div>
+      </div>
+
+      <div class="col-sm-7">
+        <div>
+          <span class="bold">{{education.areaOfFocus}}</span>
+        </div>
+        <div>
+          <span class="af-uppercased-grayed">
+                Area Of Focus
+              </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group" *ngIf="profile.artists && profile.artists.length">
+  <div class="col-sm-12">
+    <h5 class="af-title-2">Artists</h5>
+
+    <div href class="list-group-item list-style-1 row" *ngFor="#artist of profile.artists; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.artists ? 'block' : 'none') }">
+      <div class="no-padding-left col-sm-5">
+        <span class="bold">{{artist.name}}</span>
+      </div>
+      <div class="col-sm-7 small-case">
+        <div class="description-wrapper">
+          <div class="description" [innerHTML]="artist.description | smarttext"></div>
+          <!--<div class="af-show-more">
+                <a href>
+                  <span class="af-icon af-icon-s icon-arrow-right"></span>
+                </a>
+              </div>-->
+        </div>
+      </div>
+    </div>
+    <div href class="list-group-item list-style-1 row" *ngIf="profile.artists.length > visibleItemsNumber && !expandedSections.artists">
+      <div class="no-padding-left col-sm-12">
+        <a href class="view-all" (click)="toggleExpanding($event, 'artists')">
+          <span class="af-icon af-icon-s icon-arrow-down"></span>
+          <span class="bold">View All Artists</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group" *ngIf="profile.honors && profile.honors.length">
+  <div class="col-sm-12">
+    <h5 class="af-title-2">Honors & Awards</h5>
+
+    <div href class="list-group-item list-style-1 row" *ngFor="#honor of profile.honors; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.honors ? 'block' : 'none') }">
+      <div class="no-padding-left col-sm-5">
+        <div>
+          <span class="bold">{{honor.title}}</span>
+        </div>
+        <div>
+          <span class="bold x-small-case-bold-uppercased">{{honor.organization}}</span>
+        </div>
+        <div *ngIf="honor.receiveDate">
+          <span class="af-uppercased-grayed">
+                {{honor.receiveDate | formatdate:'MMMM D, YYYY'}}
+              </span>
+        </div>
+      </div>
+      <div class="col-sm-7 small-case">
+        <div [innerHTML]="honor.description | smarttext"></div>
+        <div>
+          <a [href]="honor.url | urlcorrect">{{honor.url}}</a>
+        </div>
+      </div>
+    </div>
+    <div href class="list-group-item list-style-1 row" *ngIf="profile.honors.length > visibleItemsNumber && !expandedSections.honors">
+      <div class="no-padding-left col-sm-12">
+        <a href class="view-all" (click)="toggleExpanding($event, 'honors')">
+          <span class="af-icon af-icon-s icon-arrow-down"></span>
+          <span class="bold">View All Honors & Awards</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group" *ngIf="profile.licenses && profile.licenses.length">
+  <div class="col-sm-12">
+    <h5 class="af-title-2">Licenses and Certifications</h5>
+
+    <div href class="list-group-item list-style-1 row" *ngFor="#license of profile.licenses; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.licenses ? 'block' : 'none') }">
+      <div class="no-padding-left col-sm-5">
+        <div>
+          <span class="bold">{{license.title}}</span>
+        </div>
+        <div>
+          <span class="bold x-small-case-bold-uppercased">
+                License #: {{license.licenseNr}}
+              </span>
+        </div>
+        <div>
+          <span class="af-uppercased-grayed" *ngIf="license.validStartDate || license.endDate">
+                <span *ngIf="license.validStartDate">{{license.validStartDate | formatdate:'MMM YYYY'}}</span>
+          <span *ngIf="license.endDate"> - </span>
+          <span *ngIf="license.endDate">{{license.endDate | formatdate:'MMM YYYY'}}</span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div>
+          <span class="bold">{{license.organization}}</span>
+        </div>
+        <div>
+          <a [href]="license.certificationUrl | urlcorrect">
+            <span class="bold x-small-case-bold-uppercased">
+                  {{license.certificationUrl}}
+                </span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div href class="list-group-item list-style-1 row" *ngIf="profile.licenses.length > visibleItemsNumber && !expandedSections.licenses">
+      <div class="no-padding-left col-sm-12">
+        <a href class="view-all" (click)="toggleExpanding($event, 'licenses')">
+          <span class="af-icon af-icon-s icon-arrow-down"></span>
+          <span class="bold">View All Licenses and Certifications</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group" *ngIf="profile.events && profile.events.length">
+  <div class="clearfix profile-events">
+    <div class="col-sm-12">
+      <h5 class="af-title-2">Events</h5>
+    </div>
+    <!-- Clearfix after each row -->
+    <div class="col-sm-12 ">
+      <div class="row" style="border-bottom: 1px solid #EBEBEB; ">
+        <div class="af-thumbnail-item" *ngFor="#event of profile.events; #i = index" [ngStyle]="{ display: i < visibleItemsNumber ? 'block' : (expandedSections.events ? 'block' : 'none') }">
+          <div *ngIf="i % 3 === 0" class="row"></div>
+          <div class="col-sm-6 col-md-4 event-item-card" style="padding-bottom: 10px;">
+            <div class="thumbnail">
+              <img [src]="event.photosAndVideos && event.photosAndVideos.length && event.photosAndVideos[0] && event.photosAndVideos[0].mediaObject.contentUrl"
+                [alt]="event.title" onError="this.src='./assets/img/feed-icons/Fine_Art_Picture.jpg';">
+            </div>
+            <div class="caption">
+              <h3 class="af-heading-3 truncate">
+                <span class="bold">{{event.title}}</span>
+              </h3>
+              <p class="af-uppercased-grayed" *ngIf="event.startDate || event.endDate">
+                <span *ngIf="event.startDate">{{event.startDate | formatdate:'MMMM D'}}</span>
+                <span *ngIf="event.endDate"> - </span>
+                <span *ngIf="event.endDate">{{event.endDate | formatdate:'MMMM D, YYYY, LT'}}</span>
+              </p>
+              <div class="small-case">
+                {{event.description | smarttext}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Very important - clearfox -->
+    <div href class="clearfix list-group-item list-style-1 row" *ngIf="profile.events.length > visibleItemsNumber && !expandedSections.events">
+      <div class="no-padding-left col-sm-12">
+        <a href class="view-all" (click)="toggleExpanding($event, 'events')">
+          <span class="af-icon af-icon-s icon-arrow-down"></span>
+          <span class="bold">View All Events</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="jobpost-description">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jobpost-title" [innerHTML]="jobpost.description"></div>
+        </div>
+      </div>
+    </div>-->
+</div>
+
+<!--<footer></footer>-->
+
+</div>

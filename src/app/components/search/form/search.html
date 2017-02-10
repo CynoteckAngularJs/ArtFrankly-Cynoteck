@@ -1,0 +1,63 @@
+<!--{{results | json}}-->
+<form class="search-form" [ngFormModel]="form" novalidate>
+
+  <div class="form-group" [ngClass]="{'has-error': isShowErrors && !form.controls.term.valid}">
+    <div class="alert alert-danger" *ngIf="isShowErrors && form.controls.term.errors && form.controls.term.errors.required">Search term is required</div>
+    <label class="sr-only" for="termInput">Term</label>
+    <div class="search-icon"><i class="glyphicon glyphicon-search"></i></div>
+    <input type="text" class="form-control" id="termInput" ngControl="term" [placeholder]="placeholder" (keyup.enter)="onEnter($event)"
+      autocomplete="off" (keyup)="onKeyup($event)">
+      <div *ngIf="suggestion && isShowSuggestions" class="search-input">
+        <span class="term-segment">{{suggestion.term}}</span><span class="suffix-segment">{{suggestion.suffix}}</span>
+      </div>
+  </div>
+
+  <ul class="list-group search-results" *ngIf="results.length && isShowTermsName && !isShowSuggestionsList">
+    <li class="list-group-item search-result" *ngFor="#feed of results">
+      <a href (click)="onHide($event, feed.name)">
+        <span>{{feed.name}}</span>
+      </a>
+    </li>
+  </ul>
+
+
+
+
+  <footer class="text-left af-mt-s" *ngIf="!results.length && isShowSuggestionsList">
+    <p>Search institutions, professionals, or artists</p>
+  </footer>
+
+  <ul class="list-group search-results" *ngIf="results.length && isShowSuggestionsList">
+    <li class="list-group-item search-result" *ngFor="#feed of results">
+      <!--<a href [routerLink]="['./Feeds', { term: feed.name }]">-->
+      <a href (click)="onHide($event, feed.name)">
+        <div class="row">
+          <div class="col-xs-2 no-padding-left result-type text-left uppercased">
+            <span *ngIf="feed.isProfessional()">Professional</span>
+            <span *ngIf="feed.isInstitution()">Institution</span>
+            <span *ngIf="feed.isVendor()">Vendor</span>
+            <span *ngIf="feed.isJobPost">Job Post</span>
+            <span *ngIf="feed.isSpacePost">Space Post</span>
+          </div>
+          <div class="col-xs-5 result-name text-left">
+            <span>{{feed.name}}</span>
+          </div>
+          <div class="col-xs-4 result-location text-left">
+            <span>{{feed.location}}</span>
+          </div>
+          <div class="col-xs-1 no-padding-right result-image text-right">
+            <a class="thumbnail">
+              <img *ngIf="!feed.image" src="../assets/img/feed-icons/Fine_Art_Picture.jpg" alt="">
+
+              <div class="thumbnail-img" *ngIf="feed.image" [ngStyle]="{ 'background-image': 'url(' + feed.image + ')'}"></div>
+            </a>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="text-center af-mt-s" *ngIf="isShowSearchButton">
+    <a href (click)="onEnter($event)" class="af-btn">Search</a>
+  </div>
+</form>

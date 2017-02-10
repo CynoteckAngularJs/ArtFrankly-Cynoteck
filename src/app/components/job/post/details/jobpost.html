@@ -1,0 +1,270 @@
+<div class="jobpost" *ngIf="jobpost">
+	<div class="row">
+		<div class="col-sm-12">
+			<header class="bottom-bordered">
+				<div class="sort-filter-wrap">
+					<feed-filter [total]="total"></feed-filter>
+				</div>
+				<div class="row feed-filter">
+					<div class="col-sm-5 no-padding text-left hidden-xs">
+						<span class="filter-btn-nolink">Job Post <span *ngIf="isPreview"> Preview</span></span>
+					</div>
+
+					<div class="col-sm-6 no-padding text-right job-cta-nav">
+
+
+						<div class="col-sm-12 no-padding" *ngIf="jobpost.createdBy !== profile.user && jobpost.state !== JOB_POST_STATES.ARCHIVED">
+							<a *ngIf="jobpost.id" href class="jobpost-apply btn af-button" (click)="onReply($event)">
+								<span class="af-icon af-icon-s icon-replies-white"></span> Apply
+							</a>
+
+
+							<!-- (replysuccess)="onReplySuccess($event)" -->
+							<jobpost-reply-modal *ngIf="replyModal && replyModal.opened" class="text-left" [modal]="replyModal" (onhide)="onReplyModalHide($event)"
+								[jobpost]="jobpost">
+								</jobpost-reply-modal>
+
+
+								<span class="" *ngIf="(jobpost.state !== JOB_POST_STATES.ARCHIVED && jobpost.state !== JOB_POST_STATES.PUBLISHED) && (jobpost.createdBy === profile.user || jobpost['@id'] === preview)">
+							<a *ngIf="jobpost.id" href [routerLink]="['EditJobPost', { id: jobpost.id }]" class="">
+								<button type="button" class="btn af-button"><span class="af-icon icon-posts-white af-icon-s"></span>Edit
+								Post
+								</button>
+								</a>
+
+
+								<a *ngIf="!jobpost.id" href [routerLink]="['AddJobPost']" class="">
+									<button type="button" class="btn af-button"><!-- <span class="af-icon icon-posts-add-white af-icon-s"></span>--> Add Post
+								</button>
+								</a>
+								</span>
+
+
+
+								<span *ngIf="jobpost.id && jobpost.state === JOB_POST_STATES.ARCHIVED && jobpost.createdBy === profile.user">
+							<a class="">
+								<button type="button" class="btn af-button"><span class="af-icon icon-arrow-left-white af-icon-s"></span>Repost
+								</button>
+								<div><small>Coming Soon</small></div>
+								</a>
+								</span>
+
+
+								<span *ngIf="jobpost.createdBy !== profile.user">
+							<a *ngIf="jobpost.id" href [routerLink]="['Feeds']" class="">
+								<button type="button" class="af-button-plain no-border light-btn"><span class="af-icon icon-arrow-left af-icon-xs"></span>Return
+								</button>
+								</a>
+								</span>
+
+
+						</div>
+					</div>
+				</div>
+			</header>
+		</div>
+
+
+		<div class="row ">
+			<div class="col-sm-12">
+				<h2 class="af-title-1">{{jobpost.title}}</h2>
+			</div>
+		</div>
+		<div class="row jobpost-top-info af-heading-meta profile-img">
+
+			<div class="af-column-left">
+				<!-- Preview -->
+				<a href class="af-media-avatar thumbnail" *ngIf="isPreview" [routerLink]="routerLink">
+					<img *ngIf="!jobpost.image || !jobpost.image.contentUrl" [src]="DEFAULT_PROFILE_IMAGE" alt="" fallbackimg>
+					<div class="thumbnail-img" *ngIf="jobpost.image && jobpost.image.contentUrl" [ngStyle]="{ 'background-image': 'url(' + jobpost.image.contentUrl + ')' }">
+					</div>
+				</a>
+				<!-- Non Preview -->
+				<a href class="af-media-avatar thumbnail" *ngIf="!isPreview" [routerLink]="routerLink">
+					<img *ngIf="!jobpost.image || !jobpost.image.contentUrl" [src]="appSrv.defaultAvatar" alt="" fallbackimg>
+					<div class="thumbnail-img" *ngIf="jobpost.image && jobpost.image.contentUrl" [ngStyle]="{ 'background-image': 'url(' + jobpost.image.contentUrl + ')' }">
+					</div>
+				</a>
+			</div>
+
+			<div class="af-column-right">
+				<div class="row">
+
+					<div class="col-sm-12">
+
+						<div class="col-sm-12 col-xs-12 af-label af-tags-wrapper no-padding-left" *ngIf="jobpost.createdBy === profile.user">
+							<span class="label label-warning">{{jobpost.state}}</span>
+						</div>
+						<div class="col-sm-12 col-xs-12 af-label af-tags-wrapper no-padding-left">
+							<h6 class="af-sub-title-1 af-feed-type">
+
+								<span class="af-feed-type">{{jobpost.position}}</span>
+							</h6>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+
+				</div>
+				<div class="row af-label-value" *ngIf="jobpost.organization">
+					<div class="col-sm-12 col-lg-3 af-label">Organization</div>
+					<div class="col-sm-7 col-lg-9 af-value">
+						<a href [routerLink]="routerLink">{{jobpost.organization}}</a>
+					</div>
+				</div>
+				<div class="row af-label-value" *ngIf="jobpost.jobLocation && jobpost.jobLocation.address">
+					<div class="col-sm-12 col-lg-3 af-label">Location</div>
+					<div class="col-sm-7 col-lg-9 af-value">
+						<span *ngIf="hasAddress(jobpost.jobLocation)">{{jobpost.jobLocation | formataddress}}</span>
+						<span *ngIf="!hasAddress(jobpost.jobLocation)">Unspecified</span>
+						<span *ngIf="hasAddress(jobpost.jobLocation)">
+              &nbsp;&nbsp;&nbsp;
+            </span>
+
+						<div class="location-map">
+							<button data-toggle="collapse" data-target="#reveal-map-1" class="af-button-plain no-border collapsed" value="Show map" *ngIf="jobpost.jobLocation"> <span class="af-icon icon-arrow-down af-icon-xs"></span> Show map</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div id="reveal-map-1" class="collapse">
+					<div class="location-embed" id="googlemap" *ngIf="jobpost.jobLocation">
+						<iframe class="location-embed-frame" src="https://www.google.com/maps/embed/v1/place?q={{jobpost.jobLocation | formataddress}}&zoom=10&key=AIzaSyAcMta2szaRvyJGWiU3keRw8-Ct_MW44bw"
+							frameborder="0" style="border:0">
+							</iframe>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="body">
+		<div class="jobpost-description">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="jobpost-title" *ngIf="jobpost.description" [innerHTML]="jobpost.description | smarttext"></div>
+					<div class="jobpost-title" *ngIf="!jobpost.description"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- additional details section -->
+		<div class="jobpost-additional">
+			<div class="row">
+				<div class="col-sm-12">
+					<h5 class="jobpost-heading" *ngIf="jobpost.additional">
+						How To Apply
+					</h5>
+					<div class="jobpost-title" *ngIf="jobpost.additional" [innerHTML]="jobpost.additional | smarttext"></div>
+					<div class="jobpost-title" *ngIf="!jobpost.additional"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="jobpost-contact">
+			<div class="row">
+				<div class="col-sm-12">
+					<h5 class="jobpost-heading">Contact</h5>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<!-- Addition Contact name -->
+					<div class="row af-label-value" *ngIf="jobpost.contactname">
+						<div class="col-sm-4 af-label">Name</div>
+						<div class="col-sm-8 af-value">{{jobpost.contactname}}</div>
+					</div>
+					<!-- Addition Contact phone -->
+					<div class="row af-label-value" *ngIf="jobpost.contactphone">
+						<div class="col-sm-4 af-label">Phone</div>
+						<div class="col-sm-8 af-value">{{jobpost.contactphone}}</div>
+					</div>
+					<div class="row af-label-value">
+						<div class="col-sm-4 af-label">Website</div>
+						<div class="col-sm-8 af-value">
+							<a *ngIf="jobpost.url" href="{{jobpost.url | urlcorrect}}" target="blank">{{jobpost.url}}</a>
+							<span *ngIf="!jobpost.url">Unspecified</span>
+						</div>
+					</div>
+
+					<!-- Addition Contact email -->
+					<div class="row af-label-value">
+						<div class="col-sm-4 af-label">Email</div>
+						<div class="col-sm-8 af-value">
+							<a *ngIf="jobpost.contactemail" href="{{jobpost.contactemail}}" target="blank">{{jobpost.contactemail}}</a>
+							<span *ngIf="!jobpost.contactemail">Unspecified</span>
+						</div>
+					</div>
+					<!--
+          <div class="row af-label-value">
+            <div class="col-sm-4 af-label">Address</div>
+            <div class="col-sm-8 af-value" *ngIf="jobpost.contactLocation && jobpost.contactLocation.address">
+                <span *ngIf="hasAddress(jobpost.contactLocation)">{{jobpost.contactLocation | formataddress}}</span>
+                <span *ngIf="!hasAddress(jobpost.contactLocation)">Unspecified</span>
+                <span *ngIf="hasAddress(jobpost.contactLocation)">
+                  &nbsp;&nbsp;&nbsp;
+                  <a target="_blank"
+                    href="https://www.google.com/maps/place/{{jobpost.contactLocation | formataddress}}?hl=en"
+                    class="bold underline" *ngIf="jobpost.contactLocation">
+                      Map
+                  </a>
+                </span>
+            </div>
+          </div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="jobpost-actionbar">
+			<div class="text-center" *ngIf="jobpost.createdBy === profile.user && (jobpost.state === JOB_POST_STATES.DRAFT || jobpost.state === JOB_POST_STATES.PENDING)">
+				<a *ngIf="jobpost.id" href class="jobpost-pay btn af-button" (click)="showPaymentShareModal($event)">
+          Checkout 
+        </a>
+				<jobpost-payment-share-modal *ngIf="paymentModal && paymentModal.opened" class="text-left" [modal]="paymentModal" [jobpost]="jobpost"
+					(paymentsuccess)="onPaymentShareModalSuccess($event)" (close)="onPaymentShareModalHide($event)" (onhide)="onPaymentShareModalHide($event)">
+					</jobpost-payment-share-modal>
+			</div>
+			<div *ngIf="jobpost.createdBy === profile.user || jobpost['@id'] === preview">
+				<div class="text-center mb-20">
+					<a *ngIf="jobpost.id && jobpost['@id'] === preview" href [routerLink]="['EditJobPost', { id: jobpost.id, mode: 'submit' }]"
+						class="btn af-button"><span class="af-icon af-icon-xl icon-commissions-white"></span> Post Job
+						</a>
+						<a *ngIf="!jobpost.id && jobpost['@id'] === preview" href [routerLink]="['AddJobPost', { mode: 'submit' }]" class="btn af-button"><span class="af-icon af-icon-l icon-commissions-white"></span> Post Job
+					</a>
+				</div>
+				<div class="text-center mb-20" *ngIf="(jobpost.state !== JOB_POST_STATES.ARCHIVED && jobpost.state !== JOB_POST_STATES.PUBLISHED) && (jobpost.createdBy === profile.user || jobpost['@id'] === preview)">
+					<a *ngIf="jobpost.id" href [routerLink]="['AddJobPost']" class="return-to-edit btn af-btn">
+            Back
+          </a>
+					<a *ngIf="!jobpost.id" href [routerLink]="['AddJobPost']" class="return-to-edit btn af-btn">
+            Back
+          </a>
+				</div>
+				<div class="text-center mb-20" *ngIf="jobpost.id && jobpost.state === JOB_POST_STATES.ARCHIVED && jobpost.createdBy === profile.user">
+
+					<a class="btn af-button edit-post-btn">
+						<span class="af-icon af-icon-m icon-posts-white"></span> Repost
+						<div><small>Coming Soon</small></div>
+					</a>
+				</div>
+			</div>
+			<div class="text-center" *ngIf="jobpost.createdBy !== profile.user && jobpost.state !== JOB_POST_STATES.ARCHIVED">
+				<a *ngIf="jobpost.id" href class="jobpost-apply btn af-button" (click)="onReply($event)">
+					<span class="af-icon af-icon-m icon-replies-white"></span> Apply
+				</a>
+				<!-- (replysuccess)="onReplySuccess($event)" -->
+				<jobpost-reply-modal *ngIf="replyModal && replyModal.opened" class="text-left" [modal]="replyModal" (onhide)="onReplyModalHide($event)"
+					[jobpost]="jobpost">
+					</jobpost-reply-modal>
+			</div>
+		</div>
+	</footer>
+
+</div>
